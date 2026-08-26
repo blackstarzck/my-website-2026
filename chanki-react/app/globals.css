@@ -254,7 +254,7 @@ body.light.noglass #gallery{background:linear-gradient(255deg,rgba(245,243,236,.
 /* ===== BUILD · L1/L2 layout overrides ===== */
 #gallery .gname{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.4vw,60px);letter-spacing:-.03em;line-height:.9;overflow-wrap:break-word;background:var(--ag);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 14px}
 #gallery .ghead .gtag{font-family:var(--mono);color:var(--cc);letter-spacing:.14em}
-#page .title{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,104px);letter-spacing:-.04em;line-height:.86;max-width:14ch;overflow-wrap:break-word;background:var(--ag);-webkit-background-clip:text;background-clip:text;color:transparent}
+#page .title{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,104px);letter-spacing:-.04em;line-height:1;max-width:14ch;overflow-wrap:break-word;background:var(--ag);-webkit-background-clip:text;background-clip:text;color:transparent}
 #page .kicker{font-family:var(--mono);color:var(--cc)}
 #page .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px 30px}
 /* cards: keep originals (thumb + area card) and add glass treatment */
