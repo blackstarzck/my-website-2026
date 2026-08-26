@@ -46,7 +46,7 @@
 #tabs .t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink2);text-transform:uppercase;border:1.5px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 14px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px;background:rgba(8,10,16,.35);backdrop-filter:blur(6px)}
 #tabs .t i{width:7px;height:7px;border-radius:50%;opacity:.85}
 #tabs .t.on{color:var(--ink);border-color:rgba(255,255,255,.55)}
-/* MINIMAPA (izquierda) */
+/* 미니맵 (좌측) */
 #minilbl{position:fixed;top:48px;left:22px;z-index:12;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink3)}
 #mini{position:fixed;top:62px;left:18px;width:204px;height:138px;z-index:12;background:rgba(8,10,16,.22);border:1px solid rgba(255,255,255,.16);border-radius:12px;cursor:pointer;backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 14px 40px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.22)}
 /* BREADCRUMB */
@@ -153,7 +153,7 @@ body.origen #privacylink{display:none}
 #tabslead{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--ink3);text-transform:uppercase;display:flex;align-items:center;gap:6px;padding-right:4px;white-space:nowrap}
 #tabslead::after{content:"›";font-size:14px;color:var(--ink3);transform:translateY(-1px)}
 #tabs .t.on{color:#05060a;border-color:transparent;font-weight:600}
-/* MINIMAPA tooltip */
+/* 미니맵 툴팁 */
 #mtip{position:fixed;z-index:14;pointer-events:none;opacity:0;transition:opacity .12s;font-family:var(--mono);background:rgba(8,10,16,.92);border:1px solid rgba(255,255,255,.2);border-radius:7px;padding:5px 9px;font-size:10.5px;letter-spacing:.05em;color:var(--ink);white-space:nowrap;transform:translate(-50%,-138%)}
 #mtip .mr{color:var(--ink3);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
 /* 갤러리 — 영역/프로젝트 패널 (중간 상태) */
@@ -277,7 +277,7 @@ body.light.noglass #gallery{background:linear-gradient(255deg,rgba(245,243,236,.
 .sitetree a.st-mani{color:#CFFF04;font-weight:600;letter-spacing:.03em}
 .sitetree a.st-mani:hover{opacity:.78}
 body.light .sitetree a.st-mani{color:#0a8a7e}
-/* ===== TRABAJEMOS · landing en el mapa ===== */
+/* ===== (사용 안 함) 지도 내 랜딩 ===== */
 .twdoors{display:grid;gap:14px;margin:6px 0 30px;max-width:780px}
 .twdoor{border:1px solid rgba(255,255,255,.12);border-left:3px solid var(--dc);border-radius:13px;padding:20px 20px 16px;background:rgba(255,255,255,.03);transition:transform .22s ease,box-shadow .22s ease}
 .twdoor:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.25)}

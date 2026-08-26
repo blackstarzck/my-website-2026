@@ -58,18 +58,19 @@ export default function MapCanvas() {
         </filter>
       </svg>
       <div id="wordmark">CHANKI KIM</div>
-      <button id="themebtn" aria-label="Cambiar entre claro y oscuro"><span className="ti">☀</span><span className="tl">Claro</span></button>
+      <button id="themebtn" aria-label="밝게·어둡게 전환"><span className="ti">☀</span><span className="tl">밝게</span></button>
       <div id="tabs"></div>
       <div id="minilbl">사이트 지도 · 현재 위치</div><canvas id="mini" ref={mini}></canvas>
       <div id="mtip"><div className="nm"></div><div className="mr"></div></div>
       <aside id="gallery"></aside>
       <div id="origenback">‹ 지도로 돌아가기</div><div id="origenpi"><span className="pi">π</span> 소개</div>
-      <div id="crumb"><b id="cpath">~/</b><span className="n" id="cnum">un mapa de su trabajo</span></div>
+      <div id="crumb"><b id="cpath">~/</b><span className="n" id="cnum">작업 지도</span></div>
       <div id="tip"><div className="nm"></div><div className="kc"></div><div className="go"></div></div>
       <div id="pagetop"><span className="num" id="chnum"></span><span className="back" id="back">↖ 지도로 돌아가기</span></div>
       <div id="page"><div className="spacer" id="spacer"><span className="ret">↖ 여기를 눌러 지도로 돌아가기</span></div><div className="doc" id="doc"></div></div>
       <div id="hint">고리가 있는 <b>영역</b>을 누르면 살펴보기 · <b>프로젝트</b>를 누르면 미리보기</div>
-      <a id="privacylink" href="/privacy">Privacy Policy</a>
+      {/* 개인정보 처리방침 링크는 해당 페이지를 만든 뒤 되살린다.
+          원본에서 온 링크였는데 이 앱에는 /privacy 라우트가 없어 404 였다. */}
       <div id="coldtitle">CHANKI KIM</div>
       <div id="caminos"></div>
     </>

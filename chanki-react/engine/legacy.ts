@@ -258,8 +258,8 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const s = U()
     // body 의 light 클래스는 BodyClassSync 가 uiStore.theme 에서 선언적으로 붙인다.
     themebtn.innerHTML = (s.theme === 'light')
-      ? '<span class="ti">☾</span><span class="tl">Oscuro</span>'
-      : '<span class="ti">☀</span><span class="tl">Claro</span>'
+      ? '<span class="ti">☾</span><span class="tl">' + PAGE_TEXT.themeDark + '</span>'
+      : '<span class="ti">☀</span><span class="tl">' + PAGE_TEXT.themeLight + '</span>'
     if (s.mode === 'field') renderGallery()
   })
 
@@ -290,7 +290,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     return byId[s.fieldSel] ? byId[s.fieldSel].region : 'entry'
   }
 
-  // ── MINIMAPA (Task 8: engine/renderers/minimap.ts) ──
+  // ── 미니맵 (engine/renderers/minimap.ts) ──
   const mini = canvases.mini
   miniResize(); on(window, 'resize', miniResize)
   const minimap = createMinimap({ sim, projection, canvas: mini, uiLive: U })
@@ -581,7 +581,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   CAM.forEach((id) => {
     const a = document.createElement('div')
     a.className = 'camino'; a.style.setProperty('--cc', COLOR[byId[id].region])
-    a.innerHTML = `<i></i>${byId[id].name}<span class="ca">explorar →</span>`
+    a.innerHTML = `<i></i>${byId[id].name}<span class="ca">${PAGE_TEXT.explore}</span>`
     a.onclick = () => { setHoverId(null); hideTip(); setFieldFocus(id) }
     caminosEl.appendChild(a); camChips[id] = a
   })
@@ -730,9 +730,9 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         ? `<a class="cta" href="${n.url}">${esc(n.urlLabel || PAGE_TEXT.open)}</a>`
         : `<a class="cta" href="${n.url}" target="_blank">${esc(n.urlLabel || PAGE_TEXT.openExternal)}</a>`)
       : ''
-    const metaItems: [string, string][] = [['En el mapa', RLAB[n.region] + ' · ' + numOf(n.id) + ' / ' + TOTAL]]
-    if (n.kicker) metaItems.push(['Contexto', n.kicker])
-    if (n.cap) metaItems.push(['La pieza', n.cap])
+    const metaItems: [string, string][] = [[PAGE_TEXT.metaOnMap, RLAB[n.region] + ' · ' + numOf(n.id) + ' / ' + TOTAL]]
+    if (n.kicker) metaItems.push([PAGE_TEXT.metaContext, n.kicker])
+    if (n.cap) metaItems.push([PAGE_TEXT.metaPiece, n.cap])
     const meta = `<div class="meta">${metaItems.map(([k, v]) => `<div><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join('')}</div>`
     const _pa = REG2AREA[n.region]
     let nbs = relatedNodes(n)
@@ -742,7 +742,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const seclab = (pa && pa !== n.id) ? (RLAB[n.region] + ' ' + PAGE_TEXT.moreOf) : PAGE_TEXT.followThread
     const secl2 = (pa && pa !== n.id)
       ? PAGE_TEXT.relatedNote
-      : 'Otros nodos del mapa con los que se conecta este trabajo.'
+      : PAGE_TEXT.relatedNoteAll
     const links = n.links
       ? `<div class="links">${n.links.map(([t, u]) => (u.charAt(0) === '#' || u.charAt(0) === '/')
         ? `<a class="lk" href="${u}">${esc(t)} →</a>`
@@ -760,7 +760,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    <div class="seclab">${esc(seclab)}</div><div class="seclab2">${secl2}</div>
    <div class="cardgrid">${cards}</div>
    ${foot}
-   <div class="treelab2">~/ el mapa completo</div>${siteTreeHTML()}`
+   <div class="treelab2">${PAGE_TEXT.treeFull}</div>${siteTreeHTML()}`
     ;(function () {
       const dv = document.querySelector('#doc [data-dive]') as HTMLElement | null
       if (!dv) return
@@ -925,7 +925,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     g.innerHTML = `<button class="gback" data-back="1">↖ 지도로 돌아가기</button>${MANIFESTO_ENTRY_IDS.indexOf(n.id) >= 0 ? '<button class="gpi" data-origen="1">π · 소개</button>' : ''}
   <div class="ghead"><i style="background:${acc}"></i>${headInner}</div>
   <div class="gname">${esc(n.name)}</div>${hero}${desc}${enterCTA}
-  <div class="gcaplab">${caplab}</div>${items.map(galCard).join('')}<div class="treelab2">~/ el mapa</div>${siteTreeHTML()}`
+  <div class="gcaplab">${caplab}</div>${items.map(galCard).join('')}<div class="treelab2">${PAGE_TEXT.tree}</div>${siteTreeHTML()}`
     ;(g.querySelector('[data-back]') as HTMLElement).onclick = () => goHome()
     g.querySelectorAll('[data-origen]').forEach((el) => { (el as HTMLElement).onclick = openOrigen })
     g.querySelectorAll('[data-go]').forEach((el) => {
