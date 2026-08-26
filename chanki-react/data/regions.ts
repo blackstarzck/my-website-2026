@@ -1,0 +1,108 @@
+// 김찬기 포트폴리오 콘텐츠.
+// 생성: tools/gen-content.py (이력서 + GitHub 저장소 기반)
+import type { Region } from './types'
+
+export const COLOR: Record<Region, string> = {
+  "entry": "#9B8FFF",
+  "frontend": "#4FC3F7",
+  "backend": "#FF6A3D",
+  "ai": "#CFFF04",
+  "product": "#FF3D7A",
+  "lab": "#06D6C4"
+}
+
+export const RLAB: Record<Region, string> = {
+  "entry": "시작",
+  "frontend": "프론트엔드",
+  "backend": "서버 · 데이터",
+  "ai": "AI 개발 프로세스",
+  "product": "제품 · 협업",
+  "lab": "실험실"
+}
+
+export const SLUG: Record<Region, string> = {
+  "entry": "chanki",
+  "frontend": "frontend",
+  "backend": "backend",
+  "ai": "ai",
+  "product": "product",
+  "lab": "lab"
+}
+
+export const AGRAD: Record<Region, [string, string]> = {
+  "entry": [
+    "#9B8FFF",
+    "#4FC3F7"
+  ],
+  "frontend": [
+    "#4FC3F7",
+    "#06D6C4"
+  ],
+  "backend": [
+    "#FF6A3D",
+    "#FFB03D"
+  ],
+  "ai": [
+    "#CFFF04",
+    "#06D6C4"
+  ],
+  "product": [
+    "#FF3D7A",
+    "#9B8FFF"
+  ],
+  "lab": [
+    "#06D6C4",
+    "#4FC3F7"
+  ]
+}
+
+export const TREECOLS: [Region, string][] = [
+  [
+    "frontend",
+    "frontend"
+  ],
+  [
+    "backend",
+    "backend"
+  ],
+  [
+    "ai",
+    "ai"
+  ],
+  [
+    "product",
+    "product"
+  ],
+  [
+    "lab",
+    "lab"
+  ]
+]
+
+/** 라이트 테마 전용 이미지가 있는 노드. 아직 없음. */
+export const THEMED: Record<string, number> = {}
+
+/** 이미지 스트립(<id>-2.jpg …)이 있는 노드와 장수. 아직 없음. */
+export const MULTI: Record<string, number> = {}
+
+/** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
+export const CARD_IMG: Record<string, string> = {}
+
+/** 영상(<id>.mp4)이 있는 노드. 아직 없음. */
+export const VID: Record<string, number> = {}
+
+export const PARENTS: ReadonlySet<Region> = new Set([
+  "frontend",
+  "backend",
+  "ai",
+  "product",
+  "lab"
+] as Region[])
+
+export const AREAS: ReadonlySet<string> = new Set([
+  "frontend",
+  "backend",
+  "ai",
+  "product",
+  "lab"
+])

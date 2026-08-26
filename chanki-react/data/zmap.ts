@@ -1,0 +1,35 @@
+// 김찬기 포트폴리오 콘텐츠.
+// 생성: tools/gen-content.py (이력서 + GitHub 저장소 기반)
+
+export const ZMAP: Record<string, number> = {
+  "chanki": 0.0,
+  "contact": 0.0,
+  "frontend": 0.85,
+  "topik-user": 0.67,
+  "topik-admin": 0.85,
+  "farm-3d": 1.03,
+  "connect-bee": 0.67,
+  "corp-sites": 0.85,
+  "dealer-web": 1.03,
+  "dealer-admin": 0.67,
+  "backend": -0.35,
+  "doc-merge": -0.53,
+  "supabase": -0.35,
+  "farm-api": -0.17,
+  "ai": 1.15,
+  "gate-harness": 0.97,
+  "multi-agent": 1.15,
+  "verify-loop": 1.33,
+  "figma-gen": 0.97,
+  "my-skills": 1.15,
+  "product": -0.75,
+  "dadoke": -0.93,
+  "legacy-cleanup": -0.75,
+  "docs-comm": -0.57,
+  "english": -0.93,
+  "lab": 0.35,
+  "canvas-lab": 0.17,
+  "three-lab": 0.35,
+  "game-lab": 0.53,
+  "react-basics": 0.17
+}

@@ -1,0 +1,35 @@
+// 김찬기 포트폴리오 콘텐츠.
+// 생성: tools/gen-content.py (이력서 + GitHub 저장소 기반)
+
+export const SPINE: string[] = [
+  "chanki",
+  "contact",
+  "english",
+  "react-basics",
+  "frontend",
+  "dealer-web",
+  "dealer-admin",
+  "legacy-cleanup",
+  "canvas-lab",
+  "three-lab",
+  "game-lab",
+  "lab",
+  "farm-3d",
+  "connect-bee",
+  "farm-api",
+  "backend",
+  "doc-merge",
+  "supabase",
+  "corp-sites",
+  "figma-gen",
+  "dadoke",
+  "docs-comm",
+  "product",
+  "topik-user",
+  "topik-admin",
+  "ai",
+  "gate-harness",
+  "multi-agent",
+  "verify-loop",
+  "my-skills"
+]
