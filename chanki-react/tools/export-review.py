@@ -41,9 +41,8 @@ ENTRY_ID = re.search(r"ENTRY_ID\s*=\s*'([^']+)'", site).group(1)
 
 
 def reach_of(nid):
-    if nid == ENTRY_ID:
-        return "워드마크로만 진입"
-    if nid in AREAS:
+    # 진입 노드와 리전 노드는 눌러도 페이지가 열리지 않는다. 원본도 같은 설계다.
+    if nid == ENTRY_ID or nid in AREAS:
         return "페이지 없음 (눌러도 지도 포커스만)"
     return "노드 페이지"
 
@@ -81,12 +80,15 @@ def note(nid, field, idx=None):
     p = place(nid, field, idx)
     if r.startswith("페이지 없음"):
         if field == "body":
+            if nid == ENTRY_ID:
+                return "보임 · 진입 갤러리 (지도 중심을 누르면)"
             return "보임 · 영역 갤러리 (지도에서 이 영역을 누르면)"
+        # 진입 노드의 sum 은 contact 페이지가 관련 카드로 띄운다 (legacy.ts:676)
+        if nid == ENTRY_ID and field == "sum":
+            return "보임 · contact 페이지의 관련 카드 부제"
         return "**안 보임** — " + r + ", 갤러리는 body 만 씀"
     if p == "렌더 안 됨":
         return "**안 보임** — 어느 화면에도 그려지지 않음"
-    if r == "워드마크로만 진입":
-        return "보임 (워드마크 → 소개) · " + p
     return "보임 · " + p
 
 
@@ -100,26 +102,31 @@ def key_of(text):
 prev_mark, prev_memo = {}, {}
 if os.path.exists(OUT):
     old = io.open(OUT, encoding="utf-8").read().split("\n")
-    pending_mark, cur_key = None, None
+    # 항목 하나는 [표시] 줄 + 원문 인용줄 + (사람이 덧붙인 것) 으로 이뤄진다.
+    # 덧붙인 것은 인용(>)일 수도 평문일 수도 있다 — 고칠 문장을 원문과 나란히
+    # 두려고 > 를 쓰는 게 자연스럽기 때문이다. 첫 인용줄만 원문으로 보고
+    # 그 뒤의 모든 줄은 다음 항목이 나올 때까지 메모로 보존한다.
+    cur_key, seen_quote, in_item = None, False, False
     for ln in old:
         m = re.match(r"^- \[(.)\] \*\*(\d{3})\*\*", ln)
         if m:
+            cur_key, seen_quote, in_item = None, False, True
             pending_mark = m.group(1) if m.group(1).strip() else None
-            cur_key = None
             continue
-        if pending_mark is not None and ln.lstrip().startswith(">"):
-            cur_key = key_of(ln.lstrip()[1:])
-            prev_mark[cur_key] = pending_mark
-            pending_mark = None
+        if ln.startswith("#") or ln.startswith("---") or ln.startswith("<a "):
+            cur_key, seen_quote, in_item = None, False, False
             continue
-        if ln.lstrip().startswith(">"):
-            cur_key = key_of(ln.lstrip()[1:])
+        if not in_item:
             continue
-        # 인용도 헤더도 아닌 들여쓴 줄 = 사용자가 적은 메모
-        if cur_key and ln.startswith("  ") and ln.strip():
+        if not seen_quote:
+            if ln.lstrip().startswith(">"):
+                cur_key = key_of(ln.lstrip()[1:])
+                seen_quote = True
+                if pending_mark:
+                    prev_mark[cur_key] = pending_mark
+            continue
+        if cur_key and ln.strip():
             prev_memo.setdefault(cur_key, []).append(ln.rstrip())
-        elif ln.startswith("#") or ln.startswith("---"):
-            cur_key, pending_mark = None, None
 
 TIERS = [
     ("story", "story · 개인 회고",
