@@ -71,7 +71,7 @@ node("chanki", "김찬기", "entry", "시작점",
        scope="모두가딜러(중고차)에서 반응형 웹과 관리자 도구를, 팜커넥트(스마트팜)에서 센서 데이터 시각화와 하드웨어 제어 UI를, 케듀올에서 AI 학습 서비스와 문서 통합 시스템을 만들었습니다.",
        skills=[["JavaScript · TypeScript", "core"], ["React", "core"], ["Angular", "grew"],
                ["NestJS · TypeORM", "grew"], ["기획 · 디자인 주도", "grew"], ["AI 개발 프로세스", "first"]],
-       story="영어영문학 전공과 관광통역안내사 경력은 개발과 무관해 보이지만, 서로 다른 언어를 쓰는 사람들 사이에서 요구를 옮기는 일이라는 점에서 지금 하는 일과 닮았습니다. 기획·디자인·개발의 관점 차이를 조율하는 것이 강점이 된 배경입니다."),
+       ),
      links=[["GitHub", "https://github.com/blackstarzck"],
             ["기술 블로그", "https://chan-chan2.tistory.com/"]])
 
@@ -126,7 +126,7 @@ node("farm-3d", "센서 3D 시각화 대시보드", "frontend", "팜커넥트 ·
        objectives=["30개 이상 센서의 온·습도를 3D로 시각화",
                    "AI 권장값과 실시간 환경 데이터를 비교하는 UI 설계"],
        skills=[["Angular", "grew"], ["amCharts · 3D 시각화", "first"], ["RxJS", "first"], ["NestJS", "grew"]],
-       story="이 프로젝트가 '데이터를 화면에 올린다'와 '데이터를 이해하게 만든다'가 다른 일이라는 걸 확인한 계기였습니다."))
+       ))
 
 node("connect-bee", "CONNECT BEE", "frontend", "팜커넥트",
      "수정벌 벌통의 센서 값을 보고 팬·열선·쿨러까지 한 화면에서 제어하는 하이브리드 앱입니다.",
@@ -168,7 +168,7 @@ node("dealer-admin", "모두가딜러 · 관리자", "frontend", "모두가딜�
                    "차량 데이터 일괄 적용 기능 추가",
                    "게시 전 미리보기 UI 제공"],
        skills=[["관리자 UX", "grew"], ["JavaScript", "core"]],
-       story="매일 같은 화면을 쓰는 사람에게는 클릭 한 번이 하루에 수십 번 쌓입니다. 이때 배운 관점이 이후 관리자 도구를 만들 때마다 기준이 됐습니다."))
+       ))
 
 # ── backend ──────────────────────────────────────────────────────────────
 node("backend", "서버 · 데이터", "backend", "확장 중인 영역",
@@ -192,7 +192,7 @@ node("doc-merge", "문서 통합 관리 서비스", "backend", "케듀올 · 202
                 "Ant Design·Tailwind·styled-components로 관리용 UI/UX 구축"],
        skills=[["NestJS · TypeORM", "first"], ["PostgreSQL", "first"], ["Redux Toolkit · SWR", "grew"],
                ["AG Grid", "first"], ["ExcelJS", "first"], ["React · TypeScript", "core"]],
-       story="기획서를 받아 만든 게 아니라 문제를 먼저 정의했습니다. 무엇을 만들지 정하는 일과 만드는 일이 이어져 있을 때 결과가 달라진다는 걸 확인한 프로젝트입니다."))
+       ))
 
 node("supabase", "Supabase 인증 · RLS", "backend", "케듀올 · 2026",
      "권한을 애플리케이션이 아니라 DB 레벨에서 다루는 방식을 처음 적용했습니다.",
@@ -330,7 +330,6 @@ node("react-basics", "React 학습기", "lab", "2022",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
-       story="퍼블리싱에서 프론트엔드로 넘어가던 시기입니다. 이 저장소들이 그 전환의 기록이라 남겨두고 있습니다.",
        skills=[["React", "first"]]))
 
 # ── 좌표 계산 ────────────────────────────────────────────────────────────
