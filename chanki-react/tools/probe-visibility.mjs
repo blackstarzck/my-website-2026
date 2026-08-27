@@ -73,14 +73,30 @@ for (const n of NODES) {
     if (await waitMode('page')) reach = 'via-wordmark'
   }
 
-  // ── 2) 페이지를 열고 각 필드가 어디에 그려지는지 본다 ───────────────
+  // ── 2) 갤러리에 무엇이 그려지는지 ──────────────────────────────────
+  // 갤러리는 body(없으면 sum)를 .gdesc 로 띄운다. 페이지만 보면 이걸 놓친다.
+  await goHome()
+  await page.evaluate((id) => window.__focus(id), n.id)
+  await page.waitForTimeout(1500)
+  const galText = norm(
+    await page.evaluate(() => {
+      const g = document.getElementById('gallery')
+      if (!g || g.getBoundingClientRect().height === 0) return ''
+      // 갤러리가 이 노드를 보여주고 있을 때만 유효하다
+      return g.textContent || ''
+    }),
+  )
+  const galName = await page.evaluate(() => document.querySelector('#gallery .gname')?.textContent?.trim() ?? '')
+  const galValid = galName === n.name
+
+  // ── 3) 페이지를 열고 각 필드가 어디에 그려지는지 본다 ───────────────
   await page.evaluate((id) => window.__open(id), n.id)
   await waitMode('page')
   await page.waitForTimeout(500)
 
-  const locate = (probe) =>
-    page.evaluate((q) => {
-      if (!q) return null
+  const locate = async (probe) => {
+    if (!probe) return null
+    const inDoc = await page.evaluate((q) => {
       const doc = document.getElementById('doc')
       if (!doc) return 'none'
       let deepest = null
@@ -91,6 +107,11 @@ for (const n of NODES) {
       if (!deepest) return 'none'
       return deepest.closest('.dive') ? 'dive' : 'page'
     }, probe)
+    if (inDoc !== 'none') return inDoc
+    // 페이지에 없으면 갤러리를 본다
+    if (galValid && galText.includes(probe)) return 'gallery'
+    return 'none'
+  }
 
   const pj = n.project || {}
   const f = {}

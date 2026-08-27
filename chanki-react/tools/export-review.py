@@ -59,16 +59,32 @@ def place(nid, field, idx=None):
         return "렌더 안 됨"
     if v == "dive":
         return "상세 접기 안 (버튼을 눌러야 보임)"
+    if v == "gallery":
+        return "영역 갤러리 (지도에서 이 영역을 누르면)"
     return "페이지 본문"
 
 
 def note(nid, field, idx=None):
+    """이 값이 방문자에게 보이는가.
+
+    페이지를 강제로 열면(__open) 모든 필드가 렌더되므로 "페이지에 있다"가
+    "보인다"를 뜻하지 않는다. 리전 노드는 페이지가 열리지 않으므로 갤러리가
+    유일한 노출 경로다. 그 경로는 engine/legacy.ts 에서 확인했다.
+
+      909행  const desc = `...${esc(n.body || n.sum || '')}...`  → body 우선
+      937행  갤러리 innerHTML 에 desc 삽입
+      842행  갤러리 카드 부제는 일반 노드용 — 영역 카드는 "영역 · 리전명"
+
+    따라서 리전 노드는 body 만 보이고 sum 은 어디에도 쓰이지 않는다.
+    """
     r = reach_of(nid)
     p = place(nid, field, idx)
     if r.startswith("페이지 없음"):
-        return "**안 보임** — " + r
+        if field == "body":
+            return "보임 · 영역 갤러리 (지도에서 이 영역을 누르면)"
+        return "**안 보임** — " + r + ", 갤러리는 body 만 씀"
     if p == "렌더 안 됨":
-        return "**안 보임** — 페이지에 그려지지 않음"
+        return "**안 보임** — 어느 화면에도 그려지지 않음"
     if r == "워드마크로만 진입":
         return "보임 (워드마크 → 소개) · " + p
     return "보임 · " + p

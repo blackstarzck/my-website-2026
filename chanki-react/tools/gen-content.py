@@ -41,7 +41,11 @@ AGRAD = {
 N = []
 
 def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLabel=None, links=None):
-    d = dict(id=i, name=name, region=region, kicker=kicker, sum=sum_, body=body, cap=cap)
+    d = dict(id=i, name=name, region=region, kicker=kicker)
+    # sum 이 비면 필드를 아예 넣지 않는다 — 리전 노드는 갤러리가 body 를 쓴다.
+    if sum_: d["sum"] = sum_
+    d["body"] = body
+    d["cap"] = cap
     if url: d["url"] = url
     if urlLabel: d["urlLabel"] = urlLabel
     if links: d["links"] = links
@@ -85,7 +89,7 @@ node("contact", "연락", "entry", "닿는 곳",
 
 # ── frontend ─────────────────────────────────────────────────────────────
 node("frontend", "프론트엔드", "frontend", "핵심 영역",
-     "퍼블리싱으로 시작해 React·Angular·Next.js까지. 화면을 만드는 일이 곧 사용자의 시간을 아끼는 일이라고 생각합니다.",
+     "",
      "5년 9개월의 중심 축입니다. jQuery와 Ajax로 시작해 React와 Angular, TypeScript, 최근에는 Next.js까지 다뤘습니다. 관리자 도구처럼 매일 쓰는 화면일수록 작은 마찰이 누적된다고 보고, 반복 입력·일괄 적용·미리보기 같은 기능으로 운영 시간을 줄이는 데 관심이 많습니다.",
      "프론트엔드")
 
@@ -172,7 +176,7 @@ node("dealer-admin", "모두가딜러 · 관리자", "frontend", "모두가딜�
 
 # ── backend ──────────────────────────────────────────────────────────────
 node("backend", "서버 · 데이터", "backend", "확장 중인 영역",
-     "화면 뒤가 궁금해서 넘어간 영역입니다. NestJS·TypeORM·PostgreSQL로 API와 DB를 직접 설계했습니다.",
+     "",
      "프론트엔드만으로는 데이터가 왜 그 모양으로 오는지 설명할 수 없다는 게 계기였습니다. NestJS와 TypeORM으로 API를 만들고, MySQL과 PostgreSQL로 스키마를 설계했습니다. 최근에는 Supabase의 RLS와 RPC로 권한을 DB 레벨에서 다루는 경험을 했습니다.",
      "서버 · 데이터")
 
@@ -212,7 +216,7 @@ node("farm-api", "스마트팜 관리자 · API", "backend", "팜커넥트",
 
 # ── ai ───────────────────────────────────────────────────────────────────
 node("ai", "AI 개발 프로세스", "ai", "현재 집중",
-     "AI를 코드 생성기가 아니라 검증 가능한 프로세스로 다루려고 합니다. 판단과 책임은 사람이 집니다.",
+     "",
      "생성형 AI를 요구사항 정리, 구현, 코드 리뷰, 테스트, 문서화에 활용합니다. 다만 결과를 그대로 받는 대신 요구사항·실제 동작·테스트 결과·Git 이력으로 검증하는 루프를 두는 데 관심이 있습니다. AI로 구현 가능한 범위가 빠르게 넓어지는 만큼, 무엇을 하지 않을지 정하는 일이 더 중요해졌다고 생각합니다.",
      "AI 개발 프로세스")
 
@@ -259,7 +263,7 @@ node("my-skills", "개인 스킬 라이브러리", "ai", "개인 프로젝트",
 
 # ── product ──────────────────────────────────────────────────────────────
 node("product", "제품 · 협업", "product", "일하는 방식",
-     "기획·디자인·개발의 관점 차이를 조율해 결과물을 완성하는 일. 코드 바깥의 절반입니다.",
+     "",
      "기획자와 디자이너가 없는 환경에서 일한 시간이 길어, 무엇을 만들지 정하는 일과 만드는 일을 함께 해왔습니다. 기술적인 내용을 상대방의 눈높이에 맞게 설명하는 것, 서로 다른 관점 사이를 조율하는 것이 강점이라고 생각합니다.",
      "제품 · 협업")
 
@@ -299,7 +303,7 @@ node("english", "영어 · 통역안내사", "product", "배경",
 
 # ── lab ──────────────────────────────────────────────────────────────────
 node("lab", "실험실", "lab", "손이 기억하는 것",
-     "업무 밖에서 만든 것들. 캔버스, 3D, 게임 — 화면을 다루는 감각을 유지하는 방법입니다.",
+     "",
      "회사 일과 별개로 계속 만들어 온 것들입니다. 파티클과 캔버스, 아이소메트릭과 3D, 간단한 게임까지. 당장 쓸 데가 없어도 손으로 만들어 보면 남는 게 있다고 생각합니다. 이 포트폴리오 사이트도 그 연장선입니다.",
      "실험실",
      links=[["GitHub에서 전부 보기", "https://github.com/blackstarzck?tab=repositories"]])
@@ -482,7 +486,7 @@ export type ContentNode = {{
   y: number
   r: number
   kicker: string
-  sum: string
+  sum?: string
   body: string
   cap: string
   url?: string

@@ -21,7 +21,7 @@ export type ContentNode = {
   y: number
   r: number
   kicker: string
-  sum: string
+  sum?: string
   body: string
   cap: string
   url?: string
