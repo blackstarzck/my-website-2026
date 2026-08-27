@@ -57,8 +57,7 @@ export default function MapCanvas() {
           <feGaussianBlur in="d" stdDeviation="2.2" />
         </filter>
       </svg>
-      {/* 소개 페이지로 가는 진입점. 클릭 처리는 engine/legacy.ts 에서 붙인다. */}
-      <div id="wordmark" role="button" tabIndex={0} aria-label="김찬기 소개 보기">CHANKI KIM</div>
+      <div id="wordmark">CHANKI KIM</div>
       <button id="themebtn" aria-label="밝게·어둡게 전환"><span className="ti">☀</span><span className="tl">밝게</span></button>
       <div id="tabs"></div>
       <div id="minilbl">사이트 지도 · 현재 위치</div><canvas id="mini" ref={mini}></canvas>

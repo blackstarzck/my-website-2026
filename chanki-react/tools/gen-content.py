@@ -68,16 +68,16 @@ def P(role=None, duration=None, impact=None, scope=None, objectives=None, impact
 node("chanki", "김찬기", "entry", "시작점",
      "퍼블리싱에서 시작해 프론트엔드를 지나 서버까지, 화면 뒤의 흐름을 이해하려고 계속 범위를 넓혀온 5년 9개월입니다.",
      "영어영문학을 전공하고 관광통역안내사로 일하다 개발로 넘어왔습니다. HTML·CSS·JavaScript 퍼블리싱에서 출발해 React·Angular·TypeScript 프론트엔드를 거쳐 NestJS·MySQL 서버 개발까지 경험했습니다. 화면만 만드는 것이 아니라 데이터가 전달되고 처리되는 전체 흐름을 이해하려 노력합니다. 기획자와 디자이너가 없는 환경에서도 기획·디자인·개발을 주도적으로 수행해 왔고, 최근에는 멀티 에이전트와 게이트 하네스로 AI를 개발 프로세스에 편입시키고 있습니다.",
-     "김찬기 · 프론트엔드 개발자",
-     P(role="프론트엔드 개발자. 필요하면 기획과 디자인, 서버까지.",
-       duration="2020.06 → 재직 중 · 5년 9개월",
-       impact="운영의 불편을 제품으로 바꾸는 일을 반복해 왔습니다.",
-       scope="모두가딜러(중고차)에서 반응형 웹과 관리자 도구를, 팜커넥트(스마트팜)에서 센서 데이터 시각화와 하드웨어 제어 UI를, 케듀올에서 AI 학습 서비스와 문서 통합 시스템을 만들었습니다.",
-       skills=[["JavaScript · TypeScript", "core"], ["React", "core"], ["Angular", "grew"],
-               ["NestJS · TypeORM", "grew"], ["기획 · 디자인 주도", "grew"], ["AI 개발 프로세스", "first"]],
-       ),
-     links=[["GitHub", "https://github.com/blackstarzck"],
-            ["기술 블로그", "https://chan-chan2.tistory.com/"]])
+     "김찬기 · 프론트엔드 개발자")
+# 진입 노드는 페이지가 열리지 않는다 (원본과 같은 설계). 지도의 중심을 누르면
+# 지도로 돌아가고, 프로필은 갤러리가 body 로 보여준다. 그래서 project(역할·기간·
+# 성과·범위·스킬)와 links 는 어디에도 그려지지 않아 두지 않는다.
+# 실제로 쓰이는 것은 넷뿐이다.
+#   body    진입 갤러리 설명(.gdesc)
+#   cap     갤러리 히어로 플레이스홀더
+#   kicker  지도 호버 툴팁(#tip .kc)
+#   sum     contact 페이지의 관련 카드 부제
+# 같은 링크는 contact 노드에 있고 그 페이지는 열린다.
 
 node("contact", "연락", "entry", "닿는 곳",
      "이력서와 GitHub, 기술 블로그. 그리고 메일.",
