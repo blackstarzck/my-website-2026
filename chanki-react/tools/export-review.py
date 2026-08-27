@@ -208,11 +208,60 @@ for key, _, _ in TIERS:
             hidden += 1
 lines += ["", "**합계 %d건** · 그중 방문자에게 **안 보이는 항목 %d건**" % (total, hidden), "", "---", ""]
 
+def skills_context():
+    """skills 는 69건이라 하나씩 보기 어렵다. 판단에 필요한 맥락을 앞에 둔다."""
+    import collections
+
+    LV = {"core": "능숙", "grew": "성장", "first": "첫 도입"}
+    dist = collections.Counter()
+    byname = collections.defaultdict(list)
+    for n in NODES:
+        for sk in ((n.get("project") or {}).get("skills") or []):
+            name = sk[0] if isinstance(sk, list) else str(sk)
+            lv = (sk[1] if isinstance(sk, list) and len(sk) > 1 else "core") or "core"
+            dist[lv] += 1
+            byname[name].append((n["id"], lv))
+
+    out = ["### 판정 분포", ""]
+    out.append("| 판정 | 건수 | 화면에 뜨는 툴팁 |")
+    out.append("|---|---|---|")
+    for lv, tip in (("core", "자신 있게 다뤘습니다"),
+                    ("grew", "이 프로젝트에서 더 깊어졌습니다"),
+                    ("first", "이 프로젝트에서 처음 썼습니다")):
+        out.append("| %s | %d | %s |" % (LV[lv], dist[lv], tip))
+    total_sk = sum(dist.values())
+    pct = round(dist["first"] * 100 / total_sk) if total_sk else 0
+    out += ["",
+            "`첫 도입` 이 %d%%다. 안전하게 잡느라 낮춰 매긴 경향이 있으니 "
+            "실제보다 저평가된 것이 있으면 올리는 편이 낫다." % pct,
+            ""]
+
+    multi = {k: v for k, v in byname.items() if len(v) > 1}
+    if multi:
+        out += ["### 같은 기술이 여러 노드에 나올 때", "",
+                "판정이 갈리는 것이 반드시 모순은 아니다 — 레벨은 프로젝트 기준이라",
+                "처음 쓴 프로젝트와 지금의 숙련도가 다를 수 있다.", "",
+                "| 기술 | 노드별 판정 |", "|---|---|"]
+        for name in sorted(multi):
+            uses = ", ".join("`%s`=%s" % (nid, LV[lv]) for nid, lv in multi[name])
+            flag = " ⚠️" if len({lv for _, lv in multi[name]}) > 1 else ""
+            out.append("| %s%s | %s |" % (name, flag, uses))
+        out.append("")
+
+    out += ["### 진입 노드 주의", "",
+            "레벨 툴팁이 \"이 프로젝트에서~\" 인데 `%s` 는 프로젝트가 아니라" % ENTRY_ID,
+            "경력 전체를 요약하는 노드다. 거기 붙은 항목들은 문구가 맞지 않는다.",
+            "문구를 고칠지 그 항목들을 뺄지 정해야 한다.", ""]
+    return out
+
+
 num = 0
 for key, label, why in TIERS:
     rows = items(key)
     lines += ['<a id="%s"></a>' % key, "", "## %s" % label, "", "> %s" % why, "",
               "**%d건**" % len(rows), ""]
+    if key == "skills":
+        lines += [""] + skills_context()
     cur_id = None
     for n, val, idx in rows:
         if n["id"] != cur_id:
