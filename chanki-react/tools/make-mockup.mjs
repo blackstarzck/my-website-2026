@@ -25,7 +25,12 @@ const H = 1000
 
 const argv = process.argv.slice(2)
 const force = argv.find((a) => a === '--phone' || a === '--window')
-const [SRC, ID] = argv.filter((a) => !a.startsWith('--'))
+// 브라우저 창째로 찍은 캡처는 탭 바·주소창·북마크바를 잘라내야 한다.
+const cropIdx = argv.indexOf('--crop-top')
+const CROP = cropIdx >= 0 ? Number(argv[cropIdx + 1]) || 0 : 0
+// cropIdx 가 -1 일 때 cropIdx+1 은 0 이라 첫 인자를 걸러버린다. 있을 때만 뺀다.
+const skip = cropIdx >= 0 ? cropIdx + 1 : -1
+const [SRC, ID] = argv.filter((a, i) => !a.startsWith('--') && i !== skip)
 if (!SRC || !ID) {
   console.error('사용법: node tools/make-mockup.mjs <원본이미지> <노드id> [--phone|--window]')
   process.exit(1)
@@ -91,8 +96,27 @@ const { iw, ih } = await page.evaluate(() => {
   const i = document.getElementById('m')
   return { iw: i.naturalWidth, ih: i.naturalHeight }
 })
-const ratio = ih / iw
+const ch = ih - CROP // 잘라낸 뒤의 높이 — 비율 판단도 이 값으로 한다
+const ratio = ch / iw
 const phone = force ? force === '--phone' : ratio >= 1.6
+
+// 브라우저 프레임은 담을 화면의 비율을 따라간다. 고정 크기로 두면 가로로 긴
+// 대시보드를 넣었을 때 아래쪽에 빈 여백이 크게 남는다.
+const TB = 38
+const MAX_W = 912
+const MAX_H = 880
+let inW = MAX_W - 2
+let inH = Math.round((inW * ch) / iw)
+if (inH > MAX_H - 2 - TB) {
+  inH = MAX_H - 2 - TB
+  inW = Math.round((inH * iw) / ch)
+}
+const WIN_W = inW + 2
+const WIN_H = inH + 2 + TB
+const winScale = inW / iw
+// 기기 프레임은 폭에 맞춰 넣고 넘치는 아래쪽은 흘려보낸다.
+const PHONE_SCR = 350
+const phoneScale = PHONE_SCR / iw
 
 const COMMON = `
 @font-face{font-family:P;src:url(data:font/woff2;base64,${fontB64}) format("woff2-variations");font-weight:45 920}
@@ -115,23 +139,27 @@ const PHONE = `
   border:1px solid rgba(255,255,255,.14);
   box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04) inset}
 .scr{width:100%;height:100%;border-radius:32px;overflow:hidden;background:#fff}
-.scr img{width:100%;display:block}
+.scr img{width:100%;display:block;margin-top:${-Math.round(CROP * phoneScale)}px}
 .fade{position:absolute;right:132px;bottom:0;width:394px;height:230px;
   background:linear-gradient(to bottom, transparent, #08080b 82%)}`
 
 const WINDOW = `
 .win{position:absolute;right:74px;top:50%;transform:translateY(-50%);
-  width:912px;height:868px;border-radius:14px;overflow:hidden;background:#16161a;
+  width:${WIN_W}px;height:${WIN_H}px;border-radius:14px;overflow:hidden;background:#16161a;
   border:1px solid rgba(255,255,255,.14);
   box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04) inset}
 .tb{height:38px;display:flex;align-items:center;gap:8px;padding:0 15px;
   background:#1d1d22;border-bottom:1px solid rgba(255,255,255,.08)}
 .tb i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.18)}
-.win img{width:100%;height:calc(100% - 38px);object-fit:contain;display:block;background:#fff}`
+/* 잘라낼 위쪽을 음수 여백으로 밀어 올리고 넘치는 부분을 감춘다.
+   object-fit 은 원본 기준이라 크롭과 같이 쓸 수 없어 직접 계산한다. */
+.clip{width:100%;height:${WIN_H - 2 - TB}px;overflow:hidden;background:#fff;
+  display:flex;align-items:flex-start;justify-content:center}
+.clip img{width:${Math.round(iw * winScale)}px;margin-top:${-Math.round(CROP * winScale)}px;display:block}`
 
 const body = phone
   ? `<div class="dev"><div class="scr"><img src="${dataUri}"></div></div><div class="fade"></div>`
-  : `<div class="win"><div class="tb"><i></i><i></i><i></i></div><img src="${dataUri}"></div>`
+  : `<div class="win"><div class="tb"><i></i><i></i><i></i></div><div class="clip"><img src="${dataUri}"></div></div>`
 
 writeFileSync(
   join(ROOT, 'public', 'assets', '__mockup.html'),
