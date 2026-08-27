@@ -773,6 +773,20 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         } else { d.setAttribute('hidden', ''); dv.classList.remove('on'); i.textContent = '↓' }
       }
     })()
+    // 원본(<id>-full.jpg)이 있는 노드만 이미지를 눌러 모달로 볼 수 있다.
+    // 있는지 없는지는 목록으로 들고 있지 않고 실제로 불러 보고 판단한다 —
+    // 이미지를 추가하면 데이터를 고치지 않아도 따라온다.
+    ;(function () {
+      const mf = document.querySelector('#doc .mediaframe') as HTMLElement | null
+      if (!mf) return
+      const src = '/assets/' + n.id + '-full.jpg'
+      const probe = new Image()
+      probe.onload = function () {
+        mf.classList.add('zoomable')
+        mf.onclick = function () { openLightbox(src, n.name) }
+      }
+      probe.src = src
+    })()
     gid('doc').querySelectorAll('[data-go]').forEach((p) => {
       (p as HTMLElement).onclick = (ev) => { ev.preventDefault(); navigate((p as HTMLElement).dataset.go as string) }
     })
@@ -817,6 +831,33 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     } else goHome()
   }
   on(gid('back'), 'click', returnHome)
+
+  // ── 원본 이미지 모달 ─────────────────────────────────────────────────
+  // 노드 페이지의 이미지는 16:10 으로 잘라 놓은 것이라 원본에서 빠진 부분이
+  // 있다. 눌러서 잘리지 않은 원본을 보게 한다.
+  function openLightbox(src: string, alt: string): void {
+    const im = gid('lbimg') as HTMLImageElement
+    im.src = src
+    im.alt = alt
+    gid('lbscroll').scrollTop = 0
+    gid('lightbox').removeAttribute('hidden')
+  }
+  function closeLightbox(): void {
+    const lb = gid('lightbox')
+    if (lb.hasAttribute('hidden')) return
+    lb.setAttribute('hidden', '')
+    // 큰 이미지를 물고 있지 않도록 비운다
+    ;(gid('lbimg') as HTMLImageElement).removeAttribute('src')
+  }
+  on(gid('lbclose'), 'click', closeLightbox)
+  on(gid('lightbox'), 'click', function (ev: MouseEvent) {
+    // 이미지 자체가 아니라 배경을 눌렀을 때만 닫는다
+    const t = ev.target as HTMLElement
+    if (t.id === 'lightbox' || t.id === 'lbscroll') closeLightbox()
+  })
+  on(document, 'keydown', function (ev: KeyboardEvent) {
+    if (ev.key === 'Escape') closeLightbox()
+  })
   // 워드마크는 장식이다. 진입 노드는 페이지를 열지 않고 갤러리로 간다 —
   // 지도의 중심을 누르면 지도로 돌아가는 것이 맞고, 프로필은 갤러리가 보여준다.
   // ── 갤러리 · 중간 상태(미리보기) ──

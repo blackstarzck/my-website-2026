@@ -71,6 +71,14 @@ export default function MapCanvas() {
       <div id="hint">고리가 있는 <b>영역</b>을 누르면 살펴보기 · <b>프로젝트</b>를 누르면 미리보기</div>
       {/* 개인정보 처리방침 링크는 해당 페이지를 만든 뒤 되살린다.
           원본에서 온 링크였는데 이 앱에는 /privacy 라우트가 없어 404 였다. */}
+      {/* 노드 이미지를 누르면 원본을 띄우는 자리. 열고 닫는 것은 engine/legacy.ts 가 한다. */}
+      <div id="lightbox" hidden>
+        <button id="lbclose" type="button" aria-label="닫기">✕</button>
+        {/* src 는 engine/legacy.ts 가 런타임에 넣는다. next/image 는
+            빌드 시점에 경로를 알아야 해서 이 자리에 쓸 수 없다. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <div id="lbscroll"><img id="lbimg" alt="" /></div>
+      </div>
       <div id="coldtitle">CHANKI KIM</div>
       <div id="caminos"></div>
     </>
