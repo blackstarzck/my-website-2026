@@ -149,7 +149,7 @@ node("corp-sites", "법인별 홈페이지", "frontend", "케듀올 · 2025",
        duration="2025.05 - 2025.06",
        impact="디자이너 없이 기획부터 배포까지 완주했습니다.",
        scope="Figma 기획·디자인, React 18·Tailwind CSS 4·styled-components·GSAP 퍼블리싱, FTP 배포 운영.",
-       skills=[["Figma 기획 · 디자인", "grew"], ["Tailwind CSS", "grew"], ["GSAP", "core"], ["배포 운영", "first"]]))
+       skills=[["Figma 기획 · 디자인", "grew"], ["Tailwind CSS", "grew"], ["GSAP", "grew"], ["배포 운영", "first"]]))
 
 node("dealer-web", "모두가딜러 · 웹서비스", "frontend", "모두가딜러 · 2020–2022",
      "중고차 서비스의 반응형 웹과 신규 콘텐츠를 만들며 퍼블리싱에서 프론트엔드로 넘어왔습니다.",

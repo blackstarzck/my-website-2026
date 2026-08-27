@@ -271,7 +271,7 @@ export const NODES: ContentNode[] = [
         ],
         [
           "GSAP",
-          "core"
+          "grew"
         ],
         [
           "배포 운영",
