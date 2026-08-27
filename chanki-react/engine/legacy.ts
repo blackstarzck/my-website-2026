@@ -817,7 +817,17 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     } else goHome()
   }
   on(gid('back'), 'click', returnHome)
-  // ── GALERÍA · estado intermedio (previsualización) ──
+  // 워드마크는 진입 노드(소개) 페이지로 가는 유일한 경로다.
+  // cardClick·navigate 는 진입 노드를 setFieldFocus 로 보내므로 — 지도의 중심을
+  // 클릭하면 지도로 돌아가야 맞다 — 그 노드의 본문에는 달리 닿을 방법이 없다.
+  const _wm = gid('wordmark')
+  on(_wm, 'click', function () { openPage(ENTRY_ID) })
+  // role="button" 이므로 Enter·Space 로도 눌려야 한다.
+  on(_wm, 'keydown', function (ev) {
+    const k = (ev as KeyboardEvent).key
+    if (k === 'Enter' || k === ' ') { ev.preventDefault(); openPage(ENTRY_ID) }
+  })
+  // ── 갤러리 · 중간 상태(미리보기) ──
   function galCard(m: ENode): string {
     const isA = AREAS.has(m.id)
     if (isA) {
