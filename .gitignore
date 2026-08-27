@@ -11,3 +11,6 @@ playwright-report/
 blob-report/
 .playwright/
 chanki-react/tsconfig.tsbuildinfo
+
+# 이미지 합성용 원본. 배포에도 저장소에도 들어가지 않는다.
+_sources/
