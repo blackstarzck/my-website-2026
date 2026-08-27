@@ -674,7 +674,6 @@ export const NODES: ContentNode[] = [
     "project": {
       "role": "성능 개선 및 레거시 코드 정리",
       "duration": "2022.01 - 2022.05",
-      "impact": "새 기능을 넣기 전에 걷어내는 일이 먼저일 때가 있다는 걸 배웠습니다.",
       "skills": [
         [
           "성능 개선",
@@ -726,7 +725,6 @@ export const NODES: ContentNode[] = [
     "project": {
       "role": "영어영문학 전공 · 관광통역안내사(영어)",
       "duration": "성결대학교 2008.03 - 2014.03 · 자격 2014.12",
-      "impact": "개발 이전의 경력이 지금의 협업 방식으로 이어졌습니다.",
       "skills": [
         [
           "영문 기술 문서",
@@ -794,7 +792,6 @@ export const NODES: ContentNode[] = [
     "cap": "3D · 아이소메트릭 실험",
     "project": {
       "role": "개인 실험",
-      "impact": "업무 프로젝트(센서 3D 대시보드)로 이어진 실험입니다.",
       "skills": [
         [
           "3D 렌더링",
