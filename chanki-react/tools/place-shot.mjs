@@ -10,8 +10,8 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-const W = 1200
-const H = 800
+const W = 1600
+const H = 1000
 
 const argv = process.argv.slice(2)
 if (!argv.length || argv.length % 2 !== 0) {

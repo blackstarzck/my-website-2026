@@ -18,8 +18,10 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const ASSETS = join(ROOT, 'public', 'assets')
-const W = 1200
-const H = 800
+// 슬롯 비율은 16:10 이다 (.mediaframe / .ghero). 다른 비율로 만들면 cover 로
+// 잘려서 아래쪽 글자가 먼저 사라진다.
+const W = 1600
+const H = 1000
 
 /** `export const NAME... = <JSON>` 블록을 뽑는다. data/*.ts 는 JSON 형태로 생성된다. */
 function extract(src, name) {
@@ -96,9 +98,12 @@ body{width:${W}px;height:${H}px;background:#08080b;font-family:P,sans-serif;over
 .r2{width:${r2 * 2}px;height:${r2 * 2}px;opacity:.14;border-style:dashed}
 .dot{position:absolute;left:74%;top:34%;width:15px;height:15px;border-radius:50%;
   transform:translate(-50%,-50%);background:${acc};box-shadow:0 0 34px 10px ${acc}66}
-.tx{position:absolute;left:74px;bottom:76px;right:300px}
+/* 카드 슬롯은 16:9 로 다시 잘린다(위아래 각 5.6%). 글자를 아래에 두면
+   카드에서 먼저 잘리므로 세로 가운데에 둔다. */
+.tx{position:absolute;left:86px;top:50%;transform:translateY(-50%);right:340px}
 .reg{font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:${acc};opacity:.92;font-weight:600}
-.nm{margin-top:20px;font-size:66px;line-height:1.1;font-weight:700;color:#f4f4f6;letter-spacing:-.02em}
+/* 한글은 기본이 글자 단위 줄바꿈이라 어절이 쪼개진다. */
+.nm{margin-top:20px;font-size:60px;line-height:1.12;font-weight:700;color:#f4f4f6;letter-spacing:-.02em;word-break:keep-all;text-wrap:balance}
 .kk{margin-top:22px;font-size:21px;color:#f4f4f6;opacity:.46;font-weight:400}
 .bar{position:absolute;left:0;bottom:0;height:5px;width:100%;background:linear-gradient(90deg,${g0},${g1})}
 </style>
