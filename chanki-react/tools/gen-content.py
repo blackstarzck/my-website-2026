@@ -252,7 +252,8 @@ node("figma-gen", "Figma → React 생성기", "ai", "개인 프로젝트",
      "Figma 기반 UI 라이브러리",
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["디자인 토큰 동기화", "first"], ["npm 릴리스 자동화", "first"], ["TypeScript", "core"]]),
-     url="https://github.com/blackstarzck/chanchan2", urlLabel="GitHub에서 보기")
+     url="https://chanchan2.vercel.app", urlLabel="디자인 시스템 문서 열기",
+     links=[["저장소", "https://github.com/blackstarzck/chanchan2"]])
 
 node("my-skills", "개인 스킬 라이브러리", "ai", "개인 프로젝트",
      "반복해서 쓰는 작업 방식을 스킬로 정리해 재사용합니다.",
@@ -337,8 +338,10 @@ node("game-lab", "게임 · 인터랙션", "lab", "실험",
      "게임 · 인터랙션 실험",
      P(role="개인 실험",
        skills=[["Canvas 2D", "grew"], ["Web Audio API", "first"], ["게임 루프", "first"]]),
-     links=[["neon-fist · 격투 게임", "https://github.com/blackstarzck/neon-fist"],
-            ["game-cabinet · 3D 아케이드", "https://github.com/blackstarzck/game-cabinet"]])
+     links=[["NEON FIST 플레이", "https://neon-fist.vercel.app"],
+            ["GAME CABINET 열기", "https://game-cabinet.vercel.app"],
+            ["neon-fist 저장소", "https://github.com/blackstarzck/neon-fist"],
+            ["game-cabinet 저장소", "https://github.com/blackstarzck/game-cabinet"]])
 
 node("trading-lab", "자동매매 시스템", "lab", "2026",
      "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",

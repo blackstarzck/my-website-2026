@@ -533,8 +533,14 @@ export const NODES: ContentNode[] = [
     "sum": "디자인 토큰을 동기화하고 컴포넌트를 만들어내는 UI 라이브러리 스타터입니다.",
     "body": "Figma의 디자인 토큰을 코드로 동기화하고 shadcn 스타일의 기본 컴포넌트를 생성하는 스타터를 만들었습니다. npm 릴리스 자동화까지 포함해, 디자인과 코드 사이를 손으로 옮기던 과정을 줄이는 것이 목표였습니다.",
     "cap": "Figma 기반 UI 라이브러리",
-    "url": "https://github.com/blackstarzck/chanchan2",
-    "urlLabel": "GitHub에서 보기",
+    "url": "https://chanchan2.vercel.app",
+    "urlLabel": "디자인 시스템 문서 열기",
+    "links": [
+      [
+        "저장소",
+        "https://github.com/blackstarzck/chanchan2"
+      ]
+    ],
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
       "skills": [
@@ -804,11 +810,19 @@ export const NODES: ContentNode[] = [
     "cap": "게임 · 인터랙션 실험",
     "links": [
       [
-        "neon-fist · 격투 게임",
+        "NEON FIST 플레이",
+        "https://neon-fist.vercel.app"
+      ],
+      [
+        "GAME CABINET 열기",
+        "https://game-cabinet.vercel.app"
+      ],
+      [
+        "neon-fist 저장소",
         "https://github.com/blackstarzck/neon-fist"
       ],
       [
-        "game-cabinet · 3D 아케이드",
+        "game-cabinet 저장소",
         "https://github.com/blackstarzck/game-cabinet"
       ]
     ],
