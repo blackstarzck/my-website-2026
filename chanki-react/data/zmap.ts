@@ -22,6 +22,7 @@ export const ZMAP: Record<string, number> = {
   "verify-loop": 1.33,
   "figma-gen": 0.97,
   "my-skills": 1.15,
+  "ai-squads": 1.33,
   "product": -0.75,
   "dadoke": -0.93,
   "legacy-cleanup": -0.75,
@@ -31,5 +32,6 @@ export const ZMAP: Record<string, number> = {
   "canvas-lab": 0.17,
   "three-lab": 0.35,
   "game-lab": 0.53,
-  "react-basics": 0.17
+  "trading-lab": 0.17,
+  "react-basics": 0.35
 }

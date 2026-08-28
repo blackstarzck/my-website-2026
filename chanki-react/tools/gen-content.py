@@ -85,7 +85,8 @@ node("contact", "연락", "entry", "닿는 곳",
      "연락처",
      # 이메일은 링크 칩이 아니라 메타 행(연락처)으로 보여준다 — engine/legacy.ts
      links=[["GitHub", "https://github.com/blackstarzck"],
-            ["기술 블로그", "https://chan-chan2.tistory.com/"]])
+            ["기술 블로그", "https://chan-chan2.tistory.com/"],
+            ["이 사이트의 소스", "https://github.com/blackstarzck/my-website-2026"]])
 
 # ── frontend ─────────────────────────────────────────────────────────────
 node("frontend", "프론트엔드", "frontend", "핵심 영역",
@@ -251,15 +252,24 @@ node("figma-gen", "Figma → React 생성기", "ai", "개인 프로젝트",
      "Figma 기반 UI 라이브러리",
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["디자인 토큰 동기화", "first"], ["npm 릴리스 자동화", "first"], ["TypeScript", "core"]]),
-     url="https://github.com/blackstarzck/figma-react-component-generator", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/chanchan2", urlLabel="GitHub에서 보기")
 
 node("my-skills", "개인 스킬 라이브러리", "ai", "개인 프로젝트",
      "반복해서 쓰는 작업 방식을 스킬로 정리해 재사용합니다.",
      "매번 같은 방식으로 하게 되는 작업들 — 리뷰 절차, 하네스 구성, 문서 정리 — 을 스킬 형태로 모아두고 필요할 때 꺼내 씁니다. 개인 도구지만 팀에 적용할 수 있는 형태로 다듬는 중입니다.",
      "개인 스킬 라이브러리",
      P(role="개인 프로젝트",
-       skills=[["작업 방식의 도구화", "grew"]]),
-     url="https://github.com/blackstarzck/my-skills", urlLabel="GitHub에서 보기")
+       skills=[["작업 방식의 도구화", "grew"]]))
+# ↑ 저장소가 비공개라 링크를 두지 않는다. 공개로 돌리면
+#   url="https://github.com/blackstarzck/my-skills", urlLabel="GitHub에서 보기" 를 되살리면 된다.
+
+node("ai-squads", "비개발자용 에이전트 IDE", "ai", "개인 프로젝트",
+     "AI 에이전트를 지휘해 서비스를 만들고 고칠 수 있게 하는 비주얼 IDE입니다.",
+     "개발을 모르는 사람이 AI 에이전트에게 일을 시켜 서비스를 개발하고 유지보수할 수 있게 하는 플랫폼입니다. Next.js와 FastAPI 위에 LangGraph로 에이전트 그래프를 구성했습니다. 멀티 에이전트를 제 작업에 쓰는 것과, 그 방식을 남이 쓸 수 있는 화면으로 만드는 것은 다른 문제였습니다.",
+     "비개발자용 에이전트 IDE",
+     P(role="개인 프로젝트 · 설계 및 구현",
+       skills=[["LangGraph", "first"], ["FastAPI", "first"], ["Next.js", "core"]]),
+     url="https://github.com/blackstarzck/ai-squads", urlLabel="GitHub에서 보기")
 
 # ── product ──────────────────────────────────────────────────────────────
 node("product", "제품 · 협업", "product", "일하는 방식",
@@ -304,30 +314,48 @@ node("lab", "실험실", "lab", "손이 기억하는 것",
      "",
      "회사 일과 별개로 계속 만들어 온 것들입니다. 파티클과 캔버스, 아이소메트릭에서 시작해 Blender로 3D 모델을 직접 만들고 Three.js·React Three Fiber로 웹에 올리는 것까지 이어졌습니다. 아이디어가 생기면 AI로 빠르게 프로토타입을 만들어 검증하는 흐름도 자주 씁니다. 당장 쓸 데가 없어도 손으로 만들어 보면 남는 게 있다고 생각합니다. 이 포트폴리오 사이트도 그 연장선입니다.",
      "실험실",
+     # NOTE: area 노드의 links 는 렌더되지 않는다 — 갤러리는 body 만 쓰고
+     #       page 는 열리지 않는다. 보이게 하려면 contact 로 옮겨야 한다.
      links=[["GitHub에서 전부 보기", "https://github.com/blackstarzck?tab=repositories"]])
 
 node("canvas-lab", "캔버스 · 파티클", "lab", "실험",
      "파티클과 캔버스 합성을 다양하게 시도해 본 저장소들입니다.",
-     "particles, multicanvas, particle-colorful-stars 같은 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다.",
+     "particles, particle, particle-colorful-stars, multicanvas, canvas-test 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
      "캔버스 · 파티클 실험",
      P(role="개인 실험", skills=[["Canvas 2D", "grew"], ["파티클 시스템", "first"]]))
 
 node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
-     "isosmetric, custom_model, controls 계열 저장소에서 3D 공간을 화면에 올리는 방법을 익혔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였습니다.",
+     "isosmetric-01·02, custom_model, controls-01 저장소에서 3D 공간을 화면에 올리는 방법을 익혔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다.",
      "3D · 아이소메트릭 실험",
      P(role="개인 실험",
        skills=[["3D 렌더링", "grew"], ["카메라 컨트롤", "first"]]))
 
 node("game-lab", "게임 · 인터랙션", "lab", "실험",
-     "1인칭 시점, FPS 조작, 카드 게임 같은 인터랙션 실험입니다.",
-     "lets-fps, first-person-perspective, neon-fist, game-cards 같은 저장소로 조작감과 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
+     "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
+     "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
      "게임 · 인터랙션 실험",
-     P(role="개인 실험", skills=[["실시간 인터랙션", "first"], ["게임 루프", "first"]]))
+     P(role="개인 실험",
+       skills=[["Canvas 2D", "grew"], ["Web Audio API", "first"], ["게임 루프", "first"]]),
+     links=[["neon-fist · 격투 게임", "https://github.com/blackstarzck/neon-fist"],
+            ["game-cabinet · 3D 아케이드", "https://github.com/blackstarzck/game-cabinet"]])
+
+node("trading-lab", "자동매매 시스템", "lab", "2026",
+     "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
+     "2026년 2월부터 6월까지 zenith · coin-lab · profitpal 계열 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
+     "업비트 자동매매 · 2026",
+     P(role="개인 프로젝트 · 설계 및 구현",
+       duration="2026.02 - 2026.06",
+       skills=[["Python", "grew"], ["실시간 상태 설계", "first"],
+               ["재시도 · 순서 보증", "first"], ["Supabase", "grew"]]),
+     links=[["zenith · 자동매매 본체", "https://github.com/blackstarzck/zenith"],
+            ["zenith-v4 · 모노레포 재작성", "https://github.com/blackstarzck/zenith-v4"],
+            ["coin-lab-v2", "https://github.com/blackstarzck/coin-lab-v2"],
+            ["profitpal · 에이전트 위원회", "https://github.com/blackstarzck/profitpal"]])
 
 node("react-basics", "React 학습기", "lab", "2022",
      "라우터·상태·스타일링을 하나씩 떼어 연습하던 시기의 기록입니다.",
-     "2022년, react-practice 시리즈와 react-router·styled-component·swiper 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+     "2022년, react-practice1부터 7까지와 react-router-practice, react-styled-component, react-swiper 같은 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
@@ -380,17 +408,19 @@ E += [
     ["gate-harness", "multi-agent"], ["multi-agent", "verify-loop"],
     ["figma-gen", "corp-sites"], ["my-skills", "gate-harness"],
     ["react-basics", "dealer-web"], ["canvas-lab", "three-lab"],
+    ["three-lab", "game-lab"], ["trading-lab", "supabase"],
+    ["ai-squads", "multi-agent"],
     ["english", "dadoke"], ["docs-comm", "dealer-admin"],
     ["doc-merge", "backend"], ["dadoke", "topik-user"],
 ]
 
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
 SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
-         "legacy-cleanup", "canvas-lab", "three-lab", "game-lab", "lab",
+         "legacy-cleanup", "canvas-lab", "three-lab", "game-lab", "trading-lab", "lab",
          "farm-3d", "connect-bee", "farm-api", "backend", "doc-merge", "supabase",
          "corp-sites", "figma-gen", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
-         "verify-loop", "my-skills"]
+         "verify-loop", "my-skills", "ai-squads"]
 
 # ── ZMAP (깊이) ──────────────────────────────────────────────────────────
 DEPTH = {"entry": 0.0, "frontend": 0.85, "ai": 1.15, "backend": -0.35,
@@ -407,7 +437,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 30, f"노드 수 {len(N)}"
+assert len(N) == 32, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"

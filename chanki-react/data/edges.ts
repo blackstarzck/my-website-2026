@@ -75,6 +75,10 @@ export const EDGES: [string, string][] = [
     "my-skills"
   ],
   [
+    "ai",
+    "ai-squads"
+  ],
+  [
     "backend",
     "doc-merge"
   ],
@@ -113,6 +117,10 @@ export const EDGES: [string, string][] = [
   [
     "lab",
     "game-lab"
+  ],
+  [
+    "lab",
+    "trading-lab"
   ],
   [
     "lab",
@@ -181,6 +189,18 @@ export const EDGES: [string, string][] = [
   [
     "canvas-lab",
     "three-lab"
+  ],
+  [
+    "three-lab",
+    "game-lab"
+  ],
+  [
+    "trading-lab",
+    "supabase"
+  ],
+  [
+    "ai-squads",
+    "multi-agent"
   ],
   [
     "english",

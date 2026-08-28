@@ -13,6 +13,7 @@ export const SPINE: string[] = [
   "canvas-lab",
   "three-lab",
   "game-lab",
+  "trading-lab",
   "lab",
   "farm-3d",
   "connect-bee",
@@ -31,5 +32,6 @@ export const SPINE: string[] = [
   "gate-harness",
   "multi-agent",
   "verify-loop",
-  "my-skills"
+  "my-skills",
+  "ai-squads"
 ]

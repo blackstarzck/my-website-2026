@@ -31,6 +31,10 @@ export const NODES: ContentNode[] = [
       [
         "기술 블로그",
         "https://chan-chan2.tistory.com/"
+      ],
+      [
+        "이 사이트의 소스",
+        "https://github.com/blackstarzck/my-website-2026"
       ]
     ],
     "x": 0.0,
@@ -491,8 +495,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 5.16,
-    "y": 4.73,
+    "x": 5.47,
+    "y": 4.37,
     "r": 0.72
   },
   {
@@ -517,8 +521,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 3.03,
-    "y": 5.7,
+    "x": 3.77,
+    "y": 5.23,
     "r": 0.82
   },
   {
@@ -529,7 +533,7 @@ export const NODES: ContentNode[] = [
     "sum": "디자인 토큰을 동기화하고 컴포넌트를 만들어내는 UI 라이브러리 스타터입니다.",
     "body": "Figma의 디자인 토큰을 코드로 동기화하고 shadcn 스타일의 기본 컴포넌트를 생성하는 스타터를 만들었습니다. npm 릴리스 자동화까지 포함해, 디자인과 코드 사이를 손으로 옮기던 과정을 줄이는 것이 목표였습니다.",
     "cap": "Figma 기반 UI 라이브러리",
-    "url": "https://github.com/blackstarzck/figma-react-component-generator",
+    "url": "https://github.com/blackstarzck/chanchan2",
     "urlLabel": "GitHub에서 보기",
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
@@ -548,8 +552,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 1.03,
-    "y": 6.92,
+    "x": 2.42,
+    "y": 6.57,
     "r": 0.62
   },
   {
@@ -560,8 +564,6 @@ export const NODES: ContentNode[] = [
     "sum": "반복해서 쓰는 작업 방식을 스킬로 정리해 재사용합니다.",
     "body": "매번 같은 방식으로 하게 되는 작업들 — 리뷰 절차, 하네스 구성, 문서 정리 — 을 스킬 형태로 모아두고 필요할 때 꺼내 씁니다. 개인 도구지만 팀에 적용할 수 있는 형태로 다듬는 중입니다.",
     "cap": "개인 스킬 라이브러리",
-    "url": "https://github.com/blackstarzck/my-skills",
-    "urlLabel": "GitHub에서 보기",
     "project": {
       "role": "개인 프로젝트",
       "skills": [
@@ -571,9 +573,40 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -1.23,
-    "y": 6.33,
+    "x": 0.52,
+    "y": 6.43,
     "r": 0.72
+  },
+  {
+    "id": "ai-squads",
+    "name": "비개발자용 에이전트 IDE",
+    "region": "ai",
+    "kicker": "개인 프로젝트",
+    "sum": "AI 에이전트를 지휘해 서비스를 만들고 고칠 수 있게 하는 비주얼 IDE입니다.",
+    "body": "개발을 모르는 사람이 AI 에이전트에게 일을 시켜 서비스를 개발하고 유지보수할 수 있게 하는 플랫폼입니다. Next.js와 FastAPI 위에 LangGraph로 에이전트 그래프를 구성했습니다. 멀티 에이전트를 제 작업에 쓰는 것과, 그 방식을 남이 쓸 수 있는 화면으로 만드는 것은 다른 문제였습니다.",
+    "cap": "비개발자용 에이전트 IDE",
+    "url": "https://github.com/blackstarzck/ai-squads",
+    "urlLabel": "GitHub에서 보기",
+    "project": {
+      "role": "개인 프로젝트 · 설계 및 구현",
+      "skills": [
+        [
+          "LangGraph",
+          "first"
+        ],
+        [
+          "FastAPI",
+          "first"
+        ],
+        [
+          "Next.js",
+          "core"
+        ]
+      ]
+    },
+    "x": -1.34,
+    "y": 6.87,
+    "r": 0.82
   },
   {
     "id": "product",
@@ -717,7 +750,7 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "실험",
     "sum": "파티클과 캔버스 합성을 다양하게 시도해 본 저장소들입니다.",
-    "body": "particles, multicanvas, particle-colorful-stars 같은 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다.",
+    "body": "particles, particle, particle-colorful-stars, multicanvas, canvas-test 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
     "cap": "캔버스 · 파티클 실험",
     "project": {
       "role": "개인 실험",
@@ -732,8 +765,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -3.4,
-    "y": -5.24,
+    "x": -4.1,
+    "y": -4.72,
     "r": 0.62
   },
   {
@@ -742,7 +775,7 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "실험",
     "sum": "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
-    "body": "isosmetric, custom_model, controls 계열 저장소에서 3D 공간을 화면에 올리는 방법을 익혔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였습니다.",
+    "body": "isosmetric-01·02, custom_model, controls-01 저장소에서 3D 공간을 화면에 올리는 방법을 익혔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다.",
     "cap": "3D · 아이소메트릭 실험",
     "project": {
       "role": "개인 실험",
@@ -757,8 +790,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -1.45,
-    "y": -6.64,
+    "x": -2.49,
+    "y": -6.33,
     "r": 0.72
   },
   {
@@ -766,14 +799,28 @@ export const NODES: ContentNode[] = [
     "name": "게임 · 인터랙션",
     "region": "lab",
     "kicker": "실험",
-    "sum": "1인칭 시점, FPS 조작, 카드 게임 같은 인터랙션 실험입니다.",
-    "body": "lets-fps, first-person-perspective, neon-fist, game-cards 같은 저장소로 조작감과 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
+    "sum": "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
+    "body": "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
     "cap": "게임 · 인터랙션 실험",
+    "links": [
+      [
+        "neon-fist · 격투 게임",
+        "https://github.com/blackstarzck/neon-fist"
+      ],
+      [
+        "game-cabinet · 3D 아케이드",
+        "https://github.com/blackstarzck/game-cabinet"
+      ]
+    ],
     "project": {
       "role": "개인 실험",
       "skills": [
         [
-          "실시간 인터랙션",
+          "Canvas 2D",
+          "grew"
+        ],
+        [
+          "Web Audio API",
           "first"
         ],
         [
@@ -782,9 +829,61 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 0.91,
-    "y": -6.18,
+    "x": -0.22,
+    "y": -6.25,
     "r": 0.82
+  },
+  {
+    "id": "trading-lab",
+    "name": "자동매매 시스템",
+    "region": "lab",
+    "kicker": "2026",
+    "sum": "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
+    "body": "2026년 2월부터 6월까지 zenith · coin-lab · profitpal 계열 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
+    "cap": "업비트 자동매매 · 2026",
+    "links": [
+      [
+        "zenith · 자동매매 본체",
+        "https://github.com/blackstarzck/zenith"
+      ],
+      [
+        "zenith-v4 · 모노레포 재작성",
+        "https://github.com/blackstarzck/zenith-v4"
+      ],
+      [
+        "coin-lab-v2",
+        "https://github.com/blackstarzck/coin-lab-v2"
+      ],
+      [
+        "profitpal · 에이전트 위원회",
+        "https://github.com/blackstarzck/profitpal"
+      ]
+    ],
+    "project": {
+      "role": "개인 프로젝트 · 설계 및 구현",
+      "duration": "2026.02 - 2026.06",
+      "skills": [
+        [
+          "Python",
+          "grew"
+        ],
+        [
+          "실시간 상태 설계",
+          "first"
+        ],
+        [
+          "재시도 · 순서 보증",
+          "first"
+        ],
+        [
+          "Supabase",
+          "grew"
+        ]
+      ]
+    },
+    "x": 2.04,
+    "y": -6.49,
+    "r": 0.62
   },
   {
     "id": "react-basics",
@@ -792,7 +891,7 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "2022",
     "sum": "라우터·상태·스타일링을 하나씩 떼어 연습하던 시기의 기록입니다.",
-    "body": "2022년, react-practice 시리즈와 react-router·styled-component·swiper 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+    "body": "2022년, react-practice1부터 7까지와 react-router-practice, react-styled-component, react-swiper 같은 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
     "cap": "React 학습기 · 2022",
     "project": {
       "role": "학습",
@@ -804,8 +903,8 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 3.3,
-    "y": -5.95,
-    "r": 0.62
+    "x": 3.76,
+    "y": -4.99,
+    "r": 0.72
   }
 ]
