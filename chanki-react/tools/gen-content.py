@@ -37,7 +37,23 @@ AGRAD = {
 }
 
 # 이미지 스트립(<id>-2.jpg …) 장수. 자세한 설명은 아래 MULTI 출력부 주석 참고.
-MULTI = {"react-basics": 2, "game-lab": 2}
+MULTI = {"react-basics": 4, "game-lab": 5, "three-lab": 5, "trading-lab": 2}
+
+# 이미지 슬롯마다 어느 저장소를 찍은 것인지. 0번이 대표 이미지다.
+# 이름만 칩으로 깔면 "그래서 어떻게 생겼는데" 가 남아서 화면도 같이 보여준다.
+SHOTS = {
+    "canvas-lab": ["particle-colorful-stars"],
+    "multicanvas-lab": ["multicanvas"],
+    "scroll-3d": ["scroll-page"],
+    "three-lab": ["isosmetric-02", "isosmetric-01", "custom_model", "controls-01", "ilbunidiary"],
+    "game-lab": ["neon-fist", "game-cabinet", "bridge", "first-person-perspective", "lets-fps"],
+    "trading-lab": ["zenith", "coin-lab-v2"],
+    "space-3d": ["my-space"],
+    "detect-lab": ["chanki-portfolio"],
+    "react-basics": ["react-todos", "react-practice6", "business-card", "react-modeal.net2"],
+    "figma-gen": ["chanchan2"],
+    "doc-merge": ["doc-merge"],
+}
 
 # ── 노드 정의 ────────────────────────────────────────────────────────────
 # (id, name, region, kicker, sum, body, cap, project|None, links|None)
@@ -601,11 +617,14 @@ export const THEMED: Record<string, number> = {{}}
 /**
  * 이미지 스트립이 있는 노드와 장수. <id>.jpg 다음에 <id>-2.jpg … 를 읽는다.
  * react-basics 2 = react-todos(대표) + react-practice6(네비게이션 바).
- * game-lab 2 = neon-fist(대표) + game-cabinet.
+ * 슬롯별로 어느 저장소인지는 SHOTS 가 들고 있다.
  * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
  * 그래서 노드로 두지 않고 이미지로만 남겼다.
  */
 export const MULTI: Record<string, number> = {j(MULTI)}
+
+/** 이미지 슬롯마다 찍힌 저장소 이름. 0번이 대표 이미지. */
+export const SHOTS: Record<string, string[]> = {j(SHOTS)}
 
 /** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
 export const CARD_IMG: Record<string, string> = {{}}

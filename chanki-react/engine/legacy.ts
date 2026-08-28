@@ -32,7 +32,7 @@
 import { EDGES } from '@/data/edges'
 import { NODES } from '@/data/nodes'
 import {
-  AGRAD, AREAS, CARD_IMG, COLOR, MULTI, PARENTS, RLAB, SLUG, THEMED, TREECOLS, VID,
+  AGRAD, AREAS, CARD_IMG, COLOR, MULTI, PARENTS, RLAB, SHOTS, SLUG, THEMED, TREECOLS, VID,
 } from '@/data/regions'
 import { SPINE } from '@/data/spine'
 import type { ContentNode, Region } from '@/data/types'
@@ -662,6 +662,10 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     document.querySelectorAll('#doc .imgstrip .it').forEach(function (x, k) {
       x.classList.toggle('on', k === galPos - 1)
     })
+    // 캡션도 따라간다 — 넘기고 나면 지금 보고 있는 게 어느 저장소인지 알아야 한다.
+    const capEl = document.querySelector('#doc .mediaframe + .cap')
+    const nm = (SHOTS[n.id] || [])[galPos]
+    if (capEl) capEl.textContent = nm ? (n.cap ? n.cap + ' · ' + nm : nm) : (n.cap || '')
   }
   function cardMedia(id: string): string {
     return VID[id]
@@ -926,10 +930,14 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   function imgStrip(n: ENode): string {
     const cnt = MULTI[n.id]
     if (!cnt) return ''
+    // 슬롯마다 어느 저장소를 찍은 것인지 이름을 함께 단다. 이름만 칩으로 깔면
+    // "그래서 어떻게 생겼는지" 가 남는데, 그 답이 이 스트립이다.
+    const names = SHOTS[n.id] || []
     let s = ''
     for (let i = 2; i <= cnt; i++) {
+      const lab = names[i - 1] ? '<span class="itlab">' + esc(names[i - 1]) + '</span>' : ''
       s += '<div class="it" onclick="stripView(this,\'' + n.id + '\',' + i + ')"><img src="/assets/'
-        + n.id + '-' + i + '.jpg" alt="" loading="lazy" onerror="this.parentNode.remove()"></div>'
+        + n.id + '-' + i + '.jpg" alt="" loading="lazy" onerror="this.parentNode.remove()">' + lab + '</div>'
     }
     return s ? '<div class="imgstrip">' + s + '</div>' : ''
   }
