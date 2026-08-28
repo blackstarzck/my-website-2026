@@ -5,6 +5,13 @@ import type { Region } from './types'
 /** 지도의 중심 노드. 홈으로 돌아갈 때 포커스되는 대상. */
 export const ENTRY_ID = 'chanki'
 
+/**
+ * 연락처 노드. 진입 갤러리(프로필) 본문 아래의 버튼과 페이지 푸터가 이곳으로 보낸다.
+ * 이 노드의 페이지는 맥락 대신 CONTACT_EMAIL 을 메타 행에 띄우고, 값이 겹치는
+ * '작업' 행은 두지 않는다.
+ */
+export const CONTACT_ID = 'contact'
+
 /** 상단 탭에 노출할 리전과 라벨. 순서가 곧 탭 순서다. */
 export const REG_TABS: [Region, string][] = [
   ['entry', '김찬기'],
@@ -82,6 +89,8 @@ export const PAGE_TEXT = {
   imageLabel: '이미지',
   pending: '준비 중',
   projectEnter: '프로젝트 · 클릭해서 들어가기 →',
+  metaContact: '연락처',
+  contactBtn: '연락하기 →',
   metaOnMap: '지도에서',
   metaContext: '맥락',
   metaPiece: '작업',

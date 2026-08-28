@@ -83,8 +83,8 @@ node("contact", "연락", "entry", "닿는 곳",
      "이력서와 GitHub, 기술 블로그. 그리고 메일.",
      "제안이나 문의는 메일로 주시면 가장 빠릅니다. 작업물은 GitHub에, 배우고 정리한 것들은 기술 블로그에 남기고 있습니다.",
      "연락처",
-     links=[["blackstarzck@naver.com", "mailto:blackstarzck@naver.com"],
-            ["GitHub", "https://github.com/blackstarzck"],
+     # 이메일은 링크 칩이 아니라 메타 행(연락처)으로 보여준다 — engine/legacy.ts
+     links=[["GitHub", "https://github.com/blackstarzck"],
             ["기술 블로그", "https://chan-chan2.tistory.com/"]])
 
 # ── frontend ─────────────────────────────────────────────────────────────
@@ -428,7 +428,7 @@ w("nodes.ts", f"{BANNER}import type {{ ContentNode }} from './types'\n\nexport c
 w("edges.ts", f"{BANNER}\nexport const EDGES: [string, string][] = {j(E)}\n")
 w("spine.ts", f"{BANNER}\nexport const SPINE: string[] = {j(SPINE)}\n")
 w("zmap.ts", f"{BANNER}\nexport const ZMAP: Record<string, number> = {j(ZMAP)}\n")
-w("config.ts", "export const CONTACT_EMAIL = 'blackstarzck@naver.com'\n")
+w("config.ts", "export const CONTACT_EMAIL = 'bucheongosok@gmail.com'\n")
 
 TREECOLS = [[r, SLUG[r]] for r in REGIONS if r != "entry"]
 w("regions.ts", f"""{BANNER}import type {{ Region }} from './types'

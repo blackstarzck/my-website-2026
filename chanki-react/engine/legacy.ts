@@ -56,7 +56,8 @@ import type { FieldRenderCtx } from './renderers/types'
 import { createSim } from './sim'
 import type { EngineDeps, EngineTestHandle } from './types'
 import { createViewport } from './viewport'
-import { ENTRY_ID, HOME_ITEMS, MANIFESTO_ENTRY_IDS, MANIFESTO_ID, PAGE_TEXT, REG_TABS, SKILL_LEVEL, TAB_DESC, UI_TEXT } from '@/data/site'
+import { CONTACT_ID, ENTRY_ID, HOME_ITEMS, MANIFESTO_ENTRY_IDS, MANIFESTO_ID, PAGE_TEXT, REG_TABS, SKILL_LEVEL, TAB_DESC, UI_TEXT } from '@/data/site'
+import { CONTACT_EMAIL } from '@/data/config'
 
 /** 원본이 DB.N 에 런타임으로 붙이던 z(ZMAP)를 포함한 노드. cl(파티클)은 더 이상 노드에
  *  붙지 않는다 — engine/particles.ts 의 clouds[i](노드 인덱스 배열)로 옮겼다(Task 6).
@@ -731,8 +732,12 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         : `<a class="cta" href="${n.url}" target="_blank">${esc(n.urlLabel || PAGE_TEXT.openExternal)}</a>`)
       : ''
     const metaItems: [string, string][] = [[PAGE_TEXT.metaOnMap, RLAB[n.region] + ' · ' + numOf(n.id) + ' / ' + TOTAL]]
-    if (n.kicker) metaItems.push([PAGE_TEXT.metaContext, n.kicker])
-    if (n.cap) metaItems.push([PAGE_TEXT.metaPiece, n.cap])
+    // 연락 노드는 맥락 대신 실제 연락처를 보여준다. 이메일을 링크 칩으로 두면
+    // GitHub·블로그와 같은 무게로 읽혀서, 값으로 드러나도록 여기에 넣는다.
+    if (n.id === CONTACT_ID) metaItems.push([PAGE_TEXT.metaContact, CONTACT_EMAIL])
+    else if (n.kicker) metaItems.push([PAGE_TEXT.metaContext, n.kicker])
+    // 연락 노드는 위의 '연락처' 행과 값이 겹치므로 '작업' 을 두지 않는다.
+    if (n.id !== CONTACT_ID && n.cap) metaItems.push([PAGE_TEXT.metaPiece, n.cap])
     const meta = `<div class="meta">${metaItems.map(([k, v]) => `<div><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join('')}</div>`
     const _pa = REG2AREA[n.region]
     let nbs = relatedNodes(n)
@@ -748,7 +753,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         ? `<a class="lk" href="${u}">${esc(t)} →</a>`
         : `<a class="lk" href="${u}" target="_blank">${esc(t)} ↗</a>`).join('')}</div>`
       : ''
-    const foot = `<div class="pgfoot">${n.id !== 'contact' ? `<span class="lk" data-go="contact">↦ ${esc(byId['contact']?.name ?? '')}</span>` : ''}<span class="lk" data-go="${ENTRY_ID}">↑ 지도의 중심으로</span></div>`
+    const foot = `<div class="pgfoot">${n.id !== CONTACT_ID ? `<span class="lk" data-go="${CONTACT_ID}">↦ ${esc(byId[CONTACT_ID]?.name ?? '')}</span>` : ''}<span class="lk" data-go="${ENTRY_ID}">↑ 지도의 중심으로</span></div>`
     gid('doc').innerHTML = `
    <div class="kicker">${esc(n.kicker || '')}</div>
    <h1 class="title">${esc(n.sum || '')}</h1>
@@ -940,6 +945,11 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       : ''
     const hero = `<div class="${isNode ? 'ghero clickable' : 'ghero'}"${isNode ? ' data-enter="' + n.id + '"' : ''}><div class="hph">${PAGE_TEXT.imageLabel} · ${esc(n.cap || PAGE_TEXT.pending)}</div><img src="${heroSrc}" alt="" onerror="this.remove()">${heroEnter}</div>`
     const desc = `<div class="gdesc">${esc(n.body || n.sum || '')}</div>`
+    // 프로필 본문 바로 아래. 지도에서 연락처에 닿는 유일한 경로다 —
+    // 페이지 푸터 링크는 프로젝트를 하나 열어야만 보인다.
+    const contactCTA = (n.id === ENTRY_ID && byId[CONTACT_ID])
+      ? `<button class="gcontact" data-go="${CONTACT_ID}">${PAGE_TEXT.contactBtn}</button>`
+      : ''
     let tag: string, items: ENode[], caplab: string
     if (s.galMode === 'area') {
       if (n.id === ENTRY_ID) {
@@ -967,7 +977,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       : ''
     g.innerHTML = `<button class="gback" data-back="1">↖ 지도로 돌아가기</button>${MANIFESTO_ENTRY_IDS.indexOf(n.id) >= 0 ? '<button class="gpi" data-origen="1">π · 소개</button>' : ''}
   <div class="ghead"><i style="background:${acc}"></i>${headInner}</div>
-  <div class="gname">${esc(n.name)}</div>${hero}${desc}${enterCTA}
+  <div class="gname">${esc(n.name)}</div>${hero}${desc}${contactCTA}${enterCTA}
   <div class="gcaplab">${caplab}</div>${items.map(galCard).join('')}<div class="treelab2">${PAGE_TEXT.tree}</div>${siteTreeHTML()}`
     ;(g.querySelector('[data-back]') as HTMLElement).onclick = () => goHome()
     g.querySelectorAll('[data-origen]').forEach((el) => { (el as HTMLElement).onclick = openOrigen })

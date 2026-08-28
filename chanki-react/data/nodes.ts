@@ -25,10 +25,6 @@ export const NODES: ContentNode[] = [
     "cap": "연락처",
     "links": [
       [
-        "blackstarzck@naver.com",
-        "mailto:blackstarzck@naver.com"
-      ],
-      [
         "GitHub",
         "https://github.com/blackstarzck"
       ],
