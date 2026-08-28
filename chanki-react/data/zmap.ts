@@ -30,8 +30,10 @@ export const ZMAP: Record<string, number> = {
   "english": -0.93,
   "lab": 0.35,
   "canvas-lab": 0.17,
-  "three-lab": 0.35,
-  "game-lab": 0.53,
-  "trading-lab": 0.17,
-  "react-basics": 0.35
+  "multicanvas-lab": 0.35,
+  "scroll-3d": 0.53,
+  "three-lab": 0.17,
+  "game-lab": 0.35,
+  "trading-lab": 0.53,
+  "react-basics": 0.17
 }

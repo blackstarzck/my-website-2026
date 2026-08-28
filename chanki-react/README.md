@@ -1,7 +1,7 @@
 # 김찬기 — 포트폴리오
 
 Next.js 16 + TypeScript + Zustand 로 만든 캔버스 기반 포트폴리오입니다.
-32개 노드를 6개 영역으로 나눠 지도처럼 탐색합니다. TypeScript 는 strict 모드로
+34개 노드를 6개 영역으로 나눠 지도처럼 탐색합니다. TypeScript 는 strict 모드로
 돌고 `any` 는 어디에도 쓰지 않습니다 — 새 코드에서도 유지해 주세요.
 
 렌더링 엔진과 인터랙션 구조는 [nicoborja.com](https://nicoborja.com) 을 분석해

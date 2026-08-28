@@ -755,9 +755,15 @@ export const NODES: ContentNode[] = [
     "name": "캔버스 · 파티클",
     "region": "lab",
     "kicker": "실험",
-    "sum": "파티클과 캔버스 합성을 다양하게 시도해 본 저장소들입니다.",
-    "body": "particles, particle, particle-colorful-stars, multicanvas, canvas-test 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
+    "sum": "한 저장소에 예제를 여섯 개 넣어두고 입자를 다루는 방법을 하나씩 바꿔가며 실험했습니다.",
+    "body": "particle-colorful-stars 한 저장소에 예제를 여섯 개 넣어두고 하나씩 바꿔가며 실험했습니다. 기본 Geometry로 만든 파티클에서 시작해 랜덤 배치, Point 좌표마다 메쉬를 생성하는 것, 형태가 바뀌는 이미지 패널까지 갔습니다. 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
     "cap": "캔버스 · 파티클 실험",
+    "links": [
+      [
+        "particle-colorful-stars",
+        "https://github.com/blackstarzck/particle-colorful-stars"
+      ]
+    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -774,6 +780,76 @@ export const NODES: ContentNode[] = [
     "x": -4.1,
     "y": -4.72,
     "r": 0.62
+  },
+  {
+    "id": "multicanvas-lab",
+    "name": "캔버스 여러 개",
+    "region": "lab",
+    "kicker": "실험",
+    "sum": "WebGL 렌더러 하나로 페이지 곳곳의 캔버스 자리를 채웁니다.",
+    "body": "캔버스마다 렌더러를 하나씩 두면 브라우저가 허용하는 WebGL 컨텍스트 수에 금방 닿습니다. multicanvas는 렌더러를 하나만 두고, 페이지에 흩어진 자리표시자 세 곳의 위치를 매 프레임 getBoundingClientRect로 읽어 setScissor와 setViewport로 그 영역만 잘라 그립니다. 자리가 화면 밖으로 밀려나면 아예 그리지 않고 넘어갑니다. 캔버스가 여러 개인 것처럼 보이지만 실제로는 하나입니다. 장면마다 GLTF 모델과 자기 카메라를 따로 가집니다.",
+    "cap": "캔버스 여러 개 · 실험",
+    "links": [
+      [
+        "multicanvas",
+        "https://github.com/blackstarzck/multicanvas"
+      ]
+    ],
+    "project": {
+      "role": "개인 실험",
+      "skills": [
+        [
+          "WebGL 컨텍스트 관리",
+          "first"
+        ],
+        [
+          "three.js",
+          "grew"
+        ],
+        [
+          "뷰포트 컬링",
+          "first"
+        ]
+      ]
+    },
+    "x": -3.19,
+    "y": -6.0,
+    "r": 0.72
+  },
+  {
+    "id": "scroll-3d",
+    "name": "스크롤 연동 3D",
+    "region": "lab",
+    "kicker": "실험",
+    "sum": "스크롤 위치에 3D 장면을 묶어, 페이지를 내리면 장면 안으로 들어갑니다.",
+    "body": "소스에 적어둔 주제 그대로 '스크롤에 따라 움직이는 3D 페이지'입니다. GLTF로 불러온 집 모델을 배치하고 window.scrollY 값을 gsap으로 카메라에 연결했습니다. 스크롤을 내리면 장면 안을 이동하는 것처럼 보입니다. 값이 변하는 일과 화면에 그리는 일을 어디서 나눌지 정해야 하는데, 이 포트폴리오의 지도도 결국 같은 문제를 푼 것입니다.",
+    "cap": "스크롤 연동 3D · 실험",
+    "links": [
+      [
+        "scroll-page",
+        "https://github.com/blackstarzck/scroll-page"
+      ]
+    ],
+    "project": {
+      "role": "개인 실험",
+      "skills": [
+        [
+          "GSAP",
+          "first"
+        ],
+        [
+          "GLTF 로딩",
+          "grew"
+        ],
+        [
+          "스크롤 연동",
+          "first"
+        ]
+      ]
+    },
+    "x": -1.62,
+    "y": -6.04,
+    "r": 0.82
   },
   {
     "id": "three-lab",
@@ -796,9 +872,9 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -2.49,
-    "y": -6.33,
-    "r": 0.72
+    "x": -0.24,
+    "y": -6.8,
+    "r": 0.62
   },
   {
     "id": "game-lab",
@@ -843,9 +919,9 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -0.22,
-    "y": -6.25,
-    "r": 0.82
+    "x": 1.19,
+    "y": -6.14,
+    "r": 0.72
   },
   {
     "id": "trading-lab",
@@ -895,9 +971,9 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": 2.04,
-    "y": -6.49,
-    "r": 0.62
+    "x": 2.77,
+    "y": -6.21,
+    "r": 0.82
   },
   {
     "id": "react-basics",
@@ -907,6 +983,16 @@ export const NODES: ContentNode[] = [
     "sum": "라우터·상태·스타일링을 하나씩 떼어 연습하던 시기의 기록입니다.",
     "body": "2022년, react-practice1부터 7까지와 react-router-practice, react-styled-component, react-swiper 같은 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
     "cap": "React 학습기 · 2022",
+    "links": [
+      [
+        "react-todos",
+        "https://github.com/blackstarzck/react-todos"
+      ],
+      [
+        "react-practice1~7",
+        "https://github.com/blackstarzck?tab=repositories&q=react-practice"
+      ]
+    ],
     "project": {
       "role": "학습",
       "duration": "2022",
@@ -919,6 +1005,6 @@ export const NODES: ContentNode[] = [
     },
     "x": 3.76,
     "y": -4.99,
-    "r": 0.72
+    "r": 0.62
   }
 ]

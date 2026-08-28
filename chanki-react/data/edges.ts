@@ -112,6 +112,14 @@ export const EDGES: [string, string][] = [
   ],
   [
     "lab",
+    "multicanvas-lab"
+  ],
+  [
+    "lab",
+    "scroll-3d"
+  ],
+  [
+    "lab",
     "three-lab"
   ],
   [
@@ -197,6 +205,18 @@ export const EDGES: [string, string][] = [
   [
     "trading-lab",
     "supabase"
+  ],
+  [
+    "canvas-lab",
+    "multicanvas-lab"
+  ],
+  [
+    "multicanvas-lab",
+    "three-lab"
+  ],
+  [
+    "scroll-3d",
+    "three-lab"
   ],
   [
     "ai-squads",

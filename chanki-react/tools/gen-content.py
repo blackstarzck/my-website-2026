@@ -36,6 +36,9 @@ AGRAD = {
     "lab":      ["#06D6C4", "#4FC3F7"],
 }
 
+# 이미지 스트립(<id>-2.jpg …) 장수. 자세한 설명은 아래 MULTI 출력부 주석 참고.
+MULTI = {"react-basics": 2}
+
 # ── 노드 정의 ────────────────────────────────────────────────────────────
 # (id, name, region, kicker, sum, body, cap, project|None, links|None)
 N = []
@@ -320,10 +323,27 @@ node("lab", "실험실", "lab", "손이 기억하는 것",
      links=[["GitHub에서 전부 보기", "https://github.com/blackstarzck?tab=repositories"]])
 
 node("canvas-lab", "캔버스 · 파티클", "lab", "실험",
-     "파티클과 캔버스 합성을 다양하게 시도해 본 저장소들입니다.",
-     "particles, particle, particle-colorful-stars, multicanvas, canvas-test 저장소로 캔버스 위에서 입자를 다루는 방법을 실험했습니다. 여러 캔버스를 겹쳐 합성하거나, 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
+     "한 저장소에 예제를 여섯 개 넣어두고 입자를 다루는 방법을 하나씩 바꿔가며 실험했습니다.",
+     "particle-colorful-stars 한 저장소에 예제를 여섯 개 넣어두고 하나씩 바꿔가며 실험했습니다. 기본 Geometry로 만든 파티클에서 시작해 랜덤 배치, Point 좌표마다 메쉬를 생성하는 것, 형태가 바뀌는 이미지 패널까지 갔습니다. 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
      "캔버스 · 파티클 실험",
-     P(role="개인 실험", skills=[["Canvas 2D", "grew"], ["파티클 시스템", "first"]]))
+     P(role="개인 실험", skills=[["Canvas 2D", "grew"], ["파티클 시스템", "first"]]),
+     links=[["particle-colorful-stars", "https://github.com/blackstarzck/particle-colorful-stars"]])
+
+node("multicanvas-lab", "캔버스 여러 개", "lab", "실험",
+     "WebGL 렌더러 하나로 페이지 곳곳의 캔버스 자리를 채웁니다.",
+     "캔버스마다 렌더러를 하나씩 두면 브라우저가 허용하는 WebGL 컨텍스트 수에 금방 닿습니다. multicanvas는 렌더러를 하나만 두고, 페이지에 흩어진 자리표시자 세 곳의 위치를 매 프레임 getBoundingClientRect로 읽어 setScissor와 setViewport로 그 영역만 잘라 그립니다. 자리가 화면 밖으로 밀려나면 아예 그리지 않고 넘어갑니다. 캔버스가 여러 개인 것처럼 보이지만 실제로는 하나입니다. 장면마다 GLTF 모델과 자기 카메라를 따로 가집니다.",
+     "캔버스 여러 개 · 실험",
+     P(role="개인 실험",
+       skills=[["WebGL 컨텍스트 관리", "first"], ["three.js", "grew"], ["뷰포트 컬링", "first"]]),
+     links=[["multicanvas", "https://github.com/blackstarzck/multicanvas"]])
+
+node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
+     "스크롤 위치에 3D 장면을 묶어, 페이지를 내리면 장면 안으로 들어갑니다.",
+     "소스에 적어둔 주제 그대로 '스크롤에 따라 움직이는 3D 페이지'입니다. GLTF로 불러온 집 모델을 배치하고 window.scrollY 값을 gsap으로 카메라에 연결했습니다. 스크롤을 내리면 장면 안을 이동하는 것처럼 보입니다. 값이 변하는 일과 화면에 그리는 일을 어디서 나눌지 정해야 하는데, 이 포트폴리오의 지도도 결국 같은 문제를 푼 것입니다.",
+     "스크롤 연동 3D · 실험",
+     P(role="개인 실험",
+       skills=[["GSAP", "first"], ["GLTF 로딩", "grew"], ["스크롤 연동", "first"]]),
+     links=[["scroll-page", "https://github.com/blackstarzck/scroll-page"]])
 
 node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
@@ -362,7 +382,9 @@ node("react-basics", "React 학습기", "lab", "2022",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
-       skills=[["React", "first"]]))
+       skills=[["React", "first"]]),
+     links=[["react-todos", "https://github.com/blackstarzck/react-todos"],
+            ["react-practice1~7", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]])
 
 # ── 좌표 계산 ────────────────────────────────────────────────────────────
 AREA_ANGLE = {"frontend": 118, "ai": 62, "backend": 348, "product": 192, "lab": 268}
@@ -412,6 +434,8 @@ E += [
     ["figma-gen", "corp-sites"], ["my-skills", "gate-harness"],
     ["react-basics", "dealer-web"], ["canvas-lab", "three-lab"],
     ["three-lab", "game-lab"], ["trading-lab", "supabase"],
+    ["canvas-lab", "multicanvas-lab"], ["multicanvas-lab", "three-lab"],
+    ["scroll-3d", "three-lab"],
     ["ai-squads", "multi-agent"],
     ["english", "dadoke"], ["docs-comm", "dealer-admin"],
     ["doc-merge", "backend"], ["dadoke", "topik-user"],
@@ -419,7 +443,8 @@ E += [
 
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
 SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
-         "legacy-cleanup", "canvas-lab", "three-lab", "game-lab", "trading-lab", "lab",
+         "legacy-cleanup", "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
+         "game-lab", "trading-lab", "lab",
          "farm-3d", "connect-bee", "farm-api", "backend", "doc-merge", "supabase",
          "corp-sites", "figma-gen", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
@@ -440,7 +465,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 32, f"노드 수 {len(N)}"
+assert len(N) == 34, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"
@@ -479,8 +504,13 @@ export const TREECOLS: [Region, string][] = {j(TREECOLS)}
 /** 라이트 테마 전용 이미지가 있는 노드. 아직 없음. */
 export const THEMED: Record<string, number> = {{}}
 
-/** 이미지 스트립(<id>-2.jpg …)이 있는 노드와 장수. 아직 없음. */
-export const MULTI: Record<string, number> = {{}}
+/**
+ * 이미지 스트립이 있는 노드와 장수. <id>.jpg 다음에 <id>-2.jpg … 를 읽는다.
+ * react-basics 2 = react-todos(대표) + react-practice6(네비게이션 바).
+ * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
+ * 그래서 노드로 두지 않고 이미지로만 남겼다.
+ */
+export const MULTI: Record<string, number> = {j(MULTI)}
 
 /** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
 export const CARD_IMG: Record<string, string> = {{}}

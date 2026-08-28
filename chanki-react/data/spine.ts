@@ -11,6 +11,8 @@ export const SPINE: string[] = [
   "dealer-admin",
   "legacy-cleanup",
   "canvas-lab",
+  "multicanvas-lab",
+  "scroll-3d",
   "three-lab",
   "game-lab",
   "trading-lab",
