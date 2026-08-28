@@ -327,7 +327,8 @@ node("canvas-lab", "캔버스 · 파티클", "lab", "실험",
      "particle-colorful-stars 한 저장소에 예제를 여섯 개 넣어두고 하나씩 바꿔가며 실험했습니다. 기본 Geometry로 만든 파티클에서 시작해 랜덤 배치, Point 좌표마다 메쉬를 생성하는 것, 형태가 바뀌는 이미지 패널까지 갔습니다. 수천 개 입자를 프레임마다 그릴 때 무엇이 병목이 되는지 직접 확인해 보는 것이 목적이었습니다. 지금 보고 계신 이 지도도 같은 계열입니다.",
      "캔버스 · 파티클 실험",
      P(role="개인 실험", skills=[["Canvas 2D", "grew"], ["파티클 시스템", "first"]]),
-     links=[["particle-colorful-stars", "https://github.com/blackstarzck/particle-colorful-stars"]])
+     links=[["파티클 데모 열기", "https://blackstarzck.github.io/particle-colorful-stars/"],
+            ["저장소", "https://github.com/blackstarzck/particle-colorful-stars"]])
 
 node("multicanvas-lab", "캔버스 여러 개", "lab", "실험",
      "WebGL 렌더러 하나로 페이지 곳곳의 캔버스 자리를 채웁니다.",
@@ -335,7 +336,8 @@ node("multicanvas-lab", "캔버스 여러 개", "lab", "실험",
      "캔버스 여러 개 · 실험",
      P(role="개인 실험",
        skills=[["WebGL 컨텍스트 관리", "first"], ["three.js", "grew"], ["뷰포트 컬링", "first"]]),
-     links=[["multicanvas", "https://github.com/blackstarzck/multicanvas"]])
+     links=[["데모 열기", "https://blackstarzck.github.io/multicanvas/"],
+            ["저장소", "https://github.com/blackstarzck/multicanvas"]])
 
 node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
      "스크롤 위치에 3D 장면을 묶어, 페이지를 내리면 장면 안으로 들어갑니다.",
@@ -343,29 +345,35 @@ node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
      "스크롤 연동 3D · 실험",
      P(role="개인 실험",
        skills=[["GSAP", "first"], ["GLTF 로딩", "grew"], ["스크롤 연동", "first"]]),
-     links=[["scroll-page", "https://github.com/blackstarzck/scroll-page"]])
+     links=[["데모 열기 · 스크롤해 보세요", "https://blackstarzck.github.io/scroll-page/"],
+            ["저장소", "https://github.com/blackstarzck/scroll-page"]])
 
 node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
-     "isosmetric-01·02, custom_model, controls-01 저장소에서 3D 공간을 화면에 올리는 방법을 익혔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다.",
+     "isosmetric-01·02는 아이소메트릭 방을 하나씩 지어 본 것이고, custom_model은 Blender로 만든 모델을 웹에 올려 조명을 붙인 것, controls-01은 카메라를 손으로 움직여 본 것입니다. ilbunidiary는 직교 카메라로 방을 내려다보며 Raycaster로 바닥을 찍어 캐릭터를 걷게 했습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다. 네 개 모두 아래에서 바로 돌려볼 수 있습니다.",
      "3D · 아이소메트릭 실험",
      P(role="개인 실험",
-       skills=[["3D 렌더링", "grew"], ["카메라 컨트롤", "first"]]))
+       skills=[["3D 렌더링", "grew"], ["카메라 컨트롤", "first"], ["직교 카메라", "first"]]),
+     links=[["아이소메트릭 방 01", "https://blackstarzck.github.io/isosmetric-01/"],
+            ["아이소메트릭 방 02", "https://blackstarzck.github.io/isosmetric-02/"],
+            ["Blender 모델 + 조명", "https://blackstarzck.github.io/custom_model/"],
+            ["걸어다니는 방", "https://blackstarzck.github.io/ilbunidiary/"]])
 
 node("game-lab", "게임 · 인터랙션", "lab", "실험",
      "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
-     "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
+     "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. bridge는 유리다리를 건너는 게임인데, 밟는 판이 깨지고 떨어지는 것을 눈속임이 아니라 cannon 물리 엔진으로 처리했습니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
      "게임 · 인터랙션 실험",
      P(role="개인 실험",
-       skills=[["Canvas 2D", "grew"], ["Web Audio API", "first"], ["게임 루프", "first"]]),
+       skills=[["Canvas 2D", "grew"], ["Web Audio API", "first"],
+               ["물리 엔진(cannon)", "first"], ["게임 루프", "first"]]),
      links=[["NEON FIST 플레이", "https://neon-fist.vercel.app"],
             ["GAME CABINET 열기", "https://game-cabinet.vercel.app"],
-            ["neon-fist 저장소", "https://github.com/blackstarzck/neon-fist"],
-            ["game-cabinet 저장소", "https://github.com/blackstarzck/game-cabinet"]])
+            ["유리다리 건너기", "https://blackstarzck.github.io/bridge/"],
+            ["1인칭 시점 실험", "https://blackstarzck.github.io/first-person-perspective/"]])
 
 node("trading-lab", "자동매매 시스템", "lab", "2026",
      "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
-     "2026년 2월부터 6월까지 zenith · coin-lab · profitpal 계열 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
+     "2026년 2월부터 6월까지 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다 — zenith와 v2·v3·v4, coin-lab과 v2, profitpal, 그리고 전략을 문서로 정리한 Haley입니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
      "업비트 자동매매 · 2026",
      P(role="개인 프로젝트 · 설계 및 구현",
        duration="2026.02 - 2026.06",
@@ -376,15 +384,25 @@ node("trading-lab", "자동매매 시스템", "lab", "2026",
             ["coin-lab-v2", "https://github.com/blackstarzck/coin-lab-v2"],
             ["profitpal · 에이전트 위원회", "https://github.com/blackstarzck/profitpal"]])
 
+node("space-3d", "3D 공간 만들기", "lab", "실험",
+     "마을 하나를 통째로 세워 걸어 다닐 수 있게 만든 3D 씬입니다.",
+     "예제 하나를 돌려보는 데서 멈추지 않고, 3D 앱을 구조로 짜 보려고 만든 것입니다. Experience를 싱글턴으로 두고 카메라·렌더러·리소스 로더·크기 대응을 각각 분리했습니다. 씬에서 바꾼 값은 localStorage에 남겨 다시 들어와도 유지됩니다. 눈이 쌓인 마을을 세우고 그 안을 돌아다닐 수 있게 했습니다.",
+     "3D 공간 · 실험",
+     P(role="개인 실험",
+       skills=[["3D 앱 구조 설계", "first"], ["three.js", "grew"], ["리소스 로딩", "grew"]]),
+     links=[["마을 걸어보기", "https://blackstarzck.github.io/my-space/"],
+            ["저장소", "https://github.com/blackstarzck/my-space"]])
+
 node("react-basics", "React 학습기", "lab", "2022",
-     "라우터·상태·스타일링을 하나씩 떼어 연습하던 시기의 기록입니다.",
-     "2022년, react-practice1부터 7까지와 react-router-practice, react-styled-component, react-swiper 같은 연습 저장소들을 남겼습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+     "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
+     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
        skills=[["React", "first"]]),
-     links=[["react-todos", "https://github.com/blackstarzck/react-todos"],
-            ["react-practice1~7", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]])
+     links=[["명함 제작기 데모", "https://blackstarzck.github.io/business-card/"],
+            ["react-todos 저장소", "https://github.com/blackstarzck/react-todos"],
+            ["연습 저장소 목록", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]])
 
 # ── 좌표 계산 ────────────────────────────────────────────────────────────
 AREA_ANGLE = {"frontend": 118, "ai": 62, "backend": 348, "product": 192, "lab": 268}
@@ -405,12 +423,18 @@ for reg, ang in AREA_ANGLE.items():
     pos[reg] = (ax, ay, AREA_SIZE[reg])
     kids = [n for n in by_region[reg] if n["id"] != reg]
     k = len(kids)
-    # 자식은 area 노드 바깥쪽 부채꼴로 펼친다 (중심에서 멀어지는 방향)
+    # 자식은 area 노드 바깥쪽 부채꼴로 펼친다 (중심에서 멀어지는 방향).
+    #
+    # 각도를 넓히면 옆 리전 부채꼴과 부딪힌다 — 리전 사이 간격이 56~80도 뿐이다.
+    # 그래서 각도는 그대로 두고 반지름을 3단으로 어긋나게 둔다. 이웃한 두 자식이
+    # 같은 반지름에 놓이지 않으므로 지도 라벨이 세로로 갈라져 겹치지 않는다.
+    # (2단 0.55 로는 lab 이 8개가 되면서 '스크롤 연동 3D' 와 '3D · 아이소메트릭'
+    #  라벨이 붙어 읽히지 않았다.)
     spread = 78 if k > 4 else 62
     for j, kid in enumerate(kids):
         t = 0.5 if k == 1 else j / (k - 1)
         kang = math.radians(ang - spread / 2 + spread * t)
-        kr = AREA_R[reg] + 2.05 + (0.55 if j % 2 else 0.0)
+        kr = AREA_R[reg] + 1.95 + 0.9 * (j % 3)
         pos[kid["id"]] = (kr * math.cos(kang), kr * math.sin(kang), 0.62 + 0.10 * (j % 3))
 
 for n in N:
@@ -435,7 +459,7 @@ E += [
     ["react-basics", "dealer-web"], ["canvas-lab", "three-lab"],
     ["three-lab", "game-lab"], ["trading-lab", "supabase"],
     ["canvas-lab", "multicanvas-lab"], ["multicanvas-lab", "three-lab"],
-    ["scroll-3d", "three-lab"],
+    ["scroll-3d", "three-lab"], ["space-3d", "three-lab"], ["space-3d", "game-lab"],
     ["ai-squads", "multi-agent"],
     ["english", "dadoke"], ["docs-comm", "dealer-admin"],
     ["doc-merge", "backend"], ["dadoke", "topik-user"],
@@ -444,7 +468,7 @@ E += [
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
 SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
          "legacy-cleanup", "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
-         "game-lab", "trading-lab", "lab",
+         "space-3d", "game-lab", "trading-lab", "lab",
          "farm-3d", "connect-bee", "farm-api", "backend", "doc-merge", "supabase",
          "corp-sites", "figma-gen", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
@@ -465,7 +489,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 34, f"노드 수 {len(N)}"
+assert len(N) == 35, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"

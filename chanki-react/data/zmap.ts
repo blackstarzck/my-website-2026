@@ -35,5 +35,6 @@ export const ZMAP: Record<string, number> = {
   "three-lab": 0.17,
   "game-lab": 0.35,
   "trading-lab": 0.53,
-  "react-basics": 0.17
+  "space-3d": 0.17,
+  "react-basics": 0.35
 }

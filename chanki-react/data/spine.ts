@@ -14,6 +14,7 @@ export const SPINE: string[] = [
   "multicanvas-lab",
   "scroll-3d",
   "three-lab",
+  "space-3d",
   "game-lab",
   "trading-lab",
   "lab",
