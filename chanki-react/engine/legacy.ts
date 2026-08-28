@@ -767,6 +767,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    ${repoChips(n)}
    ${projectDetail(n)}
    <div class="media">${media(n)}${imgStrip(n)}</div>
+   ${projectCards(n)}
    <div class="seclab">${esc(seclab)}</div><div class="seclab2">${secl2}</div>
    <div class="cardgrid">${cards}</div>
    ${foot}
@@ -921,6 +922,36 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    * 한 노드가 저장소를 여럿 묶는 경우(react-basics 27개)에는 더 그렇다.
    * 그래서 이름을 눌러서 저장소로 갈 수 있게 따로 그린다.
    */
+  /**
+   * 저장소가 여럿인 노드의 프로젝트 카드.
+   *
+   * 카드 하나가 화면·이름·설명·스킬·코드·데모를 다 들고 있다. 이전에는 같은
+   * 저장소가 본문 문장 · 링크 칩 · 저장소 칩 · 썸네일 네 군데에 흩어져 있었고
+   * 어느 줄도 전부를 담지 못했다(링크 4 / 칩 6 / 썸네일 4 식). 그래서 카드가
+   * 있는 노드에서는 links·repos·스트립을 아예 그리지 않는다.
+   */
+  function projectCards(n: ENode): string {
+    if (!n.cards || !n.cards.length) return ''
+    const items = n.cards.map((c) => {
+      const th = c.shot
+        ? `<img src="/assets/${c.shot}.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
+        : ''
+      const sk = c.skills.map((x) => `<span class="pc-s">${esc(x)}</span>`).join('')
+      const demo = c.demo
+        ? `<a class="pc-go" href="${c.demo}" target="_blank" rel="noopener">${PAGE_TEXT.cardDemo}</a>`
+        : (c.note ? `<span class="pc-note">${esc(c.note)}</span>` : '')
+      return `<article class="pc">
+   <div class="pc-th${c.shot ? '' : ' none'}">${th}</div>
+   <div class="pc-b">
+     <div class="pc-n">${esc(c.repo)}</div>
+     <p class="pc-d">${esc(c.desc)}</p>
+     <div class="pc-sk">${sk}</div>
+     <div class="pc-a"><a class="pc-code" href="https://github.com/${GITHUB_USER}/${encodeURIComponent(c.repo)}" target="_blank" rel="noopener">${PAGE_TEXT.cardCode}</a>${demo}</div>
+   </div>
+ </article>`
+    }).join('')
+    return `<div class="pcwrap"><div class="repolab">${esc(PAGE_TEXT.reposLabel)} · ${n.cards.length}</div><div class="pcards">${items}</div></div>`
+  }
   function repoChips(n: ENode): string {
     if (!n.repos || !n.repos.length) return ''
     const chips = n.repos.map((r) =>

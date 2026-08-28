@@ -89,12 +89,7 @@ export const THEMED: Record<string, number> = {}
  * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
  * 그래서 노드로 두지 않고 이미지로만 남겼다.
  */
-export const MULTI: Record<string, number> = {
-  "react-basics": 4,
-  "game-lab": 5,
-  "three-lab": 5,
-  "trading-lab": 2
-}
+export const MULTI: Record<string, number> = {}
 
 /** 이미지 슬롯마다 찍힌 저장소 이름. 0번이 대표 이미지. */
 export const SHOTS: Record<string, string[]> = {
@@ -107,35 +102,11 @@ export const SHOTS: Record<string, string[]> = {
   "scroll-3d": [
     "scroll-page"
   ],
-  "three-lab": [
-    "isosmetric-02",
-    "isosmetric-01",
-    "custom_model",
-    "controls-01",
-    "ilbunidiary"
-  ],
-  "game-lab": [
-    "neon-fist",
-    "game-cabinet",
-    "bridge",
-    "first-person-perspective",
-    "lets-fps"
-  ],
-  "trading-lab": [
-    "zenith",
-    "coin-lab-v2"
-  ],
   "space-3d": [
     "my-space"
   ],
   "detect-lab": [
     "chanki-portfolio"
-  ],
-  "react-basics": [
-    "react-todos",
-    "react-practice6",
-    "business-card",
-    "react-modeal.net2"
   ],
   "figma-gen": [
     "chanchan2"

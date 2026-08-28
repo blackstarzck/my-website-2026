@@ -36,6 +36,76 @@ AGRAD = {
     "lab":      ["#06D6C4", "#4FC3F7"],
 }
 
+GH = "https://github.com/blackstarzck/"
+PG = "https://blackstarzck.github.io/"
+
+# 저장소가 여럿인 노드는 프로젝트 카드로 보여준다. 카드 하나에 화면·이름·설명·
+# 스킬·코드·데모가 다 들어가므로, 카드가 있는 노드에서는 links/repos/이미지
+# 스트립을 두지 않는다 — 같은 것을 네 번 늘어놓던 것이 그 셋이었다.
+def card(repo, desc, skills, demo=None, shot=None, note=None):
+    d = {"repo": repo, "desc": desc, "skills": skills}
+    if demo: d["demo"] = demo
+    if shot: d["shot"] = shot
+    if note: d["note"] = note
+    return d
+
+CARDS = {
+"three-lab": [
+    card("isosmetric-02", "GLTF로 만든 아이소메트릭 방. 침대·책상·조명까지 배치하고 모델에 붙은 애니메이션을 재생한다.", ["three.js", "GLTF", "AnimationMixer"], "https://blackstarzck.github.io/isosmetric-02/", "three-lab"),
+    card("isosmetric-01", "같은 구조로 지은 첫 번째 방. lil-gui를 붙여 값을 실시간으로 만져 가며 감을 잡았다.", ["three.js", "GLTF", "lil-gui"], "https://blackstarzck.github.io/isosmetric-01/", "three-lab-2"),
+    card("custom_model", "Blender로 만든 모델을 웹에 올리고 조명 둘을 붙여 밝기와 위치를 조절해 봤다.", ["Blender", "three.js", "조명"], "https://blackstarzck.github.io/custom_model/", "three-lab-3"),
+    card("controls-01", "카메라의 위치와 각도를 컨트롤 패널로 직접 움직여 보며 3D 좌표계에 익숙해진 것.", ["OrbitControls", "카메라"], "https://blackstarzck.github.io/controls-01/", "three-lab-4"),
+    card("ilbunidiary", "위에서 내려다보는 시점의 방. Raycaster로 바닥을 찍으면 캐릭터가 그 지점까지 걸어간다.", ["Raycaster", "GLTF", "GSAP"], "https://blackstarzck.github.io/ilbunidiary/", "three-lab-5"),
+],
+"game-lab": [
+    card("neon-fist", "백엔드도 외부 에셋도 없이 만든 1:1 격투 게임. UI·파티클·게이지를 코드로 그리고 타격음부터 배경 음악까지 실시간 합성한다.", ["Canvas 2D", "Web Audio API", "Vite"], "https://neon-fist.vercel.app", "game-lab"),
+    card("game-cabinet", "3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행한다. 큐레이션한 게임을 캐비닛 화면에 띄운다.", ["React Three Fiber", "Next.js"], "https://game-cabinet.vercel.app", "game-lab-2"),
+    card("bridge", "유리다리를 건너는 게임. 밟은 판이 깨져 떨어지는 것을 눈속임이 아니라 물리 엔진으로 처리했다.", ["cannon", "Raycaster", "GSAP"], "https://blackstarzck.github.io/bridge/", "game-lab-3"),
+    card("first-person-perspective", "1인칭으로 공간을 걸어 다닌다. 충돌은 cannon-es로 처리하고 키보드와 터치 조작을 따로 나눠 뒀다.", ["three.js", "cannon-es", "입력 처리"], "https://blackstarzck.github.io/first-person-perspective/", "game-lab-4"),
+    card("lets-fps", "여럿이 같이 하는 FPS. 충돌용 월드를 GLTF로 불러오고 로그인과 방 상태는 Supabase에 뒀다.", ["three.js", "Supabase", "Vite"], "https://lets-fps.vercel.app", "game-lab-5"),
+    card("game-cards", "카드를 뒤집어 짝을 맞추는 게임. 상태 전이를 다뤄 본 초기 실험이다.", ["상태 전이"], None, None, "유료 패키지(fontawesome-pro) 의존이라 빌드 불가 — 화면 없음"),
+],
+"trading-lab": [
+    card("zenith", "업비트 자동매매 본체. Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 쓴다. 손실 리포트와 원인 분석 문서가 함께 있다.", ["Python", "Supabase", "React"], None, "trading-lab"),
+    card("zenith-v2", "봇을 zenith_bot 패키지로 다시 묶고 pytest를 붙였다.", ["Python", "pytest"], None),
+    card("zenith-v3", "docs/prd.md에 적은 매매 명세를 그대로 구현하는 전략 엔진으로 다시 짰다. trader와 web을 나눴다.", ["Python", "명세 기반 구현"], None),
+    card("zenith-v4", "모노레포로 재작성. 연결 상태를 상태머신으로 정리하고 타임아웃·지터 백오프 재시도, runId와 seq로 중복·순서역전을 막았다.", ["TypeScript", "WebSocket", "재시도 · 순서 보증"], None),
+    card("coin-lab", "backend·frontend·workers·infra로 나눠 다시 세운 판. PostgreSQL 함수까지 직접 썼다.", ["Python", "PostgreSQL", "워커"], None),
+    card("coin-lab-v2", "전략 실험 대시보드. 디자인 시스템을 문서로 먼저 정하고 화면을 맞췄다.", ["디자인 시스템", "Python", "React"], None, "trading-lab-2"),
+    card("profitpal", "차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조.", ["멀티 에이전트", "Python"], None),
+    card("Haley", "매매 전략을 코드보다 먼저 문서로 정리한 것. 단계별 다이어그램으로 흐름을 굳혔다.", ["전략 명세"], None),
+],
+"react-basics": [
+    card("react-todos", "투두 앱. 영상을 보며 클론 코딩한 것으로, 목록 추가·완료·삭제를 처음 끝까지 만들어 봤다.", ["React", "클론 코딩"], None, "react-basics"),
+    card("react-practice6", "드롭다운이 있는 반응형 네비게이션 바.", ["React"], None, "react-basics-2"),
+    card("business-card", "명함을 만들어 저장하는 앱. Firebase로 로그인과 저장을, Cloudinary로 이미지 업로드를 붙였다.", ["Firebase", "Cloudinary"], "https://blackstarzck.github.io/business-card/", "react-basics-3"),
+    card("react-modeal.net2", "화면 하나를 통째로 따라 만들어 본 클론 코딩. swiper로 캐러셀을 붙였다.", ["React Router", "swiper"], "https://blackstarzck.github.io/react-modeal.net2/", "react-basics-4"),
+    card("react-modeal", "같은 클론의 앞 버전. styled-components와 라우터를 처음 같이 써 봤다.", ["styled-components", "React Router"], None),
+    card("pokemon", "TypeScript로 API 호출·전역 상태·라우팅·애니메이션을 한 번에 묶어 본 것. 이 시기 저장소 중 가장 앱에 가깝다.", ["TypeScript", "Redux Toolkit", "GSAP"], None),
+    card("react-face-detect", "face-api.js를 붙여 사진 속 얼굴을 잡아 봤다. 모델 파일을 직접 넣어 브라우저에서 돌린다.", ["face-api.js", "React"], None),
+    card("react-youtube", "유튜브 API를 붙여 영상 목록과 상세를 보여주는 앱. API 호출부를 service로 떼어 냈다.", ["axios", "API 분리"], None),
+    card("react-swiper", "영화 목록과 상세를 라우팅으로 나눈 앱. 강의를 따라가며 만들었다.", ["React Router", "axios"], "https://blackstarzck.github.io/react-swiper/"),
+    card("react-practice4", "코인 시세 목록. axios로 외부 API를 처음 붙여 본 연습이다.", ["axios"], None),
+    card("react-axios-practice", "axios 호출 패턴만 떼어 여러 방식으로 써 본 것.", ["axios"], None),
+    card("react-practice5", "투두 목록·입력·항목을 컴포넌트로 쪼개 본 연습.", ["컴포넌트 분리", "react-icons"], None),
+    card("react-practice3", "페이지를 나누고 라우터로 이동시키는 연습. 아이콘을 붙여 봤다.", ["React Router", "react-icons"], None),
+    card("react-practice2", "드롭다운 메뉴가 있는 네비게이션 바를 컴포넌트로 만들어 본 것.", ["컴포넌트 분리"], None),
+    card("react-practice1", "라우터를 처음 붙여 본 연습.", ["React Router"], None),
+    card("react-practice7", "가장 작은 형태로 남긴 연습 프로젝트.", ["React"], None),
+    card("react-router-practice1", "history를 직접 다뤄 가며 라우팅 동작을 확인해 본 것.", ["React Router", "history"], None),
+    card("react-router-practice2", "라우팅 구조를 한 번 더 반복해 본 연습.", ["React Router"], None),
+    card("react-styled-component", "styled-components로 스타일을 컴포넌트 안으로 넣어 본 연습.", ["styled-components"], None),
+    card("react-CRUD", "가장 기본적인 추가·조회·수정·삭제만 남긴 연습.", ["React"], None),
+    card("memo", "메모 앱. lodash.debounce로 입력이 멈춘 뒤에만 저장되게 했다.", ["debounce", "React"], None),
+    card("habit-tracker", "습관 기록 앱. 클래스형 컴포넌트로 만들었다.", ["클래스 컴포넌트"], None),
+    card("new-habit-tracker", "위 앱을 함수형 컴포넌트로 다시 쓴 것. 같은 화면을 두 방식으로 만들어 비교했다.", ["함수형 컴포넌트"], None),
+    card("assignment", "PokeAPI로 포켓몬을 검색하는 과제. TypeScript로 썼고 React 없이 만들었다.", ["TypeScript", "PokeAPI"], None),
+    card("data_structure", "연결 리스트를 자바스크립트로 직접 구현하고 화면에 그려 확인했다.", ["자료구조", "바닐라 JS"], None),
+    card("drag-n-drop", "라이브러리 없이 드래그 앤 드롭을 브라우저 API만으로 구현했다.", ["바닐라 JS", "DnD"], None),
+    card("canvas-test", "캔버스에 삼각형과 다각형을 그려 본 첫 습작.", ["Canvas 2D"], None),
+],
+}
+
 # 이미지 스트립(<id>-2.jpg …) 장수. 자세한 설명은 아래 MULTI 출력부 주석 참고.
 MULTI = {"react-basics": 4, "game-lab": 5, "three-lab": 5, "trading-lab": 2}
 
@@ -405,7 +475,7 @@ node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
 
 node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
-     "isosmetric-01·02는 아이소메트릭 방을 하나씩 지어 본 것이고, custom_model은 Blender로 만든 모델을 웹에 올려 조명을 붙인 것, controls-01은 카메라를 손으로 움직여 본 것입니다. ilbunidiary는 직교 카메라로 방을 내려다보며 Raycaster로 바닥을 찍어 캐릭터를 걷게 했습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다. 네 개 모두 아래에서 바로 돌려볼 수 있습니다.",
+     "3D 공간을 화면에 올리는 방법을 하나씩 바꿔가며 익혔습니다. 모델을 불러오고, 카메라를 두고, 조명을 붙이고, 클릭한 지점으로 캐릭터를 보내는 것까지 갔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet의 React Three Fiber로 이어졌습니다.",
      "3D · 아이소메트릭 실험",
      P(role="개인 실험",
        skills=[["3D 렌더링", "grew"], ["카메라 컨트롤", "first"], ["직교 카메라", "first"]]),
@@ -417,7 +487,7 @@ node("three-lab", "3D · 아이소메트릭", "lab", "실험",
 
 node("game-lab", "게임 · 인터랙션", "lab", "실험",
      "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
-     "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. bridge는 유리다리를 건너는 게임인데, 밟는 판이 깨지고 떨어지는 것을 눈속임이 아니라 cannon 물리 엔진으로 처리했습니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
+     "게임은 프레임마다 상태가 바뀝니다. 누르면 바로 반응해야 하고, 충돌과 물리를 직접 다뤄야 하고, 소리까지 붙습니다. UI 개발과는 다른 근육이라 계속 만들어 보고 있습니다. 캔버스에 직접 그리는 것에서 시작해 물리 엔진과 3D, 실시간 사운드까지 하나씩 넓혀 왔습니다.",
      "게임 · 인터랙션 실험",
      P(role="개인 실험",
        skills=[["Canvas 2D", "grew"], ["Web Audio API", "first"],
@@ -431,7 +501,7 @@ node("game-lab", "게임 · 인터랙션", "lab", "실험",
 
 node("trading-lab", "자동매매 시스템", "lab", "2026",
      "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
-     "2026년 2월부터 6월까지 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다 — zenith와 v2·v3·v4, coin-lab과 v2, profitpal, 그리고 전략을 문서로 정리한 Haley입니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
+     "2026년 2월부터 6월까지 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실이 났을 때 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다. 상태머신, 재시도와 순서 보증, 에이전트 위원회 같은 것들이 그 과정에서 하나씩 붙었습니다.",
      "업비트 자동매매 · 2026",
      P(role="개인 프로젝트 · 설계 및 구현",
        duration="2026.02 - 2026.06",
@@ -468,7 +538,7 @@ node("detect-lab", "물체 감지", "lab", "2022",
 
 node("react-basics", "React 학습기", "lab", "2022",
      "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
-     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. pokemon은 TypeScript로 API 호출·전역 상태·라우팅·GSAP를 한 번에 묶어 본 것이라 이 시기 저장소 중에서는 가장 앱에 가깝습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. 라우터·상태·스타일링을 하나씩 떼어 익히고, 자료구조나 브라우저 API처럼 React 바깥의 것들도 만져 봤습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
@@ -484,6 +554,16 @@ node("react-basics", "React 학습기", "lab", "2022",
             "react-youtube", "react-face-detect", "pokemon", "memo", "business-card", 
             "habit-tracker", "new-habit-tracker", "assignment", "data_structure", 
             "drag-n-drop", "canvas-test"])
+
+# 카드가 있는 노드는 links/repos 를 지운다. 카드가 그 둘을 대신한다.
+_byid = {n["id"]: n for n in N}
+for _nid, _cs in CARDS.items():
+    _n = _byid[_nid]
+    _n["cards"] = _cs
+    _n.pop("links", None)
+    _n.pop("repos", None)
+    MULTI.pop(_nid, None)
+    SHOTS.pop(_nid, None)
 
 # ── 좌표 계산 ────────────────────────────────────────────────────────────
 AREA_ANGLE = {"frontend": 118, "ai": 62, "backend": 348, "product": 192, "lab": 268}
@@ -652,6 +732,18 @@ export type ProjectFields = {{
   story?: string
 }}
 
+export type ProjectCard = {{
+  repo: string
+  desc: string
+  skills: string[]
+  /** 배포된 화면 주소. 없으면 코드 링크만 보인다. */
+  demo?: string
+  /** /assets/<shot>.jpg 를 카드 썸네일로 쓴다. */
+  shot?: string
+  /** 화면이 없는 이유 같은 단서. */
+  note?: string
+}}
+
 export type ContentNode = {{
   id: string
   name: string
@@ -668,6 +760,8 @@ export type ContentNode = {{
   links?: [string, string][]
   /** 이 노드가 다루는 GitHub 저장소 이름. 페이지에 칩으로 그려진다. */
   repos?: string[]
+  /** 저장소가 여럿인 노드의 프로젝트 카드. 있으면 links/repos/스트립을 대신한다. */
+  cards?: ProjectCard[]
   project?: ProjectFields
 }}
 """)

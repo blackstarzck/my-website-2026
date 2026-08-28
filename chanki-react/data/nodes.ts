@@ -998,33 +998,8 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "실험",
     "sum": "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
-    "body": "isosmetric-01·02는 아이소메트릭 방을 하나씩 지어 본 것이고, custom_model은 Blender로 만든 모델을 웹에 올려 조명을 붙인 것, controls-01은 카메라를 손으로 움직여 본 것입니다. ilbunidiary는 직교 카메라로 방을 내려다보며 Raycaster로 바닥을 찍어 캐릭터를 걷게 했습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet에서 React Three Fiber로 이어졌습니다. 네 개 모두 아래에서 바로 돌려볼 수 있습니다.",
+    "body": "3D 공간을 화면에 올리는 방법을 하나씩 바꿔가며 익혔습니다. 모델을 불러오고, 카메라를 두고, 조명을 붙이고, 클릭한 지점으로 캐릭터를 보내는 것까지 갔습니다. 이 경험이 이후 팜커넥트에서 센서 데이터를 3D로 시각화할 때 직접 쓰였고, 최근에는 game-cabinet의 React Three Fiber로 이어졌습니다.",
     "cap": "3D · 아이소메트릭 실험",
-    "links": [
-      [
-        "아이소메트릭 방 01",
-        "https://blackstarzck.github.io/isosmetric-01/"
-      ],
-      [
-        "아이소메트릭 방 02",
-        "https://blackstarzck.github.io/isosmetric-02/"
-      ],
-      [
-        "Blender 모델 + 조명",
-        "https://blackstarzck.github.io/custom_model/"
-      ],
-      [
-        "걸어다니는 방",
-        "https://blackstarzck.github.io/ilbunidiary/"
-      ]
-    ],
-    "repos": [
-      "isosmetric-01",
-      "isosmetric-02",
-      "custom_model",
-      "controls-01",
-      "ilbunidiary"
-    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -1042,6 +1017,62 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
+    "cards": [
+      {
+        "repo": "isosmetric-02",
+        "desc": "GLTF로 만든 아이소메트릭 방. 침대·책상·조명까지 배치하고 모델에 붙은 애니메이션을 재생한다.",
+        "skills": [
+          "three.js",
+          "GLTF",
+          "AnimationMixer"
+        ],
+        "demo": "https://blackstarzck.github.io/isosmetric-02/",
+        "shot": "three-lab"
+      },
+      {
+        "repo": "isosmetric-01",
+        "desc": "같은 구조로 지은 첫 번째 방. lil-gui를 붙여 값을 실시간으로 만져 가며 감을 잡았다.",
+        "skills": [
+          "three.js",
+          "GLTF",
+          "lil-gui"
+        ],
+        "demo": "https://blackstarzck.github.io/isosmetric-01/",
+        "shot": "three-lab-2"
+      },
+      {
+        "repo": "custom_model",
+        "desc": "Blender로 만든 모델을 웹에 올리고 조명 둘을 붙여 밝기와 위치를 조절해 봤다.",
+        "skills": [
+          "Blender",
+          "three.js",
+          "조명"
+        ],
+        "demo": "https://blackstarzck.github.io/custom_model/",
+        "shot": "three-lab-3"
+      },
+      {
+        "repo": "controls-01",
+        "desc": "카메라의 위치와 각도를 컨트롤 패널로 직접 움직여 보며 3D 좌표계에 익숙해진 것.",
+        "skills": [
+          "OrbitControls",
+          "카메라"
+        ],
+        "demo": "https://blackstarzck.github.io/controls-01/",
+        "shot": "three-lab-4"
+      },
+      {
+        "repo": "ilbunidiary",
+        "desc": "위에서 내려다보는 시점의 방. Raycaster로 바닥을 찍으면 캐릭터가 그 지점까지 걸어간다.",
+        "skills": [
+          "Raycaster",
+          "GLTF",
+          "GSAP"
+        ],
+        "demo": "https://blackstarzck.github.io/ilbunidiary/",
+        "shot": "three-lab-5"
+      }
+    ],
     "x": -1.25,
     "y": -6.02,
     "r": 0.62
@@ -1052,34 +1083,8 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "실험",
     "sum": "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
-    "body": "neon-fist는 백엔드도 외부 에셋도 없이 Vite와 Canvas 2D만으로 만든 1:1 격투 게임입니다. 배경 한 장과 파이터 키프레임을 빼면 UI·파티클·플래시·게이지를 전부 코드로 그리고, 타격음부터 배경 음악까지 Web Audio API로 실시간 합성합니다. game-cabinet은 React Three Fiber로 3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. bridge는 유리다리를 건너는 게임인데, 밟는 판이 깨지고 떨어지는 것을 눈속임이 아니라 cannon 물리 엔진으로 처리했습니다. 그 전에는 lets-fps와 first-person-perspective로 1인칭 조작을, game-cards로 상태 전이를 실험했습니다. 게임은 프레임마다 상태가 바뀌기 때문에 UI 개발과는 다른 근육을 씁니다.",
+    "body": "게임은 프레임마다 상태가 바뀝니다. 누르면 바로 반응해야 하고, 충돌과 물리를 직접 다뤄야 하고, 소리까지 붙습니다. UI 개발과는 다른 근육이라 계속 만들어 보고 있습니다. 캔버스에 직접 그리는 것에서 시작해 물리 엔진과 3D, 실시간 사운드까지 하나씩 넓혀 왔습니다.",
     "cap": "게임 · 인터랙션 실험",
-    "links": [
-      [
-        "NEON FIST 플레이",
-        "https://neon-fist.vercel.app"
-      ],
-      [
-        "GAME CABINET 열기",
-        "https://game-cabinet.vercel.app"
-      ],
-      [
-        "유리다리 건너기",
-        "https://blackstarzck.github.io/bridge/"
-      ],
-      [
-        "1인칭 시점 실험",
-        "https://blackstarzck.github.io/first-person-perspective/"
-      ]
-    ],
-    "repos": [
-      "neon-fist",
-      "game-cabinet",
-      "bridge",
-      "game-cards",
-      "lets-fps",
-      "first-person-perspective"
-    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -1101,6 +1106,70 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
+    "cards": [
+      {
+        "repo": "neon-fist",
+        "desc": "백엔드도 외부 에셋도 없이 만든 1:1 격투 게임. UI·파티클·게이지를 코드로 그리고 타격음부터 배경 음악까지 실시간 합성한다.",
+        "skills": [
+          "Canvas 2D",
+          "Web Audio API",
+          "Vite"
+        ],
+        "demo": "https://neon-fist.vercel.app",
+        "shot": "game-lab"
+      },
+      {
+        "repo": "game-cabinet",
+        "desc": "3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행한다. 큐레이션한 게임을 캐비닛 화면에 띄운다.",
+        "skills": [
+          "React Three Fiber",
+          "Next.js"
+        ],
+        "demo": "https://game-cabinet.vercel.app",
+        "shot": "game-lab-2"
+      },
+      {
+        "repo": "bridge",
+        "desc": "유리다리를 건너는 게임. 밟은 판이 깨져 떨어지는 것을 눈속임이 아니라 물리 엔진으로 처리했다.",
+        "skills": [
+          "cannon",
+          "Raycaster",
+          "GSAP"
+        ],
+        "demo": "https://blackstarzck.github.io/bridge/",
+        "shot": "game-lab-3"
+      },
+      {
+        "repo": "first-person-perspective",
+        "desc": "1인칭으로 공간을 걸어 다닌다. 충돌은 cannon-es로 처리하고 키보드와 터치 조작을 따로 나눠 뒀다.",
+        "skills": [
+          "three.js",
+          "cannon-es",
+          "입력 처리"
+        ],
+        "demo": "https://blackstarzck.github.io/first-person-perspective/",
+        "shot": "game-lab-4"
+      },
+      {
+        "repo": "lets-fps",
+        "desc": "여럿이 같이 하는 FPS. 충돌용 월드를 GLTF로 불러오고 로그인과 방 상태는 Supabase에 뒀다.",
+        "skills": [
+          "three.js",
+          "Supabase",
+          "Vite"
+        ],
+        "demo": "https://lets-fps.vercel.app",
+        "shot": "game-lab-5"
+      },
+      {
+        "repo": "game-cards",
+        "desc": "카드를 뒤집어 짝을 맞추는 게임. 상태 전이를 다뤄 본 초기 실험이다.",
+        "skills": [
+          "상태 전이"
+        ],
+        "note": "유료 패키지(fontawesome-pro) 의존이라 빌드 불가 — 화면 없음"
+      }
+    ],
     "x": -0.25,
     "y": -7.05,
     "r": 0.72
@@ -1111,36 +1180,8 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "2026",
     "sum": "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
-    "body": "2026년 2월부터 6월까지 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다 — zenith와 v2·v3·v4, coin-lab과 v2, profitpal, 그리고 전략을 문서로 정리한 Haley입니다. zenith는 Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다 — 봇이 쓰면 UI가 realtime으로 읽고, UI가 전략 파라미터를 바꾸면 봇이 폴링해 반영합니다. v4에서는 연결 상태를 LIVE·DELAYED·RECONNECTING·ERROR·PAUSED 상태머신으로 정리하고, 타임아웃과 지터를 섞은 백오프 재시도, runId와 seq로 메시지 중복·순서역전을 막는 장치를 넣었습니다. profitpal은 차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조입니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다.",
+    "body": "2026년 2월부터 6월까지 여덟 개 저장소로 업비트 자동매매를 만들고 다시 만들었습니다. 돈이 걸린 코드라 틀리면 바로 드러납니다. 손실이 났을 때 리포트와 원인 분석을 남기고 다음 버전으로 넘어간 기록이 저장소에 그대로 있습니다. 상태머신, 재시도와 순서 보증, 에이전트 위원회 같은 것들이 그 과정에서 하나씩 붙었습니다.",
     "cap": "업비트 자동매매 · 2026",
-    "links": [
-      [
-        "zenith · 자동매매 본체",
-        "https://github.com/blackstarzck/zenith"
-      ],
-      [
-        "zenith-v4 · 모노레포 재작성",
-        "https://github.com/blackstarzck/zenith-v4"
-      ],
-      [
-        "coin-lab-v2",
-        "https://github.com/blackstarzck/coin-lab-v2"
-      ],
-      [
-        "profitpal · 에이전트 위원회",
-        "https://github.com/blackstarzck/profitpal"
-      ]
-    ],
-    "repos": [
-      "zenith",
-      "zenith-v2",
-      "zenith-v3",
-      "zenith-v4",
-      "coin-lab",
-      "coin-lab-v2",
-      "profitpal",
-      "Haley"
-    ],
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
       "duration": "2026.02 - 2026.06",
@@ -1163,6 +1204,77 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
+    "cards": [
+      {
+        "repo": "zenith",
+        "desc": "업비트 자동매매 본체. Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 쓴다. 손실 리포트와 원인 분석 문서가 함께 있다.",
+        "skills": [
+          "Python",
+          "Supabase",
+          "React"
+        ],
+        "shot": "trading-lab"
+      },
+      {
+        "repo": "zenith-v2",
+        "desc": "봇을 zenith_bot 패키지로 다시 묶고 pytest를 붙였다.",
+        "skills": [
+          "Python",
+          "pytest"
+        ]
+      },
+      {
+        "repo": "zenith-v3",
+        "desc": "docs/prd.md에 적은 매매 명세를 그대로 구현하는 전략 엔진으로 다시 짰다. trader와 web을 나눴다.",
+        "skills": [
+          "Python",
+          "명세 기반 구현"
+        ]
+      },
+      {
+        "repo": "zenith-v4",
+        "desc": "모노레포로 재작성. 연결 상태를 상태머신으로 정리하고 타임아웃·지터 백오프 재시도, runId와 seq로 중복·순서역전을 막았다.",
+        "skills": [
+          "TypeScript",
+          "WebSocket",
+          "재시도 · 순서 보증"
+        ]
+      },
+      {
+        "repo": "coin-lab",
+        "desc": "backend·frontend·workers·infra로 나눠 다시 세운 판. PostgreSQL 함수까지 직접 썼다.",
+        "skills": [
+          "Python",
+          "PostgreSQL",
+          "워커"
+        ]
+      },
+      {
+        "repo": "coin-lab-v2",
+        "desc": "전략 실험 대시보드. 디자인 시스템을 문서로 먼저 정하고 화면을 맞췄다.",
+        "skills": [
+          "디자인 시스템",
+          "Python",
+          "React"
+        ],
+        "shot": "trading-lab-2"
+      },
+      {
+        "repo": "profitpal",
+        "desc": "차트·뉴스·고래 지갑을 각각 보는 에이전트의 판단을 의장이 취합하는 위원회 구조.",
+        "skills": [
+          "멀티 에이전트",
+          "Python"
+        ]
+      },
+      {
+        "repo": "Haley",
+        "desc": "매매 전략을 코드보다 먼저 문서로 정리한 것. 단계별 다이어그램으로 흐름을 굳혔다.",
+        "skills": [
+          "전략 명세"
+        ]
+      }
+    ],
     "x": 1.07,
     "y": -7.88,
     "r": 0.82
@@ -1262,55 +1374,8 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "2022",
     "sum": "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
-    "body": "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. pokemon은 TypeScript로 API 호출·전역 상태·라우팅·GSAP를 한 번에 묶어 본 것이라 이 시기 저장소 중에서는 가장 앱에 가깝습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+    "body": "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. 라우터·상태·스타일링을 하나씩 떼어 익히고, 자료구조나 브라우저 API처럼 React 바깥의 것들도 만져 봤습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
     "cap": "React 학습기 · 2022",
-    "links": [
-      [
-        "명함 제작기 데모",
-        "https://blackstarzck.github.io/business-card/"
-      ],
-      [
-        "클론 코딩 데모",
-        "https://blackstarzck.github.io/react-modeal.net2/"
-      ],
-      [
-        "react-todos 저장소",
-        "https://github.com/blackstarzck/react-todos"
-      ],
-      [
-        "연습 저장소 목록",
-        "https://github.com/blackstarzck?tab=repositories&q=react-practice"
-      ]
-    ],
-    "repos": [
-      "react-practice1",
-      "react-practice2",
-      "react-practice3",
-      "react-practice4",
-      "react-practice5",
-      "react-practice6",
-      "react-practice7",
-      "react-router-practice1",
-      "react-router-practice2",
-      "react-styled-component",
-      "react-swiper",
-      "react-todos",
-      "react-modeal",
-      "react-modeal.net2",
-      "react-CRUD",
-      "react-axios-practice",
-      "react-youtube",
-      "react-face-detect",
-      "pokemon",
-      "memo",
-      "business-card",
-      "habit-tracker",
-      "new-habit-tracker",
-      "assignment",
-      "data_structure",
-      "drag-n-drop",
-      "canvas-test"
-    ],
     "project": {
       "role": "학습",
       "duration": "2022",
@@ -1321,6 +1386,220 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
+    "cards": [
+      {
+        "repo": "react-todos",
+        "desc": "투두 앱. 영상을 보며 클론 코딩한 것으로, 목록 추가·완료·삭제를 처음 끝까지 만들어 봤다.",
+        "skills": [
+          "React",
+          "클론 코딩"
+        ],
+        "shot": "react-basics"
+      },
+      {
+        "repo": "react-practice6",
+        "desc": "드롭다운이 있는 반응형 네비게이션 바.",
+        "skills": [
+          "React"
+        ],
+        "shot": "react-basics-2"
+      },
+      {
+        "repo": "business-card",
+        "desc": "명함을 만들어 저장하는 앱. Firebase로 로그인과 저장을, Cloudinary로 이미지 업로드를 붙였다.",
+        "skills": [
+          "Firebase",
+          "Cloudinary"
+        ],
+        "demo": "https://blackstarzck.github.io/business-card/",
+        "shot": "react-basics-3"
+      },
+      {
+        "repo": "react-modeal.net2",
+        "desc": "화면 하나를 통째로 따라 만들어 본 클론 코딩. swiper로 캐러셀을 붙였다.",
+        "skills": [
+          "React Router",
+          "swiper"
+        ],
+        "demo": "https://blackstarzck.github.io/react-modeal.net2/",
+        "shot": "react-basics-4"
+      },
+      {
+        "repo": "react-modeal",
+        "desc": "같은 클론의 앞 버전. styled-components와 라우터를 처음 같이 써 봤다.",
+        "skills": [
+          "styled-components",
+          "React Router"
+        ]
+      },
+      {
+        "repo": "pokemon",
+        "desc": "TypeScript로 API 호출·전역 상태·라우팅·애니메이션을 한 번에 묶어 본 것. 이 시기 저장소 중 가장 앱에 가깝다.",
+        "skills": [
+          "TypeScript",
+          "Redux Toolkit",
+          "GSAP"
+        ]
+      },
+      {
+        "repo": "react-face-detect",
+        "desc": "face-api.js를 붙여 사진 속 얼굴을 잡아 봤다. 모델 파일을 직접 넣어 브라우저에서 돌린다.",
+        "skills": [
+          "face-api.js",
+          "React"
+        ]
+      },
+      {
+        "repo": "react-youtube",
+        "desc": "유튜브 API를 붙여 영상 목록과 상세를 보여주는 앱. API 호출부를 service로 떼어 냈다.",
+        "skills": [
+          "axios",
+          "API 분리"
+        ]
+      },
+      {
+        "repo": "react-swiper",
+        "desc": "영화 목록과 상세를 라우팅으로 나눈 앱. 강의를 따라가며 만들었다.",
+        "skills": [
+          "React Router",
+          "axios"
+        ],
+        "demo": "https://blackstarzck.github.io/react-swiper/"
+      },
+      {
+        "repo": "react-practice4",
+        "desc": "코인 시세 목록. axios로 외부 API를 처음 붙여 본 연습이다.",
+        "skills": [
+          "axios"
+        ]
+      },
+      {
+        "repo": "react-axios-practice",
+        "desc": "axios 호출 패턴만 떼어 여러 방식으로 써 본 것.",
+        "skills": [
+          "axios"
+        ]
+      },
+      {
+        "repo": "react-practice5",
+        "desc": "투두 목록·입력·항목을 컴포넌트로 쪼개 본 연습.",
+        "skills": [
+          "컴포넌트 분리",
+          "react-icons"
+        ]
+      },
+      {
+        "repo": "react-practice3",
+        "desc": "페이지를 나누고 라우터로 이동시키는 연습. 아이콘을 붙여 봤다.",
+        "skills": [
+          "React Router",
+          "react-icons"
+        ]
+      },
+      {
+        "repo": "react-practice2",
+        "desc": "드롭다운 메뉴가 있는 네비게이션 바를 컴포넌트로 만들어 본 것.",
+        "skills": [
+          "컴포넌트 분리"
+        ]
+      },
+      {
+        "repo": "react-practice1",
+        "desc": "라우터를 처음 붙여 본 연습.",
+        "skills": [
+          "React Router"
+        ]
+      },
+      {
+        "repo": "react-practice7",
+        "desc": "가장 작은 형태로 남긴 연습 프로젝트.",
+        "skills": [
+          "React"
+        ]
+      },
+      {
+        "repo": "react-router-practice1",
+        "desc": "history를 직접 다뤄 가며 라우팅 동작을 확인해 본 것.",
+        "skills": [
+          "React Router",
+          "history"
+        ]
+      },
+      {
+        "repo": "react-router-practice2",
+        "desc": "라우팅 구조를 한 번 더 반복해 본 연습.",
+        "skills": [
+          "React Router"
+        ]
+      },
+      {
+        "repo": "react-styled-component",
+        "desc": "styled-components로 스타일을 컴포넌트 안으로 넣어 본 연습.",
+        "skills": [
+          "styled-components"
+        ]
+      },
+      {
+        "repo": "react-CRUD",
+        "desc": "가장 기본적인 추가·조회·수정·삭제만 남긴 연습.",
+        "skills": [
+          "React"
+        ]
+      },
+      {
+        "repo": "memo",
+        "desc": "메모 앱. lodash.debounce로 입력이 멈춘 뒤에만 저장되게 했다.",
+        "skills": [
+          "debounce",
+          "React"
+        ]
+      },
+      {
+        "repo": "habit-tracker",
+        "desc": "습관 기록 앱. 클래스형 컴포넌트로 만들었다.",
+        "skills": [
+          "클래스 컴포넌트"
+        ]
+      },
+      {
+        "repo": "new-habit-tracker",
+        "desc": "위 앱을 함수형 컴포넌트로 다시 쓴 것. 같은 화면을 두 방식으로 만들어 비교했다.",
+        "skills": [
+          "함수형 컴포넌트"
+        ]
+      },
+      {
+        "repo": "assignment",
+        "desc": "PokeAPI로 포켓몬을 검색하는 과제. TypeScript로 썼고 React 없이 만들었다.",
+        "skills": [
+          "TypeScript",
+          "PokeAPI"
+        ]
+      },
+      {
+        "repo": "data_structure",
+        "desc": "연결 리스트를 자바스크립트로 직접 구현하고 화면에 그려 확인했다.",
+        "skills": [
+          "자료구조",
+          "바닐라 JS"
+        ]
+      },
+      {
+        "repo": "drag-n-drop",
+        "desc": "라이브러리 없이 드래그 앤 드롭을 브라우저 API만으로 구현했다.",
+        "skills": [
+          "바닐라 JS",
+          "DnD"
+        ]
+      },
+      {
+        "repo": "canvas-test",
+        "desc": "캔버스에 삼각형과 다각형을 그려 본 첫 습작.",
+        "skills": [
+          "Canvas 2D"
+        ]
+      }
+    ],
     "x": 4.78,
     "y": -6.35,
     "r": 0.82
