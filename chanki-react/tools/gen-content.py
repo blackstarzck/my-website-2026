@@ -37,7 +37,7 @@ AGRAD = {
 }
 
 # 이미지 스트립(<id>-2.jpg …) 장수. 자세한 설명은 아래 MULTI 출력부 주석 참고.
-MULTI = {"react-basics": 2}
+MULTI = {"react-basics": 2, "game-lab": 2}
 
 # ── 노드 정의 ────────────────────────────────────────────────────────────
 # (id, name, region, kicker, sum, body, cap, project|None, links|None)
@@ -431,7 +431,7 @@ node("detect-lab", "물체 감지", "lab", "2022",
 
 node("react-basics", "React 학습기", "lab", "2022",
      "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
-     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. pokemon은 TypeScript로 API 호출·전역 상태·라우팅·GSAP를 한 번에 묶어 본 것이라 이 시기 저장소 중에서는 가장 앱에 가깝습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
@@ -571,6 +571,7 @@ export const THEMED: Record<string, number> = {{}}
 /**
  * 이미지 스트립이 있는 노드와 장수. <id>.jpg 다음에 <id>-2.jpg … 를 읽는다.
  * react-basics 2 = react-todos(대표) + react-practice6(네비게이션 바).
+ * game-lab 2 = neon-fist(대표) + game-cabinet.
  * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
  * 그래서 노드로 두지 않고 이미지로만 남겼다.
  */

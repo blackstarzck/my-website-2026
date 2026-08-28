@@ -1195,7 +1195,7 @@ export const NODES: ContentNode[] = [
     "region": "lab",
     "kicker": "2022",
     "sum": "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
-    "body": "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+    "body": "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. pokemon은 TypeScript로 API 호출·전역 상태·라우팅·GSAP를 한 번에 묶어 본 것이라 이 시기 저장소 중에서는 가장 앱에 가깝습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
     "cap": "React 학습기 · 2022",
     "links": [
       [

@@ -85,11 +85,13 @@ export const THEMED: Record<string, number> = {}
 /**
  * 이미지 스트립이 있는 노드와 장수. <id>.jpg 다음에 <id>-2.jpg … 를 읽는다.
  * react-basics 2 = react-todos(대표) + react-practice6(네비게이션 바).
+ * game-lab 2 = neon-fist(대표) + game-cabinet.
  * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
  * 그래서 노드로 두지 않고 이미지로만 남겼다.
  */
 export const MULTI: Record<string, number> = {
-  "react-basics": 2
+  "react-basics": 2,
+  "game-lab": 2
 }
 
 /** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
