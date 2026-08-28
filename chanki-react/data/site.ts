@@ -94,6 +94,9 @@ export const PAGE_TEXT = {
   metaOnMap: '지도에서',
   metaContext: '맥락',
   metaPiece: '작업',
+  // 노드가 다루는 GitHub 저장소 칩 묶음의 라벨. 본문 문장 속 이름만으로는
+  // 찾을 수 없어서(링크도 지도 라벨도 없다) 칩으로 따로 깐다.
+  reposLabel: '저장소',
   relatedNoteAll: '이 작업과 이어지는 지도의 다른 노드들입니다.',
   treeFull: '~/ 전체 지도',
   tree: '~/ 지도',

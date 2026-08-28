@@ -27,5 +27,7 @@ export type ContentNode = {
   url?: string
   urlLabel?: string
   links?: [string, string][]
+  /** 이 노드가 다루는 GitHub 저장소 이름. 페이지에 칩으로 그려진다. */
+  repos?: string[]
   project?: ProjectFields
 }

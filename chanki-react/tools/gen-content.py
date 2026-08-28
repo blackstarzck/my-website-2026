@@ -43,7 +43,8 @@ MULTI = {"react-basics": 2, "game-lab": 2}
 # (id, name, region, kicker, sum, body, cap, project|None, links|None)
 N = []
 
-def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLabel=None, links=None):
+def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLabel=None,
+         links=None, repos=None):
     d = dict(id=i, name=name, region=region, kicker=kicker)
     # sum 이 비면 필드를 아예 넣지 않는다 — 리전 노드는 갤러리가 body 를 쓴다.
     if sum_: d["sum"] = sum_
@@ -52,6 +53,8 @@ def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLa
     if url: d["url"] = url
     if urlLabel: d["urlLabel"] = urlLabel
     if links: d["links"] = links
+    # 이 노드가 다루는 GitHub 저장소. 페이지에 칩으로 깔려 전부 눌린다.
+    if repos: d["repos"] = repos
     if project: d["project"] = project
     N.append(d)
 
@@ -89,7 +92,8 @@ node("contact", "연락", "entry", "닿는 곳",
      # 이메일은 링크 칩이 아니라 메타 행(연락처)으로 보여준다 — engine/legacy.ts
      links=[["GitHub", "https://github.com/blackstarzck"],
             ["기술 블로그", "https://chan-chan2.tistory.com/"],
-            ["이 사이트의 소스", "https://github.com/blackstarzck/my-website-2026"]])
+            ["이 사이트의 소스", "https://github.com/blackstarzck/my-website-2026"]],
+     repos=["my-website-2026"])
 
 # ── frontend ─────────────────────────────────────────────────────────────
 node("frontend", "프론트엔드", "frontend", "핵심 영역",
@@ -226,7 +230,8 @@ node("nest-sns", "NestJS 학습", "backend", "학습",
      P(role="학습",
        skills=[["NestJS", "grew"], ["TypeORM · PostgreSQL", "grew"],
                ["JWT 인증", "first"], ["WebSocket", "first"]]),
-     url="https://github.com/blackstarzck/cf_sns", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/cf_sns", urlLabel="GitHub에서 보기",
+     repos=["cf_sns"])
 
 # ── ai ───────────────────────────────────────────────────────────────────
 node("ai", "AI 개발 프로세스", "ai", "현재 집중",
@@ -241,7 +246,8 @@ node("gate-harness", "요구사항 게이트 하네스", "ai", "실무 적용",
      P(role="게이트 하네스 설계·적용",
        impact="AI 결과를 주관적 판단이 아니라 명시된 기준으로 판정하게 했습니다.",
        skills=[["요구사항 명세", "grew"], ["하네스 설계", "first"]]),
-     url="https://github.com/blackstarzck/requirement-gated-python-harness", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/requirement-gated-python-harness", urlLabel="GitHub에서 보기",
+     repos=["requirement-gated-python-harness"])
 
 node("multi-agent", "멀티 에이전트 오케스트레이션", "ai", "실무 적용",
      "PM·설계·개발·QA 역할을 나눠 맡기고, 사이에 피드백 루프를 뒀습니다.",
@@ -266,7 +272,8 @@ node("figma-gen", "Figma → React 생성기", "ai", "개인 프로젝트",
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["디자인 토큰 동기화", "first"], ["npm 릴리스 자동화", "first"], ["TypeScript", "core"]]),
      url="https://chanchan2.vercel.app", urlLabel="디자인 시스템 문서 열기",
-     links=[["저장소", "https://github.com/blackstarzck/chanchan2"]])
+     links=[["저장소", "https://github.com/blackstarzck/chanchan2"]],
+     repos=["chanchan2"])
 
 node("my-skills", "개인 스킬 라이브러리", "ai", "개인 프로젝트",
      "반복해서 쓰는 작업 방식을 스킬로 정리해 재사용합니다.",
@@ -283,7 +290,8 @@ node("ai-squads", "비개발자용 에이전트 IDE", "ai", "개인 프로젝트
      "비개발자용 에이전트 IDE",
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["LangGraph", "first"], ["FastAPI", "first"], ["Next.js", "core"]]),
-     url="https://github.com/blackstarzck/ai-squads", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/ai-squads", urlLabel="GitHub에서 보기",
+     repos=["ai-squads"])
 
 node("video-agent", "영상 제작 에이전트", "ai", "개인 프로젝트",
      "영상 생성을 에이전트에게 맡기기 전에, 무엇을 근거로 삼을지부터 정했습니다.",
@@ -291,7 +299,8 @@ node("video-agent", "영상 제작 에이전트", "ai", "개인 프로젝트",
      "영상 제작 에이전트",
      P(role="개인 프로젝트 · 설계",
        skills=[["에이전트 문서 설계", "grew"], ["근거 등급 관리", "first"], ["하드 게이트", "grew"]]),
-     url="https://github.com/blackstarzck/sample-03", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/sample-03", urlLabel="GitHub에서 보기",
+     repos=["sample-03"])
 
 node("design-rulebook", "디자인 룰북", "ai", "개인 프로젝트",
      "AI에게 디자인을 시킬 때 쓸 판단 기준을 룰북으로 모았습니다.",
@@ -299,7 +308,8 @@ node("design-rulebook", "디자인 룰북", "ai", "개인 프로젝트",
      "디자인 룰북",
      P(role="개인 프로젝트",
        skills=[["디자인 기준 문서화", "first"], ["AI 프롬프트 규칙", "grew"]]),
-     url="https://github.com/blackstarzck/madia-design-rule", urlLabel="GitHub에서 보기")
+     url="https://github.com/blackstarzck/madia-design-rule", urlLabel="GitHub에서 보기",
+     repos=["madia-design-rule"])
 
 # ── product ──────────────────────────────────────────────────────────────
 node("product", "제품 · 협업", "product", "일하는 방식",
@@ -354,7 +364,8 @@ node("canvas-lab", "캔버스 · 파티클", "lab", "실험",
      "캔버스 · 파티클 실험",
      P(role="개인 실험", skills=[["Canvas 2D", "grew"], ["파티클 시스템", "first"]]),
      links=[["파티클 데모 열기", "https://blackstarzck.github.io/particle-colorful-stars/"],
-            ["저장소", "https://github.com/blackstarzck/particle-colorful-stars"]])
+            ["저장소", "https://github.com/blackstarzck/particle-colorful-stars"]],
+     repos=["particle-colorful-stars"])
 
 node("multicanvas-lab", "캔버스 여러 개", "lab", "실험",
      "WebGL 렌더러 하나로 페이지 곳곳의 캔버스 자리를 채웁니다.",
@@ -363,7 +374,8 @@ node("multicanvas-lab", "캔버스 여러 개", "lab", "실험",
      P(role="개인 실험",
        skills=[["WebGL 컨텍스트 관리", "first"], ["three.js", "grew"], ["뷰포트 컬링", "first"]]),
      links=[["데모 열기", "https://blackstarzck.github.io/multicanvas/"],
-            ["저장소", "https://github.com/blackstarzck/multicanvas"]])
+            ["저장소", "https://github.com/blackstarzck/multicanvas"]],
+     repos=["multicanvas"])
 
 node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
      "스크롤 위치에 3D 장면을 묶어, 페이지를 내리면 장면 안으로 들어갑니다.",
@@ -372,7 +384,8 @@ node("scroll-3d", "스크롤 연동 3D", "lab", "실험",
      P(role="개인 실험",
        skills=[["GSAP", "first"], ["GLTF 로딩", "grew"], ["스크롤 연동", "first"]]),
      links=[["데모 열기 · 스크롤해 보세요", "https://blackstarzck.github.io/scroll-page/"],
-            ["저장소", "https://github.com/blackstarzck/scroll-page"]])
+            ["저장소", "https://github.com/blackstarzck/scroll-page"]],
+     repos=["scroll-page"])
 
 node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      "아이소메트릭 뷰와 3D 모델, 카메라 컨트롤을 다뤄본 저장소들입니다.",
@@ -383,7 +396,8 @@ node("three-lab", "3D · 아이소메트릭", "lab", "실험",
      links=[["아이소메트릭 방 01", "https://blackstarzck.github.io/isosmetric-01/"],
             ["아이소메트릭 방 02", "https://blackstarzck.github.io/isosmetric-02/"],
             ["Blender 모델 + 조명", "https://blackstarzck.github.io/custom_model/"],
-            ["걸어다니는 방", "https://blackstarzck.github.io/ilbunidiary/"]])
+            ["걸어다니는 방", "https://blackstarzck.github.io/ilbunidiary/"]],
+     repos=["isosmetric-01", "isosmetric-02", "custom_model", "controls-01", "ilbunidiary"])
 
 node("game-lab", "게임 · 인터랙션", "lab", "실험",
      "브라우저에서 도는 격투 게임과 3D 아케이드 캐비닛, 1인칭 조작 실험입니다.",
@@ -395,7 +409,9 @@ node("game-lab", "게임 · 인터랙션", "lab", "실험",
      links=[["NEON FIST 플레이", "https://neon-fist.vercel.app"],
             ["GAME CABINET 열기", "https://game-cabinet.vercel.app"],
             ["유리다리 건너기", "https://blackstarzck.github.io/bridge/"],
-            ["1인칭 시점 실험", "https://blackstarzck.github.io/first-person-perspective/"]])
+            ["1인칭 시점 실험", "https://blackstarzck.github.io/first-person-perspective/"]],
+     repos=["neon-fist", "game-cabinet", "bridge", "game-cards", "lets-fps", 
+            "first-person-perspective"])
 
 node("trading-lab", "자동매매 시스템", "lab", "2026",
      "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
@@ -408,7 +424,9 @@ node("trading-lab", "자동매매 시스템", "lab", "2026",
      links=[["zenith · 자동매매 본체", "https://github.com/blackstarzck/zenith"],
             ["zenith-v4 · 모노레포 재작성", "https://github.com/blackstarzck/zenith-v4"],
             ["coin-lab-v2", "https://github.com/blackstarzck/coin-lab-v2"],
-            ["profitpal · 에이전트 위원회", "https://github.com/blackstarzck/profitpal"]])
+            ["profitpal · 에이전트 위원회", "https://github.com/blackstarzck/profitpal"]],
+     repos=["zenith", "zenith-v2", "zenith-v3", "zenith-v4", "coin-lab", "coin-lab-v2", 
+            "profitpal", "Haley"])
 
 node("space-3d", "3D 공간 만들기", "lab", "실험",
      "마을 하나를 통째로 세워 걸어 다닐 수 있게 만든 3D 씬입니다.",
@@ -417,7 +435,8 @@ node("space-3d", "3D 공간 만들기", "lab", "실험",
      P(role="개인 실험",
        skills=[["3D 앱 구조 설계", "first"], ["three.js", "grew"], ["리소스 로딩", "grew"]]),
      links=[["마을 걸어보기", "https://blackstarzck.github.io/my-space/"],
-            ["저장소", "https://github.com/blackstarzck/my-space"]])
+            ["저장소", "https://github.com/blackstarzck/my-space"]],
+     repos=["my-space"])
 
 node("detect-lab", "물체 감지", "lab", "2022",
      "사진 속 물건을 브라우저에서 잡아 카드로 띄운, 이 사이트 이전의 포트폴리오입니다.",
@@ -428,7 +447,8 @@ node("detect-lab", "물체 감지", "lab", "2022",
        skills=[["tensorflow.js", "first"], ["Canvas 2D", "grew"],
                ["GSAP", "first"], ["바닐라 자바스크립트", "core"]]),
      links=[["직접 돌려보기", "https://blackstarzck.github.io/chanki-portfolio/"],
-            ["저장소", "https://github.com/blackstarzck/chanki-portfolio"]])
+            ["저장소", "https://github.com/blackstarzck/chanki-portfolio"]],
+     repos=["chanki-portfolio"])
 
 node("react-basics", "React 학습기", "lab", "2022",
      "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
@@ -440,7 +460,14 @@ node("react-basics", "React 학습기", "lab", "2022",
      links=[["명함 제작기 데모", "https://blackstarzck.github.io/business-card/"],
             ["클론 코딩 데모", "https://blackstarzck.github.io/react-modeal.net2/"],
             ["react-todos 저장소", "https://github.com/blackstarzck/react-todos"],
-            ["연습 저장소 목록", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]])
+            ["연습 저장소 목록", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]],
+     repos=["react-practice1", "react-practice2", "react-practice3", "react-practice4", 
+            "react-practice5", "react-practice6", "react-practice7", "react-router-practice1", 
+            "react-router-practice2", "react-styled-component", "react-swiper", "react-todos", 
+            "react-modeal", "react-modeal.net2", "react-CRUD", "react-axios-practice", 
+            "react-youtube", "react-face-detect", "pokemon", "memo", "business-card", 
+            "habit-tracker", "new-habit-tracker", "assignment", "data_structure", 
+            "drag-n-drop", "canvas-test"])
 
 # ── 좌표 계산 ────────────────────────────────────────────────────────────
 AREA_ANGLE = {"frontend": 118, "ai": 62, "backend": 348, "product": 192, "lab": 268}
@@ -551,7 +578,9 @@ w("nodes.ts", f"{BANNER}import type {{ ContentNode }} from './types'\n\nexport c
 w("edges.ts", f"{BANNER}\nexport const EDGES: [string, string][] = {j(E)}\n")
 w("spine.ts", f"{BANNER}\nexport const SPINE: string[] = {j(SPINE)}\n")
 w("zmap.ts", f"{BANNER}\nexport const ZMAP: Record<string, number> = {j(ZMAP)}\n")
-w("config.ts", "export const CONTACT_EMAIL = 'bucheongosok@gmail.com'\n")
+w("config.ts", "export const CONTACT_EMAIL = 'bucheongosok@gmail.com'\n"
+              "// ContentNode.repos 의 저장소 칩이 가리킬 계정.\n"
+              "export const GITHUB_USER = 'blackstarzck'\n")
 
 TREECOLS = [[r, SLUG[r]] for r in REGIONS if r != "entry"]
 w("regions.ts", f"""{BANNER}import type {{ Region }} from './types'
@@ -618,6 +647,8 @@ export type ContentNode = {{
   url?: string
   urlLabel?: string
   links?: [string, string][]
+  /** 이 노드가 다루는 GitHub 저장소 이름. 페이지에 칩으로 그려진다. */
+  repos?: string[]
   project?: ProjectFields
 }}
 """)

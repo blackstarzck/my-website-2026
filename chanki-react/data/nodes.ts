@@ -37,6 +37,9 @@ export const NODES: ContentNode[] = [
         "https://github.com/blackstarzck/my-website-2026"
       ]
     ],
+    "repos": [
+      "my-website-2026"
+    ],
     "x": 0.0,
     "y": 2.05,
     "r": 0.72
@@ -450,6 +453,9 @@ export const NODES: ContentNode[] = [
     "cap": "NestJS SNS 서버 · 학습",
     "url": "https://github.com/blackstarzck/cf_sns",
     "urlLabel": "GitHub에서 보기",
+    "repos": [
+      "cf_sns"
+    ],
     "project": {
       "role": "학습",
       "skills": [
@@ -496,6 +502,9 @@ export const NODES: ContentNode[] = [
     "cap": "요구사항 게이트 하네스",
     "url": "https://github.com/blackstarzck/requirement-gated-python-harness",
     "urlLabel": "GitHub에서 보기",
+    "repos": [
+      "requirement-gated-python-harness"
+    ],
     "project": {
       "role": "게이트 하네스 설계·적용",
       "impact": "AI 결과를 주관적 판단이 아니라 명시된 기준으로 판정하게 했습니다.",
@@ -582,6 +591,9 @@ export const NODES: ContentNode[] = [
         "https://github.com/blackstarzck/chanchan2"
       ]
     ],
+    "repos": [
+      "chanchan2"
+    ],
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
       "skills": [
@@ -634,6 +646,9 @@ export const NODES: ContentNode[] = [
     "cap": "비개발자용 에이전트 IDE",
     "url": "https://github.com/blackstarzck/ai-squads",
     "urlLabel": "GitHub에서 보기",
+    "repos": [
+      "ai-squads"
+    ],
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
       "skills": [
@@ -665,6 +680,9 @@ export const NODES: ContentNode[] = [
     "cap": "영상 제작 에이전트",
     "url": "https://github.com/blackstarzck/sample-03",
     "urlLabel": "GitHub에서 보기",
+    "repos": [
+      "sample-03"
+    ],
     "project": {
       "role": "개인 프로젝트 · 설계",
       "skills": [
@@ -696,6 +714,9 @@ export const NODES: ContentNode[] = [
     "cap": "디자인 룰북",
     "url": "https://github.com/blackstarzck/madia-design-rule",
     "urlLabel": "GitHub에서 보기",
+    "repos": [
+      "madia-design-rule"
+    ],
     "project": {
       "role": "개인 프로젝트",
       "skills": [
@@ -867,6 +888,9 @@ export const NODES: ContentNode[] = [
         "https://github.com/blackstarzck/particle-colorful-stars"
       ]
     ],
+    "repos": [
+      "particle-colorful-stars"
+    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -901,6 +925,9 @@ export const NODES: ContentNode[] = [
         "저장소",
         "https://github.com/blackstarzck/multicanvas"
       ]
+    ],
+    "repos": [
+      "multicanvas"
     ],
     "project": {
       "role": "개인 실험",
@@ -940,6 +967,9 @@ export const NODES: ContentNode[] = [
         "저장소",
         "https://github.com/blackstarzck/scroll-page"
       ]
+    ],
+    "repos": [
+      "scroll-page"
     ],
     "project": {
       "role": "개인 실험",
@@ -988,6 +1018,13 @@ export const NODES: ContentNode[] = [
         "https://blackstarzck.github.io/ilbunidiary/"
       ]
     ],
+    "repos": [
+      "isosmetric-01",
+      "isosmetric-02",
+      "custom_model",
+      "controls-01",
+      "ilbunidiary"
+    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -1034,6 +1071,14 @@ export const NODES: ContentNode[] = [
         "1인칭 시점 실험",
         "https://blackstarzck.github.io/first-person-perspective/"
       ]
+    ],
+    "repos": [
+      "neon-fist",
+      "game-cabinet",
+      "bridge",
+      "game-cards",
+      "lets-fps",
+      "first-person-perspective"
     ],
     "project": {
       "role": "개인 실험",
@@ -1086,6 +1131,16 @@ export const NODES: ContentNode[] = [
         "https://github.com/blackstarzck/profitpal"
       ]
     ],
+    "repos": [
+      "zenith",
+      "zenith-v2",
+      "zenith-v3",
+      "zenith-v4",
+      "coin-lab",
+      "coin-lab-v2",
+      "profitpal",
+      "Haley"
+    ],
     "project": {
       "role": "개인 프로젝트 · 설계 및 구현",
       "duration": "2026.02 - 2026.06",
@@ -1130,6 +1185,9 @@ export const NODES: ContentNode[] = [
         "https://github.com/blackstarzck/my-space"
       ]
     ],
+    "repos": [
+      "my-space"
+    ],
     "project": {
       "role": "개인 실험",
       "skills": [
@@ -1168,6 +1226,9 @@ export const NODES: ContentNode[] = [
         "저장소",
         "https://github.com/blackstarzck/chanki-portfolio"
       ]
+    ],
+    "repos": [
+      "chanki-portfolio"
     ],
     "project": {
       "role": "개인 프로젝트 · 기획 · 디자인 · 구현",
@@ -1220,6 +1281,35 @@ export const NODES: ContentNode[] = [
         "연습 저장소 목록",
         "https://github.com/blackstarzck?tab=repositories&q=react-practice"
       ]
+    ],
+    "repos": [
+      "react-practice1",
+      "react-practice2",
+      "react-practice3",
+      "react-practice4",
+      "react-practice5",
+      "react-practice6",
+      "react-practice7",
+      "react-router-practice1",
+      "react-router-practice2",
+      "react-styled-component",
+      "react-swiper",
+      "react-todos",
+      "react-modeal",
+      "react-modeal.net2",
+      "react-CRUD",
+      "react-axios-practice",
+      "react-youtube",
+      "react-face-detect",
+      "pokemon",
+      "memo",
+      "business-card",
+      "habit-tracker",
+      "new-habit-tracker",
+      "assignment",
+      "data_structure",
+      "drag-n-drop",
+      "canvas-test"
     ],
     "project": {
       "role": "학습",

@@ -57,7 +57,7 @@ import { createSim } from './sim'
 import type { EngineDeps, EngineTestHandle } from './types'
 import { createViewport } from './viewport'
 import { CONTACT_ID, ENTRY_ID, HOME_ITEMS, MANIFESTO_ENTRY_IDS, MANIFESTO_ID, PAGE_TEXT, REG_TABS, SKILL_LEVEL, TAB_DESC, UI_TEXT } from '@/data/site'
-import { CONTACT_EMAIL } from '@/data/config'
+import { CONTACT_EMAIL, GITHUB_USER } from '@/data/config'
 
 /** 원본이 DB.N 에 런타임으로 붙이던 z(ZMAP)를 포함한 노드. cl(파티클)은 더 이상 노드에
  *  붙지 않는다 — engine/particles.ts 의 clouds[i](노드 인덱스 배열)로 옮겼다(Task 6).
@@ -760,6 +760,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    <p class="lead">${esc(n.body || '')}</p>
    ${cta}${links}
    ${meta}
+   ${repoChips(n)}
    ${projectDetail(n)}
    <div class="media">${media(n)}${imgStrip(n)}</div>
    <div class="seclab">${esc(seclab)}</div><div class="seclab2">${secl2}</div>
@@ -908,6 +909,20 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   }
   function imgSrc(id: string): string { return '/assets/' + id + ((THEMED[id] && U().theme === 'light') ? '-light' : '') + '.jpg' }
   function cardImgSrc(id: string): string { return CARD_IMG[id] ? '/assets/' + CARD_IMG[id] + '.jpg' : imgSrc(id) }
+  /**
+   * 이 노드가 다루는 GitHub 저장소를 칩으로 깐다.
+   *
+   * 저장소 이름을 본문 문장 안에만 두면 사실상 찾을 수 없다 — 지도 라벨은
+   * 노드 이름이고, 갤러리 카드도 노드 단위라, 긴 문단을 읽어야만 나온다.
+   * 한 노드가 저장소를 여럿 묶는 경우(react-basics 27개)에는 더 그렇다.
+   * 그래서 이름을 눌러서 저장소로 갈 수 있게 따로 그린다.
+   */
+  function repoChips(n: ENode): string {
+    if (!n.repos || !n.repos.length) return ''
+    const chips = n.repos.map((r) =>
+      `<a class="repo" href="https://github.com/${GITHUB_USER}/${encodeURIComponent(r)}" target="_blank" rel="noopener">${esc(r)}</a>`).join('')
+    return `<div class="repos"><div class="repolab">${esc(PAGE_TEXT.reposLabel)} · ${n.repos.length}</div><div class="repolist">${chips}</div></div>`
+  }
   function imgStrip(n: ENode): string {
     const cnt = MULTI[n.id]
     if (!cnt) return ''
