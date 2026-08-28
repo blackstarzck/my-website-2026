@@ -200,7 +200,8 @@ node("doc-merge", "문서 통합 관리 서비스", "backend", "케듀올 · 202
                 "Ant Design·Tailwind·styled-components로 관리용 UI/UX 구축"],
        skills=[["NestJS · TypeORM", "first"], ["PostgreSQL", "first"], ["Redux Toolkit · SWR", "grew"],
                ["AG Grid", "first"], ["ExcelJS", "first"], ["React · TypeScript", "core"]],
-       ))
+       ),
+     links=[["화면 열어보기", "https://blackstarzck.github.io/doc-merge/"]])
 
 node("supabase", "Supabase 인증 · RLS", "backend", "케듀올 · 2026",
      "권한을 애플리케이션이 아니라 DB 레벨에서 다루는 방식을 처음 적용했습니다.",
