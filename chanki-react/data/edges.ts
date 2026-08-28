@@ -79,6 +79,14 @@ export const EDGES: [string, string][] = [
     "ai-squads"
   ],
   [
+    "ai",
+    "video-agent"
+  ],
+  [
+    "ai",
+    "design-rulebook"
+  ],
+  [
     "backend",
     "doc-merge"
   ],
@@ -89,6 +97,10 @@ export const EDGES: [string, string][] = [
   [
     "backend",
     "farm-api"
+  ],
+  [
+    "backend",
+    "nest-sns"
   ],
   [
     "product",
@@ -189,6 +201,22 @@ export const EDGES: [string, string][] = [
   [
     "multi-agent",
     "verify-loop"
+  ],
+  [
+    "gate-harness",
+    "video-agent"
+  ],
+  [
+    "design-rulebook",
+    "figma-gen"
+  ],
+  [
+    "nest-sns",
+    "supabase"
+  ],
+  [
+    "nest-sns",
+    "farm-api"
   ],
   [
     "figma-gen",

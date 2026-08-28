@@ -23,10 +23,12 @@ export const SPINE: string[] = [
   "connect-bee",
   "farm-api",
   "backend",
+  "nest-sns",
   "doc-merge",
   "supabase",
   "corp-sites",
   "figma-gen",
+  "design-rulebook",
   "dadoke",
   "docs-comm",
   "product",
@@ -37,5 +39,6 @@ export const SPINE: string[] = [
   "multi-agent",
   "verify-loop",
   "my-skills",
-  "ai-squads"
+  "ai-squads",
+  "video-agent"
 ]

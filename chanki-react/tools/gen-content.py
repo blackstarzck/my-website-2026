@@ -218,6 +218,15 @@ node("farm-api", "스마트팜 관리자 · API", "backend", "팜커넥트",
        impact="AI 환경 안내가 동작할 수 있는 데이터 관리 구조를 만들었습니다.",
        skills=[["NestJS", "grew"], ["MySQL", "grew"], ["Angular", "grew"]]))
 
+node("nest-sns", "NestJS 학습", "backend", "학습",
+     "인증부터 실시간 채팅까지, 서버 한 벌을 빈 폴더에서 얹어 본 기록입니다.",
+     "강의를 따라가며 NestJS로 SNS 서버를 한 벌 만들었습니다. JWT로 인증을 붙이고 bcrypt로 비밀번호를 다뤘고, TypeORM으로 PostgreSQL 스키마와 관계를 잡았습니다. 사용자·게시글·채팅을 모듈로 나누고 socket.io로 실시간 채팅을 얹었습니다. 들어오는 값은 class-validator로 걸렀고 파일 업로드는 multer로 처리했습니다. 실무에서 만난 서버는 이미 굴러가고 있는 것이었습니다. 빈 폴더에서 시작해 인증·검증·관계·실시간까지 직접 쌓아 보는 것이 목적이었습니다.",
+     "NestJS SNS 서버 · 학습",
+     P(role="학습",
+       skills=[["NestJS", "grew"], ["TypeORM · PostgreSQL", "grew"],
+               ["JWT 인증", "first"], ["WebSocket", "first"]]),
+     url="https://github.com/blackstarzck/cf_sns", urlLabel="GitHub에서 보기")
+
 # ── ai ───────────────────────────────────────────────────────────────────
 node("ai", "AI 개발 프로세스", "ai", "현재 집중",
      "",
@@ -274,6 +283,22 @@ node("ai-squads", "비개발자용 에이전트 IDE", "ai", "개인 프로젝트
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["LangGraph", "first"], ["FastAPI", "first"], ["Next.js", "core"]]),
      url="https://github.com/blackstarzck/ai-squads", urlLabel="GitHub에서 보기")
+
+node("video-agent", "영상 제작 에이전트", "ai", "개인 프로젝트",
+     "영상 생성을 에이전트에게 맡기기 전에, 무엇을 근거로 삼을지부터 정했습니다.",
+     "Higgsfield로 영상을 만드는 작업을 에이전트에게 맡기려고 문서부터 짰습니다. 먼저 근거에 등급을 매겼습니다 — 공식 사이트로 확인된 기능은 최우선 근거로 두고, 튜토리얼에서 나온 것은 '제품 기능'이 아니라 '권장 제작 방식'으로 따로 표기해 섞이지 않게 했습니다. 어떤 영상을 어디까지 확인했는지도 근거 문서에 남겼습니다. 컷마다 원인·접촉·반응·결과와 상태 연속성을 확인하는 규칙을 두고, 생성 도구로 넘기기 전에 별도 리뷰 에이전트가 하드 게이트로 막게 했습니다. 요구사항 게이트 하네스에서 하던 것을 영상 쪽으로 옮긴 셈입니다.",
+     "영상 제작 에이전트",
+     P(role="개인 프로젝트 · 설계",
+       skills=[["에이전트 문서 설계", "grew"], ["근거 등급 관리", "first"], ["하드 게이트", "grew"]]),
+     url="https://github.com/blackstarzck/sample-03", urlLabel="GitHub에서 보기")
+
+node("design-rulebook", "디자인 룰북", "ai", "개인 프로젝트",
+     "AI에게 디자인을 시킬 때 쓸 판단 기준을 룰북으로 모았습니다.",
+     "AI에게 UI를 만들라고 하면 그럴듯하지만 기준 없는 결과가 나옵니다. 디자인 리뷰에서 반복해 나오는 판단 기준을 뽑아 룰북으로 정리했습니다. 출발점이 되는 보편 원칙, 누적해 온 규칙, 프롬프트에 그대로 붙여 넣을 규칙을 나눠 두었습니다. 여기에 하나를 더 두었는데, 새로 본 것을 어떻게 누적 룰북으로 정제할지 그 기준입니다. 규칙 자체보다 규칙을 쌓는 방법을 정해두는 쪽이 오래 간다고 봤습니다.",
+     "디자인 룰북",
+     P(role="개인 프로젝트",
+       skills=[["디자인 기준 문서화", "first"], ["AI 프롬프트 규칙", "grew"]]),
+     url="https://github.com/blackstarzck/madia-design-rule", urlLabel="GitHub에서 보기")
 
 # ── product ──────────────────────────────────────────────────────────────
 node("product", "제품 · 협업", "product", "일하는 방식",
@@ -406,12 +431,13 @@ node("detect-lab", "물체 감지", "lab", "2022",
 
 node("react-basics", "React 학습기", "lab", "2022",
      "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
-     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
+     "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. business-card는 Firebase 인증과 Cloudinary 업로드를 붙여 명함을 만드는 앱이고, react-modeal.net2는 화면 하나를 통째로 따라 만들어 본 클론 코딩입니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
      "React 학습기 · 2022",
      P(role="학습",
        duration="2022",
        skills=[["React", "first"]]),
      links=[["명함 제작기 데모", "https://blackstarzck.github.io/business-card/"],
+            ["클론 코딩 데모", "https://blackstarzck.github.io/react-modeal.net2/"],
             ["react-todos 저장소", "https://github.com/blackstarzck/react-todos"],
             ["연습 저장소 목록", "https://github.com/blackstarzck?tab=repositories&q=react-practice"]])
 
@@ -466,6 +492,8 @@ E += [
     ["topik-user", "topik-admin"], ["topik-admin", "supabase"], ["topik-user", "supabase"],
     ["topik-admin", "verify-loop"], ["doc-merge", "corp-sites"],
     ["gate-harness", "multi-agent"], ["multi-agent", "verify-loop"],
+    ["gate-harness", "video-agent"], ["design-rulebook", "figma-gen"],
+    ["nest-sns", "supabase"], ["nest-sns", "farm-api"],
     ["figma-gen", "corp-sites"], ["my-skills", "gate-harness"],
     ["react-basics", "dealer-web"], ["canvas-lab", "three-lab"],
     ["three-lab", "game-lab"], ["trading-lab", "supabase"],
@@ -481,10 +509,10 @@ E += [
 SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
          "legacy-cleanup", "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
          "space-3d", "game-lab", "trading-lab", "detect-lab", "lab",
-         "farm-3d", "connect-bee", "farm-api", "backend", "doc-merge", "supabase",
-         "corp-sites", "figma-gen", "dadoke", "docs-comm", "product",
+         "farm-3d", "connect-bee", "farm-api", "backend", "nest-sns", "doc-merge", "supabase",
+         "corp-sites", "figma-gen", "design-rulebook", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
-         "verify-loop", "my-skills", "ai-squads"]
+         "verify-loop", "my-skills", "ai-squads", "video-agent"]
 
 # ── ZMAP (깊이) ──────────────────────────────────────────────────────────
 DEPTH = {"entry": 0.0, "frontend": 0.85, "ai": 1.15, "backend": -0.35,
@@ -501,7 +529,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 36, f"노드 수 {len(N)}"
+assert len(N) == 39, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"
