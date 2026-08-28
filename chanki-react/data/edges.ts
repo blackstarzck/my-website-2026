@@ -136,6 +136,10 @@ export const EDGES: [string, string][] = [
   ],
   [
     "lab",
+    "detect-lab"
+  ],
+  [
+    "lab",
     "react-basics"
   ],
   [
@@ -229,6 +233,14 @@ export const EDGES: [string, string][] = [
   [
     "space-3d",
     "game-lab"
+  ],
+  [
+    "detect-lab",
+    "react-basics"
+  ],
+  [
+    "detect-lab",
+    "canvas-lab"
   ],
   [
     "ai-squads",

@@ -393,6 +393,17 @@ node("space-3d", "3D 공간 만들기", "lab", "실험",
      links=[["마을 걸어보기", "https://blackstarzck.github.io/my-space/"],
             ["저장소", "https://github.com/blackstarzck/my-space"]])
 
+node("detect-lab", "물체 감지", "lab", "2022",
+     "사진 속 물건을 브라우저에서 잡아 카드로 띄운, 이 사이트 이전의 포트폴리오입니다.",
+     "오늘의집을 보다 시작했습니다. 이미지 속 물건의 위치를 사람이 일일이 찍어 표시하는데, 그걸 자동으로 하면 작업 시간이 줄겠다고 생각했습니다. tensorflow.js로 브라우저에서 물체를 감지하고, 오늘의집 DB가 없으니 결과는 SVG 아이콘 카드로 대신 띄웠습니다. 감지된 지점에 점을 찍고 캔버스로 점과 카드를 선으로 이었는데, 카드끼리 겹치지 않도록 충돌 방지를 넣었습니다. 충돌을 확인하느라 렌더링이 늘어 결과가 늦게 나오길래 로딩 애니메이션을 뒀습니다. 정작 더 오래 붙잡은 건 AI가 틀렸을 때였습니다 — 전혀 다른 물체를 잡은 경우와 비슷하지만 아닌 경우를 나누고, 어느 쪽이든 사용자가 직접 고르게 하는 단계를 두었습니다. 바닐라 자바스크립트로 만든 싱글 페이지입니다. 점과 선으로 이어 보여주는 방식은 지금 이 지도와 같습니다.",
+     "이미지 물체 감지 · 2022",
+     P(role="개인 프로젝트 · 기획 · 디자인 · 구현",
+       duration="2022",
+       skills=[["tensorflow.js", "first"], ["Canvas 2D", "grew"],
+               ["GSAP", "first"], ["바닐라 자바스크립트", "core"]]),
+     links=[["직접 돌려보기", "https://blackstarzck.github.io/chanki-portfolio/"],
+            ["저장소", "https://github.com/blackstarzck/chanki-portfolio"]])
+
 node("react-basics", "React 학습기", "lab", "2022",
      "2022년에 스무 개 남짓 남긴 연습 저장소들, 하나씩 떼어 익히던 시기의 기록입니다.",
      "2022년에 남긴 연습 저장소가 스무 개 남짓입니다. react-practice1부터 7까지, react-router-practice, react-styled-component, react-swiper로 라우터·상태·스타일링을 하나씩 떼어 봤습니다. React 바깥으로도 나갔습니다 — react-face-detect로 face-api.js를 붙여 얼굴을 잡아봤고, data_structure에서는 연결 리스트를 직접 짜봤고, drag-n-drop과 canvas-test는 브라우저 API만으로 만들었습니다. 지금 보면 조각난 예제들이지만, 이때 하나씩 떼어 연습한 것들이 이후 실무에서 조합되어 쓰였습니다. 지우지 않고 두는 이유입니다.",
@@ -460,6 +471,7 @@ E += [
     ["three-lab", "game-lab"], ["trading-lab", "supabase"],
     ["canvas-lab", "multicanvas-lab"], ["multicanvas-lab", "three-lab"],
     ["scroll-3d", "three-lab"], ["space-3d", "three-lab"], ["space-3d", "game-lab"],
+    ["detect-lab", "react-basics"], ["detect-lab", "canvas-lab"],
     ["ai-squads", "multi-agent"],
     ["english", "dadoke"], ["docs-comm", "dealer-admin"],
     ["doc-merge", "backend"], ["dadoke", "topik-user"],
@@ -468,7 +480,7 @@ E += [
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
 SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
          "legacy-cleanup", "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
-         "space-3d", "game-lab", "trading-lab", "lab",
+         "space-3d", "game-lab", "trading-lab", "detect-lab", "lab",
          "farm-3d", "connect-bee", "farm-api", "backend", "doc-merge", "supabase",
          "corp-sites", "figma-gen", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
@@ -489,7 +501,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 35, f"노드 수 {len(N)}"
+assert len(N) == 36, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"

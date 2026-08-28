@@ -17,6 +17,7 @@ export const SPINE: string[] = [
   "space-3d",
   "game-lab",
   "trading-lab",
+  "detect-lab",
   "lab",
   "farm-3d",
   "connect-bee",
