@@ -982,6 +982,14 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     if (AREAS.has(n.id)) items = items.filter((m) => !AREAS.has(m.id))
     return items.sort((a, b) => (AREAS.has(a.id) ? 1 : 0) - (AREAS.has(b.id) ? 1 : 0))
   }
+  const STORY_HERO: Record<string, { src: string; width: number; height: number }> = {
+    chanki: { src: '/chanki.png', width: 1086, height: 1448 },
+    frontend: { src: '/frontend.png', width: 1122, height: 1402 },
+    backend: { src: '/server.png', width: 1122, height: 1402 },
+    ai: { src: '/ai.png', width: 1086, height: 1448 },
+    product: { src: '/product.png', width: 1024, height: 1536 },
+    lab: { src: '/lab.png', width: 1122, height: 1402 },
+  }
   function renderGallery(): void {
     const s = U()
     const g = gid('gallery')
@@ -990,14 +998,18 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const acc = COLOR[n.region]
     g.style.setProperty('--cc', acc)
     g.style.setProperty('--ag', areaGrad(n.region))
-    const heroSrc = '/assets/' + n.id + '.jpg'
+    const storyHero = STORY_HERO[n.id]
+    const heroSrc = storyHero?.src || '/assets/' + n.id + '.jpg'
     const isNode = (s.galMode === 'node')
     const heroEnter = isNode
       ? (n.url
         ? '<div class="henter">↦ ' + esc(n.urlLabel || PAGE_TEXT.launch) + '</div>'
         : '<div class="henter">' + PAGE_TEXT.enterPage + '</div>')
       : ''
-    const hero = `<div class="${isNode ? 'ghero clickable' : 'ghero'}"${isNode ? ' data-enter="' + n.id + '"' : ''}><div class="hph">${PAGE_TEXT.imageLabel} · ${esc(n.cap || PAGE_TEXT.pending)}</div><img src="${heroSrc}" alt="" onerror="this.remove()">${heroEnter}</div>`
+    const heroClass = 'ghero' + (storyHero ? ' storyhero' : '') + (isNode ? ' clickable' : '')
+    const heroSize = storyHero ? ` width="${storyHero.width}" height="${storyHero.height}"` : ''
+    const heroAlt = storyHero ? esc(n.name + ' 스토리 대표 이미지') : ''
+    const hero = `<div class="${heroClass}"${isNode ? ' data-enter="' + n.id + '"' : ''}><div class="hph"${storyHero ? ' aria-hidden="true"' : ''}>${PAGE_TEXT.imageLabel} · ${esc(n.cap || PAGE_TEXT.pending)}</div><img src="${heroSrc}" alt="${heroAlt}"${heroSize} onerror="this.remove()">${heroEnter}</div>`
     const desc = `<div class="gdesc">${esc(n.body || n.sum || '')}</div>`
     // 프로필 본문 바로 아래. 지도에서 연락처에 닿는 유일한 경로다 —
     // 페이지 푸터 링크는 프로젝트를 하나 열어야만 보인다.

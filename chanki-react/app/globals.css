@@ -190,6 +190,8 @@ body.noglass #gallery{background:linear-gradient(255deg,rgba(12,15,23,.9),rgba(1
 #gallery .gname{font-size:24px;font-weight:300;letter-spacing:-.012em;color:var(--ink);line-height:1.08;margin:8px 0 13px}
 #gallery .ghero{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);aspect-ratio:16/10;background:radial-gradient(120% 120% at 30% 20%,color-mix(in srgb,var(--cc) 30%,transparent),rgba(255,255,255,.02) 64%);animation:gin .42s both}
 #gallery .ghero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#gallery .ghero.storyhero{aspect-ratio:auto}
+#gallery .ghero.storyhero img{position:relative;inset:auto;height:auto;object-fit:contain}
 #gallery .ghero .hph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink3)}
 #gallery .ghero.clickable{cursor:pointer}
 #gallery .ghero.clickable:hover{border-color:var(--cc)}
