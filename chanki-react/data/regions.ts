@@ -89,7 +89,9 @@ export const THEMED: Record<string, number> = {}
  * react-practice6 은 저장소에 빌드 산출물만 있어 소스를 읽을 수 없다.
  * 그래서 노드로 두지 않고 이미지로만 남겼다.
  */
-export const MULTI: Record<string, number> = {}
+export const MULTI: Record<string, number> = {
+  "millie-admin-dashboard": 3
+}
 
 /** 이미지 슬롯마다 찍힌 저장소 이름. 0번이 대표 이미지. */
 export const SHOTS: Record<string, string[]> = {
@@ -113,6 +115,11 @@ export const SHOTS: Record<string, string[]> = {
   ],
   "doc-merge": [
     "doc-merge"
+  ],
+  "millie-admin-dashboard": [
+    "대시보드",
+    "도서 관리",
+    "회원 관리"
   ]
 }
 

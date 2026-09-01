@@ -42,14 +42,24 @@ PG = "https://blackstarzck.github.io/"
 # 저장소가 여럿인 노드는 프로젝트 카드로 보여준다. 카드 하나에 화면·이름·설명·
 # 스킬·코드·데모가 다 들어가므로, 카드가 있는 노드에서는 links/repos/이미지
 # 스트립을 두지 않는다 — 같은 것을 네 번 늘어놓던 것이 그 셋이었다.
-def card(repo, desc, skills, demo=None, shot=None, note=None):
+def card(repo, desc, skills, demo=None, shot=None, note=None, code=None, demo_label=None):
     d = {"repo": repo, "desc": desc, "skills": skills}
     if demo: d["demo"] = demo
     if shot: d["shot"] = shot
     if note: d["note"] = note
+    if code is not None: d["code"] = code
+    if demo_label: d["demoLabel"] = demo_label
     return d
 
 CARDS = {
+"corp-sites": [
+    card("케듀올", "베트남과 한국을 잇는 유학·한국어교육·출판·에듀테크 기업 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://keduall.com", "corp-sites", code=False, demo_label="사이트 열기 ↗"),
+    card("부클리", "한국 출판 콘텐츠의 해외 수출과 판권 정보를 소개하는 글로벌 콘텐츠 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://hibookly.com", "corp-sites-bookly", code=False, demo_label="사이트 열기 ↗"),
+    card("위즈덤셀러", "언어와 커리어를 연결해 글로벌 교육·유학 서비스를 소개하는 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://wisdomcellar.com", "corp-sites-wisdomcellar", code=False, demo_label="사이트 열기 ↗"),
+    card("북차카", "한국어 교육과 글로벌 유학·도서 유통·출판 콘텐츠를 소개하는 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://bookchaka.com", "corp-sites-bookchaka", code=False, demo_label="사이트 열기 ↗"),
+    card("글로윈 비나 (북카페)", "글로윈 비나 북카페의 브랜드와 공간을 소개하는 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://glowinvina.com", code=False, demo_label="사이트 열기 ↗"),
+    card("비블리아", "비블리아의 브랜드와 서비스를 소개하는 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://hibiblia.com", code=False, demo_label="사이트 열기 ↗"),
+],
 "three-lab": [
     card("isosmetric-02", "GLTF로 만든 아이소메트릭 방. 침대·책상·조명까지 배치하고 모델에 붙은 애니메이션을 재생한다.", ["three.js", "GLTF", "AnimationMixer"], "https://blackstarzck.github.io/isosmetric-02/", "three-lab"),
     card("isosmetric-01", "같은 구조로 지은 첫 번째 방. lil-gui를 붙여 값을 실시간으로 만져 가며 감을 잡았다.", ["three.js", "GLTF", "lil-gui"], "https://blackstarzck.github.io/isosmetric-01/", "three-lab-2"),
@@ -63,7 +73,6 @@ CARDS = {
     card("bridge", "유리다리를 건너는 게임. 밟은 판이 깨져 떨어지는 것을 눈속임이 아니라 물리 엔진으로 처리했다.", ["cannon", "Raycaster", "GSAP"], "https://blackstarzck.github.io/bridge/", "game-lab-3"),
     card("first-person-perspective", "1인칭으로 공간을 걸어 다닌다. 충돌은 cannon-es로 처리하고 키보드와 터치 조작을 따로 나눠 뒀다.", ["three.js", "cannon-es", "입력 처리"], "https://blackstarzck.github.io/first-person-perspective/", "game-lab-4"),
     card("lets-fps", "여럿이 같이 하는 FPS. 충돌용 월드를 GLTF로 불러오고 로그인과 방 상태는 Supabase에 뒀다.", ["three.js", "Supabase", "Vite"], "https://lets-fps.vercel.app", "game-lab-5"),
-    card("game-cards", "카드를 뒤집어 짝을 맞추는 게임. 상태 전이를 다뤄 본 초기 실험이다.", ["상태 전이"], None, None, "유료 패키지(fontawesome-pro) 의존이라 빌드 불가 — 화면 없음"),
 ],
 "trading-lab": [
     card("zenith", "업비트 자동매매 본체. Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 쓴다. 손실 리포트와 원인 분석 문서가 함께 있다.", ["Python", "Supabase", "React"], None, "trading-lab"),
@@ -81,7 +90,6 @@ CARDS = {
     card("business-card", "명함을 만들어 저장하는 앱. Firebase로 로그인과 저장을, Cloudinary로 이미지 업로드를 붙였다.", ["Firebase", "Cloudinary"], "https://blackstarzck.github.io/business-card/", "react-basics-3"),
     card("react-modeal.net2", "화면 하나를 통째로 따라 만들어 본 클론 코딩. swiper로 캐러셀을 붙였다.", ["React Router", "swiper"], "https://blackstarzck.github.io/react-modeal.net2/", "react-basics-4"),
     card("react-modeal", "같은 클론의 앞 버전. styled-components와 라우터를 처음 같이 써 봤다.", ["styled-components", "React Router"], None),
-    card("pokemon", "TypeScript로 API 호출·전역 상태·라우팅·애니메이션을 한 번에 묶어 본 것. 이 시기 저장소 중 가장 앱에 가깝다.", ["TypeScript", "Redux Toolkit", "GSAP"], None),
     card("react-face-detect", "face-api.js를 붙여 사진 속 얼굴을 잡아 봤다. 모델 파일을 직접 넣어 브라우저에서 돌린다.", ["face-api.js", "React"], None),
     card("react-youtube", "유튜브 API를 붙여 영상 목록과 상세를 보여주는 앱. API 호출부를 service로 떼어 냈다.", ["axios", "API 분리"], None),
     card("react-swiper", "영화 목록과 상세를 라우팅으로 나눈 앱. 강의를 따라가며 만들었다.", ["React Router", "axios"], "https://blackstarzck.github.io/react-swiper/"),
@@ -107,7 +115,8 @@ CARDS = {
 }
 
 # 이미지 스트립(<id>-2.jpg …) 장수. 자세한 설명은 아래 MULTI 출력부 주석 참고.
-MULTI = {"react-basics": 4, "game-lab": 5, "three-lab": 5, "trading-lab": 2}
+MULTI = {"react-basics": 4, "game-lab": 5, "three-lab": 5, "trading-lab": 2,
+         "millie-admin-dashboard": 3}
 
 # 이미지 슬롯마다 어느 저장소를 찍은 것인지. 0번이 대표 이미지다.
 # 이름만 칩으로 깔면 "그래서 어떻게 생겼는데" 가 남아서 화면도 같이 보여준다.
@@ -123,6 +132,7 @@ SHOTS = {
     "react-basics": ["react-todos", "react-practice6", "business-card", "react-modeal.net2"],
     "figma-gen": ["chanchan2"],
     "doc-merge": ["doc-merge"],
+    "millie-admin-dashboard": ["대시보드", "도서 관리", "회원 관리"],
 }
 
 # ── 노드 정의 ────────────────────────────────────────────────────────────
@@ -130,7 +140,7 @@ SHOTS = {
 N = []
 
 def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLabel=None,
-         links=None, repos=None):
+         links=None, repos=None, contact=None):
     d = dict(id=i, name=name, region=region, kicker=kicker)
     # sum 이 비면 필드를 아예 넣지 않는다 — 리전 노드는 갤러리가 body 를 쓴다.
     if sum_: d["sum"] = sum_
@@ -142,6 +152,7 @@ def node(i, name, region, kicker, sum_, body, cap, project=None, url=None, urlLa
     # 이 노드가 다루는 GitHub 저장소. 페이지에 칩으로 깔려 전부 눌린다.
     if repos: d["repos"] = repos
     if project: d["project"] = project
+    if contact: d["contact"] = contact
     N.append(d)
 
 def P(role=None, duration=None, impact=None, scope=None, objectives=None, impacts=None, skills=None, story=None):
@@ -159,7 +170,7 @@ def P(role=None, duration=None, impact=None, scope=None, objectives=None, impact
 # ── entry ────────────────────────────────────────────────────────────────
 node("chanki", "김찬기", "entry", "시작점",
      "퍼블리싱에서 시작해 프론트엔드를 지나 서버까지, 화면 뒤의 흐름을 이해하려고 계속 범위를 넓혀온 5년 9개월입니다.",
-     "영어영문학을 전공하고 관광통역안내사로 일하다 개발로 넘어왔습니다. HTML·CSS·JavaScript 퍼블리싱에서 출발해 React·Angular·TypeScript 프론트엔드를 거쳐 NestJS·MySQL 서버 개발까지 경험했습니다. 화면만 만드는 것이 아니라 데이터가 전달되고 처리되는 전체 흐름을 이해하려 노력합니다. 기획자와 디자이너가 없는 환경에서도 기획·디자인·개발을 주도적으로 수행해 왔고, 최근에는 멀티 에이전트와 게이트 하네스로 AI를 개발 프로세스에 편입시키고 있습니다.",
+     "HTML·CSS·JavaScript 퍼블리싱에서 출발해 React·Angular·TypeScript 프론트엔드를 거쳐 NestJS·MySQL 서버 개발까지 경험했습니다. 화면만 만드는 것이 아니라 데이터가 전달되고 처리되는 전체 흐름을 이해하려 노력합니다. 기획자와 디자이너가 없는 환경에서도 기획·디자인·개발을 주도적으로 수행해 왔고, 최근에는 멀티 에이전트와 게이트 하네스로 AI를 개발 프로세스에 편입시키고 있습니다.",
      "김찬기 · 프론트엔드 개발자")
 # 진입 노드는 페이지가 열리지 않는다 (원본과 같은 설계). 지도의 중심을 누르면
 # 지도로 돌아가고, 프로필은 갤러리가 body 로 보여준다. 그래서 project(역할·기간·
@@ -171,15 +182,157 @@ node("chanki", "김찬기", "entry", "시작점",
 #   sum     contact 페이지의 관련 카드 부제
 # 같은 링크는 contact 노드에 있고 그 페이지는 열린다.
 
-node("contact", "연락", "entry", "닿는 곳",
-     "이력서와 GitHub, 기술 블로그. 그리고 메일.",
-     "제안이나 문의는 메일로 주시면 가장 빠릅니다. 작업물은 GitHub에, 배우고 정리한 것들은 기술 블로그에 남기고 있습니다.",
-     "연락처",
+node("contact", "연락", "entry", "함께 제품을 더 낫게",
+     "사용자의 불편을 발견하고, 팀이 운영할 수 있는 제품으로 끝까지 연결합니다.",
+     "5년 9개월 동안 퍼블리싱에서 프론트엔드와 서버까지 범위를 넓혀 왔습니다. 화면을 구현하는 데서 멈추지 않고 사용자 흐름, 운영 구조, 데이터와 검증까지 연결합니다. 복잡한 요구를 팀의 언어로 정리하고 실제로 쓰이는 개선으로 만드는 프론트엔드 개발자입니다.",
+     "김찬기 · 프론트엔드 개발자",
      # 이메일은 링크 칩이 아니라 메타 행(연락처)으로 보여준다 — engine/legacy.ts
      links=[["GitHub", "https://github.com/blackstarzck"],
             ["기술 블로그", "https://chan-chan2.tistory.com/"],
-            ["이 사이트의 소스", "https://github.com/blackstarzck/my-website-2026"]],
-     repos=["my-website-2026"])
+             ["2024 소개, 이력서", "/chanki-resume.pdf"],
+            ["이 포트폴리오 코드", "https://github.com/blackstarzck/my-website-2026"]],
+     contact={
+         "proofHeading": "사용자 경험을 제품 가치로 바꾸는 네 가지 방식",
+         "proofLead": "화면의 완성도만으로 끝내지 않고 사용자의 이해, 운영자의 시간, 팀의 검증 비용까지 함께 줄이는 방향으로 일합니다.",
+         "proofs": [
+             {
+                 "label": "운영 효율",
+                 "title": "반복을 찾아 업무 흐름을 줄입니다.",
+                 "body": "관리자 화면에 공통 입력 일괄 적용과 게시 전 미리보기를 더해 반복 작업과 검수 과정의 마찰을 줄였습니다."
+             },
+             {
+                 "label": "정보 시각화",
+                 "title": "복잡한 데이터를 한눈에 보이게 만듭니다.",
+                 "body": "30개 이상 센서의 온도·습도 데이터를 3D 대시보드로 풀어 농장주가 환경 상태를 직관적으로 파악하도록 만들었습니다."
+             },
+             {
+                 "label": "0→1 실행",
+                 "title": "문제를 서비스로 끝까지 연결합니다.",
+                 "body": "여러 엑셀과 문서의 중복 입력 문제를 발견하고 문서 통합 서비스를 기획부터 프론트엔드·서버·데이터 구조까지 1인 개발했습니다."
+             },
+             {
+                 "label": "검증 가능한 AI",
+                 "title": "속도만큼 결과의 신뢰를 관리합니다.",
+                 "body": "AI를 요구사항 정리·구현·리뷰·테스트·문서화에 활용하되 테스트·보안·배포 게이트와 Git 이력으로 결과를 검증합니다."
+             }
+         ],
+         "journeyHeading": "관심을 결과물로, 화면을 제품으로",
+         "journeyLead": "퍼블리싱에서 시작해 프론트엔드와 서버, 데이터, AI 검증까지 해결 범위를 넓혀 왔습니다.",
+         "journey": [
+             {
+                 "year": "2014.03",
+                 "title": "성결대학교 졸업",
+                 "body": "영어영문학과"
+             },
+             {
+                 "year": "경력 초반",
+                 "title": "여행사 A"
+             },
+             {
+                 "year": "경력 초반",
+                 "title": "여행사 B"
+             },
+             {
+                 "year": "2020",
+                 "title": "코로나19",
+                 "body": "익숙했던 일상이 멈추며 앞으로의 일을 다시 선택해야 했고, 오래 관심을 두었던 웹 개발을 새로운 커리어로 결정했습니다."
+             },
+             {
+                 "year": "2020",
+                 "title": "국비지원 개발 교육",
+                 "body": "웹 개발의 기초를 체계적으로 배우고, 아이디어를 실제 화면과 기능으로 구현하는 개발자로 첫발을 내디뎠습니다."
+             },
+             {
+                 "year": "2020.06 - 2022.06",
+                 "title": "모두가딜러",
+                 "body": "반응형 웹과 신규 콘텐츠 개발에서 시작해 데이터 조회, 사용자 인터랙션, 관리자 기능까지 담당하며 퍼블리셔에서 프론트엔드 개발자로 역할을 넓혔습니다.",
+                 "projects": [
+                     {
+                         "title": "반응형 서비스 운영 및 신규 콘텐츠 개발",
+                         "body": "웹과 앱의 화면을 개선하고 동적 콘텐츠와 개인화 기능을 구현해 화면의 완성도와 운영 편의성을 함께 높였습니다."
+                     },
+                     {
+                         "title": "관리자 페이지 UI 개선",
+                         "body": "조건별 입력 화면과 일괄 적용, 미리보기 기능을 추가해 반복 작업을 줄이고 검수 정확도를 높였습니다."
+                     },
+                     {
+                         "title": "레거시 코드와 데이터 조회 구조 정리",
+                         "body": "불필요한 데이터 호출과 사용하지 않는 자산을 제거하고 조회 구조와 추적 스크립트를 정리해 유지보수성을 높였습니다."
+                     }
+                 ]
+             },
+             {
+                 "year": "2023.01 - 2025.02",
+                 "title": "팜커넥트",
+                 "body": "화면뿐 아니라 데이터가 전달되는 서버 영역까지 함께 구현하며 프론트엔드 개발 범위를 넓혔습니다.",
+                 "projects": [
+                     {
+                         "title": "센서 데이터 3D 시각화 대시보드",
+                         "body": "30개 이상 센서의 온도·습도 데이터를 3D로 시각화해 농장주가 실시간 환경과 AI 권장값을 직관적으로 비교하도록 만들었습니다."
+                     },
+                     {
+                         "title": "CONNECT BEE 하이브리드 앱",
+                         "body": "센서 데이터 확인과 팬·열선·쿨러 제어를 하나의 화면 흐름으로 연결했습니다."
+                     },
+                     {
+                         "title": "스마트팜 관리자 페이지",
+                         "body": "농장주와 농장, 센서 정보를 관리하고 환경 상태를 빠르게 확인할 수 있는 운영 화면을 개발했습니다."
+                     }
+                 ]
+             },
+             {
+                 "year": "2025.02 - 현재",
+                 "title": "케듀올",
+                 "body": "기획과 디자인, 프론트엔드와 서버를 연결하고 AI 기반 검증 과정까지 설계하며 제품 전체로 역할을 넓혔습니다.",
+                 "projects": [
+                     {
+                         "title": "도토리 TOPIK 학습 서비스",
+                         "body": "문제 풀이와 AI 피드백, 추천, 학습 이력, 다국어 경험을 구현하고 테스트·보안·배포 검증 과정을 연결했습니다."
+                     },
+                     {
+                         "title": "도서 재고 문서 통합 관리 서비스",
+                         "body": "여러 문서에 같은 정보를 반복 입력하던 업무를 하나의 시스템으로 통합하고 기획부터 화면과 서버까지 1인 개발했습니다."
+                     },
+                     {
+                         "title": "법인별 홈페이지",
+                         "body": "기획과 디자인부터 반응형 웹 개발, 배포와 운영까지 단독으로 수행해 유지보수성과 확장성을 높였습니다."
+                     },
+                     {
+                         "title": "DADOKe 전자책·오디오북 플랫폼",
+                         "body": "시장과 경쟁사를 분석하고 요구사항 정의와 해외 개발업체 커뮤니케이션을 총괄했습니다."
+                     }
+                 ]
+             }
+         ],
+         "collaborationHeading": "이런 방식으로 함께 일합니다.",
+         "collaboration": [
+             {
+                 "title": "흐름부터 합의합니다.",
+                 "body": "화면을 만들기 전에 사용자 동선과 상태 전이를 정리하고 기획 단계부터 의견을 냅니다."
+             },
+             {
+                 "title": "눈높이를 번역합니다.",
+                 "body": "PPT·Figma·흐름도·기능 명세를 활용해 기술적인 내용을 각 직군이 판단할 수 있는 형태로 설명합니다."
+             },
+             {
+                 "title": "경계를 넘되 책임을 남깁니다.",
+                 "body": "기획자나 디자이너가 없는 환경에서도 필요한 역할을 메우고 결과는 문서와 테스트로 다시 확인할 수 있게 남깁니다."
+             },
+             {
+                 "title": "영어 협업도 이어갑니다.",
+                 "body": "영어 기술 문서를 읽고 해외 외주 개발사와 요구사항을 조율한 경험으로 언어와 직군의 차이를 넘어 협업합니다."
+             }
+         ],
+         "fitHeading": "이런 팀이라면 특히 잘 맞습니다.",
+         "fit": [
+             "사용자 경험과 운영 효율을 모두 제품 품질로 보는 팀",
+             "역할의 경계를 열어 두고 문제 해결을 함께 소유하는 팀",
+             "빠른 실험과 자동화, 검증 가능한 개발 문화를 함께 만들 팀",
+             "프론트엔드 전문성을 중심으로 서버와 데이터까지 연결할 사람이 필요한 팀"
+         ],
+         "closingTitle": "다음 제품의 사용자·운영 문제를 함께 풀어보고 싶습니다.",
+         "closingBody": "사용자의 불편을 발견해 더 나은 경험과 제품 가치로 연결하는 프론트엔드 개발자 김찬기입니다."
+     })
 
 # ── frontend ─────────────────────────────────────────────────────────────
 node("frontend", "프론트엔드", "frontend", "핵심 영역",
@@ -245,6 +398,22 @@ node("corp-sites", "법인별 홈페이지", "frontend", "케듀올 · 2025",
        scope="Figma 기획·디자인, React 18·Tailwind CSS 4·styled-components·GSAP 퍼블리싱, FTP 배포 운영.",
        skills=[["Figma 기획 · 디자인", "grew"], ["Tailwind CSS", "grew"], ["GSAP", "grew"], ["배포 운영", "first"]]))
 
+node("millie-admin-dashboard", "밀리 관리자 대시보드", "frontend", "개인 프로젝트 · 2025",
+     "복잡한 콘텐츠 플랫폼의 운영 업무를 하나의 관리자 정보 구조와 화면 체계로 풀어낸 개인 프로젝트입니다.",
+     "밀리의 서재를 참고해 콘텐츠·회원·구독·쿠폰·알림·통계·권한 관리까지 관리자 업무를 폭넓게 설계하고 React로 구현했습니다. 실제 서비스 운영 프로젝트가 아닌 개인 UI 프로토타입이며, 데이터가 많은 화면에서 탐색·필터·편집·상태 확인이 끊기지 않도록 메뉴 구조와 공통 패턴을 정리하는 데 초점을 맞췄습니다.",
+     "밀리 관리자 대시보드 · 개인 프로젝트",
+     P(role="관리자 정보 구조·UI 설계 및 프론트엔드 구현",
+       duration="2025.04 - 2025.12 · GitHub 기록 기준",
+       impact="여러 운영 도메인을 일관된 메뉴·표·폼·통계 화면으로 구조화했습니다.",
+       scope="React 18·React Router·Ant Design 기반 프론트엔드 프로토타입. 표·차트·편집기·드래그 앤 드롭·권한 설정 화면을 구현했습니다.",
+       objectives=["콘텐츠·회원·구독·프로모션·고객 대응 업무를 하나의 메뉴 체계로 구성",
+                   "검색·필터·상태·일괄 작업이 반복되는 관리자 화면 패턴 정리",
+                   "대시보드 지표와 분석 화면으로 운영 상태를 빠르게 파악"],
+       skills=[["관리자 UX · 정보 구조", "grew"], ["React · React Router", "core"],
+               ["Ant Design", "grew"], ["데이터 테이블 · 차트", "grew"]]),
+     url="https://millie-admin-dashboard.vercel.app/#/dashboard", urlLabel="대시보드 열어보기",
+     repos=["millie-admin-dashboard"])
+
 node("dealer-web", "모두가딜러 · 웹서비스", "frontend", "모두가딜러 · 2020–2022",
      "중고차 서비스의 반응형 웹과 신규 콘텐츠를 만들며 퍼블리싱에서 프론트엔드로 넘어왔습니다.",
      "첫 직장이자 기본기를 만든 곳입니다. 반응형 웹·앱 UI를 구현하고 신규 콘텐츠 페이지를 개발했습니다. MySQL과 PHP로 차량 정보를 조회·가공해 노출하는 기능을 다뤘고, jQuery와 Ajax, async/await로 동적 콘텐츠와 인터랙션을 구현했습니다. Swiper.js와 GSAP을 도입해 기간을 줄이면서 표현 품질을 올렸습니다.",
@@ -291,23 +460,8 @@ node("doc-merge", "문서 통합 관리 서비스", "backend", "케듀올 · 202
        skills=[["NestJS · TypeORM", "first"], ["PostgreSQL", "first"], ["Redux Toolkit · SWR", "grew"],
                ["AG Grid", "first"], ["ExcelJS", "first"], ["React · TypeScript", "core"]],
        ),
-     links=[["화면 열어보기", "https://blackstarzck.github.io/doc-merge/"]])
-
-node("supabase", "Supabase 인증 · RLS", "backend", "케듀올 · 2026",
-     "권한을 애플리케이션이 아니라 DB 레벨에서 다루는 방식을 처음 적용했습니다.",
-     "도토리 토픽에서 Supabase 기반 인증과 RLS(Row Level Security), RPC, DB 마이그레이션을 설계했습니다. 사용자단과 관리자단이 같은 DB를 쓰기 때문에 권한 경계를 어디에 둘지가 핵심이었고, 애플리케이션 코드가 아니라 DB 정책으로 막는 쪽을 택했습니다.",
-     "Supabase 인증 · 권한",
-     P(role="인증·RLS/RPC·마이그레이션 설계",
-       impact="사용자단과 관리자단이 공유하는 데이터의 권한 경계를 DB 레벨에서 강제했습니다.",
-       skills=[["Supabase", "first"], ["RLS · RPC", "first"], ["DB 마이그레이션", "grew"]]))
-
-node("farm-api", "스마트팜 관리자 · API", "backend", "팜커넥트",
-     "농장·센서 정보를 관리하고 AI가 환경값을 안내할 수 있도록 데이터 구조를 잡았습니다.",
-     "스마트팜을 운영하는 농장주, 농장, 센서 정보를 관리하는 관리자 페이지를 개발하고 유지보수했습니다. 입력된 데이터를 바탕으로 AI가 온도·습도·CO2·배액량·환기 시간을 안내할 수 있도록 관리 구조를 구현하고, 운영자가 필요한 정보를 빠르게 찾도록 화면과 API를 함께 개선했습니다.",
-     "스마트팜 관리자 페이지",
-     P(role="관리자 페이지 개발 및 유지보수, 화면·API 개선",
-       impact="AI 환경 안내가 동작할 수 있는 데이터 관리 구조를 만들었습니다.",
-       skills=[["NestJS", "grew"], ["MySQL", "grew"], ["Angular", "grew"]]))
+     links=[["화면 열어보기", "https://blackstarzck.github.io/doc-merge/"]],
+     repos=["doc-merge", "doc-merge-server"])
 
 node("nest-sns", "NestJS 학습", "backend", "학습",
      "인증부터 실시간 채팅까지, 서버 한 벌을 빈 폴더에서 얹어 본 기록입니다.",
@@ -322,34 +476,38 @@ node("nest-sns", "NestJS 학습", "backend", "학습",
 # ── ai ───────────────────────────────────────────────────────────────────
 node("ai", "AI 개발 프로세스", "ai", "현재 집중",
      "",
-     "생성형 AI를 요구사항 정리, 구현, 코드 리뷰, 테스트, 문서화에 활용합니다. 다만 결과를 그대로 받는 대신 요구사항·실제 동작·테스트 결과·Git 이력으로 검증하는 루프를 두는 데 관심이 있습니다. AI로 구현 가능한 범위가 빠르게 넓어지는 만큼, 무엇을 하지 않을지 정하는 일이 더 중요해졌다고 생각합니다.",
+     "AI에게 결과를 생성시키는 데서 그치지 않고, 무엇을 읽고 어디까지 작업하며 어떤 근거로 통과시킬지를 시스템으로 설계합니다. 문서로 맥락을 고정하고, 하네스로 위험한 작업을 막으며, 역할별 에이전트와 검증 루프가 결과를 다시 확인하게 만듭니다. 아래 작업들은 한 번의 프롬프트 결과가 아니라 실패를 발견하고 규칙·도구·작업 순서를 다시 설계한 기록입니다.",
      "AI 개발 프로세스")
 
 node("gate-harness", "요구사항 게이트 하네스", "ai", "실무 적용",
-     "요구사항을 통과 기준으로 바꿔, 충족하지 못한 변경이 다음 단계로 넘어가지 못하게 막습니다.",
-     "AI가 만든 결과물을 '그럴듯하다'가 아니라 '요구사항을 충족했다'로 판정하려면 기준이 코드 바깥에 명시돼 있어야 합니다. 요구사항을 게이트로 정의하고 통과하지 못하면 진행되지 않도록 하네스를 구성했습니다.",
+     "문서를 확인하지 않으면 변경할 수 없고, 실패해도 같은 작업 기록에서 다시 이어갈 수 있는 AI 실행 환경입니다.",
+     "AI가 규칙을 읽었다고 가정하지 않고 확인 기록이 생기기 전에는 파일 변경과 실행을 차단했습니다. 에이전트·도구·샌드박스가 실패해도 작업 장부는 유지되며, 검증과 품질 리뷰를 통과해야 완료할 수 있습니다. README의 실제 워크플로우와 테스트 근거를 사례 연구로 정리했습니다.",
      "요구사항 게이트 하네스",
      P(role="게이트 하네스 설계·적용",
-       impact="AI 결과를 주관적 판단이 아니라 명시된 기준으로 판정하게 했습니다.",
+       impact="AI 작업을 중단·재개·검증할 수 있는 사건 기록과 게이트로 바꿨습니다.",
        skills=[["요구사항 명세", "grew"], ["하네스 설계", "first"]]),
      url="https://github.com/blackstarzck/requirement-gated-python-harness", urlLabel="GitHub에서 보기",
      repos=["requirement-gated-python-harness"])
 
-node("multi-agent", "멀티 에이전트 오케스트레이션", "ai", "실무 적용",
-     "PM·설계·개발·QA 역할을 나눠 맡기고, 사이에 피드백 루프를 뒀습니다.",
-     "하나의 에이전트에게 전부 맡기면 검토자가 없어집니다. PM·설계·개발·QA로 역할을 분담하고 각 단계 사이에 피드백 루프를 설계했습니다. 컨텍스트 인수인계를 명시적으로 처리해 단계가 넘어갈 때 정보가 유실되지 않게 하는 것이 핵심이었습니다.",
-     "멀티 에이전트 오케스트레이션",
-     P(role="역할 분담 구조와 피드백 루프 설계",
-       impact="검토 없이 진행되던 단계에 독립적인 관점을 넣었습니다.",
-       skills=[["에이전트 오케스트레이션", "first"], ["컨텍스트 인수인계", "first"]]))
+node("multi-agent", "AI 개발 파이프라인", "ai", "실무 적용",
+     "Codex와 Claude가 바뀌어도 같은 작업 공간·맥락·검증 근거를 이어받는 개발 흐름입니다.",
+     "질문·작은 코드·병렬 위험 작업을 먼저 분류하고, 작업 성격에 맞는 공간을 선택하도록 했습니다. AI 도구가 바뀌어도 목표와 결정, 남은 일, 검증 근거를 같은 작업 기록으로 넘기며, 현재 코드와 정확히 일치하는 성공 증거만 재사용합니다.",
+     "AI 개발 파이프라인 v3.1",
+     P(role="AI 작업 수명주기·인수인계·검증 흐름 설계",
+       impact="도구가 바뀌어도 작업의 상태와 완료 근거가 끊기지 않게 했습니다.",
+       skills=[["작업 오케스트레이션", "first"], ["컨텍스트 인수인계", "first"]]),
+     url="https://github.com/blackstarzck/topik-project-v13/blob/main/docs/operations/ai-development-pipeline.md", urlLabel="파이프라인 원문 보기",
+     repos=["topik-project-v13"])
 
-node("verify-loop", "검증 루프", "ai", "실무 적용",
-     "타입체크·린트·테스트·빌드·보안·배포를 게이트로 엮어 변경 품질을 확인합니다.",
-     "도토리 토픽에서 Vitest와 Playwright, typecheck, lint, build를 보안·배포 게이트와 연계해 변경마다 품질을 검증하도록 구성했습니다. 사람이 매번 확인하는 대신 통과 여부가 기계적으로 드러나게 하는 것이 목적이었습니다.",
-     "검증 루프",
-     P(role="테스트·정적분석·배포 게이트 연계",
-       impact="변경 품질을 사람의 기억이 아니라 파이프라인이 보증하게 했습니다.",
-       skills=[["Vitest · Playwright", "grew"], ["CI 게이트 구성", "first"]]))
+node("verify-loop", "TOPIK AI 검증 하네스", "ai", "실무 적용",
+     "문서·화면 경로·데이터 경계·테스트가 함께 움직이는지를 변경마다 반복 검사합니다.",
+     "TOPIK 관리자 서비스에서 짧은 작업 지침과 상세 문서를 분리하고, 문서 연결·화면 경로·데이터 계약·중복·타입·빌드·대표 화면 흐름을 기계적으로 검사했습니다. 같은 문제가 반복되면 코드뿐 아니라 문서와 하네스 규칙도 다시 고칩니다.",
+     "TOPIK AI Admin Harness",
+     P(role="문서·구조·코드·화면 검증 하네스 설계",
+       impact="저장소 규칙의 이탈을 사람이 기억하기 전에 검사기가 드러내게 했습니다.",
+       skills=[["Vitest · Playwright", "grew"], ["CI 게이트 구성", "first"]]),
+     url="https://github.com/blackstarzck/topik-ai/blob/main/docs/harness/index.md", urlLabel="하네스 원문 보기",
+     repos=["topik-ai"])
 
 node("figma-gen", "Figma → React 생성기", "ai", "개인 프로젝트",
      "디자인 토큰을 동기화하고 컴포넌트를 만들어내는 UI 라이브러리 스타터입니다.",
@@ -361,36 +519,37 @@ node("figma-gen", "Figma → React 생성기", "ai", "개인 프로젝트",
      links=[["저장소", "https://github.com/blackstarzck/chanchan2"]],
      repos=["chanchan2"])
 
-node("my-skills", "개인 스킬 라이브러리", "ai", "개인 프로젝트",
-     "반복해서 쓰는 작업 방식을 스킬로 정리해 재사용합니다.",
-     "매번 같은 방식으로 하게 되는 작업들 — 리뷰 절차, 하네스 구성, 문서 정리 — 을 스킬 형태로 모아두고 필요할 때 꺼내 씁니다. 개인 도구지만 팀에 적용할 수 있는 형태로 다듬는 중입니다.",
-     "개인 스킬 라이브러리",
-     P(role="개인 프로젝트",
-       skills=[["작업 방식의 도구화", "grew"]]))
-# ↑ 저장소가 비공개라 링크를 두지 않는다. 공개로 돌리면
-#   url="https://github.com/blackstarzck/my-skills", urlLabel="GitHub에서 보기" 를 되살리면 된다.
+node("my-skills", "반복 작업을 SKILL로 만드는 법", "ai", "개인 프로젝트",
+     "자주 반복되는 판단을 발동 조건·작업 범위·읽을 자료·검증 방법이 있는 절차로 바꿉니다.",
+     "SKILL을 긴 프롬프트 모음이 아니라 특정 요청에서 자동으로 꺼내 쓰는 작업 절차로 설계했습니다. 테마 변경 사례에서는 넓게 탐색하기 전에 범위와 보호선을 묻고, 최소 자료만 읽은 뒤 주변 화면으로 변경이 번지지 않았는지 검증합니다.",
+     "재사용 가능한 AI 작업 절차",
+     P(role="반복 작업 절차 설계·적용",
+       skills=[["작업 방식의 도구화", "grew"]]),
+     url="https://github.com/blackstarzck/v12/blob/main/.codex/skills/theme-clarification-fast-path/SKILL.md", urlLabel="SKILL 원문 보기",
+     repos=["v12", "sample-03"])
 
 node("ai-squads", "비개발자용 에이전트 IDE", "ai", "개인 프로젝트",
-     "AI 에이전트를 지휘해 서비스를 만들고 고칠 수 있게 하는 비주얼 IDE입니다.",
-     "개발을 모르는 사람이 AI 에이전트에게 일을 시켜 서비스를 개발하고 유지보수할 수 있게 하는 플랫폼입니다. Next.js와 FastAPI 위에 LangGraph로 에이전트 그래프를 구성했습니다. 멀티 에이전트를 제 작업에 쓰는 것과, 그 방식을 남이 쓸 수 있는 화면으로 만드는 것은 다른 문제였습니다.",
+     "PM·설계·개발·QA의 작업 흐름을 보여주는 비주얼 IDE와, 이견을 보존하는 AI 위원회 실험입니다.",
+     "비개발자가 역할별 에이전트의 진행을 볼 수 있는 초기 프로토타입을 만들었습니다. 별도의 ProfitPal 실험에서는 차트·뉴스·수급 분석을 병렬로 실행하고, 의견이 갈리면 재검토한 뒤 최종안과 소수 의견을 함께 남기도록 구성했습니다.",
      "비개발자용 에이전트 IDE",
      P(role="개인 프로젝트 · 설계 및 구현",
        skills=[["LangGraph", "first"], ["FastAPI", "first"], ["Next.js", "core"]]),
      url="https://github.com/blackstarzck/ai-squads", urlLabel="GitHub에서 보기",
-     repos=["ai-squads"])
+     links=[["AI 위원회 프롬프트 설계", "https://github.com/blackstarzck/profitpal/blob/main/docs/agent-prompt-design.md"]],
+     repos=["ai-squads", "profitpal"])
 
-node("video-agent", "영상 제작 에이전트", "ai", "개인 프로젝트",
-     "영상 생성을 에이전트에게 맡기기 전에, 무엇을 근거로 삼을지부터 정했습니다.",
-     "Higgsfield로 영상을 만드는 작업을 에이전트에게 맡기려고 문서부터 짰습니다. 먼저 근거에 등급을 매겼습니다 — 공식 사이트로 확인된 기능은 최우선 근거로 두고, 튜토리얼에서 나온 것은 '제품 기능'이 아니라 '권장 제작 방식'으로 따로 표기해 섞이지 않게 했습니다. 어떤 영상을 어디까지 확인했는지도 근거 문서에 남겼습니다. 컷마다 원인·접촉·반응·결과와 상태 연속성을 확인하는 규칙을 두고, 생성 도구로 넘기기 전에 별도 리뷰 에이전트가 하드 게이트로 막게 했습니다. 요구사항 게이트 하네스에서 하던 것을 영상 쪽으로 옮긴 셈입니다.",
-     "영상 제작 에이전트",
-     P(role="개인 프로젝트 · 설계",
+node("video-agent", "검사 가능한 AI 영상 제작 루프", "ai", "개인 프로젝트",
+     "36개 실행 프롬프트를 감사해 규칙 이탈을 찾고, 생성 전에 검사기가 막는 제작 루프로 바꿨습니다.",
+     "영상 작업 문서에는 필수 항목이 있었지만 실제 생성 프롬프트 36개 중 정확히 지킨 것은 1개뿐이었습니다. 검토 에이전트가 실행됐다는 사실과 규칙이 강제됐다는 사실을 분리하고, 필수 항목 사전 검사·독립 리뷰·한 번에 한 변수만 바꾸는 재생성 루프를 도입했습니다.",
+     "AI 영상 프롬프트 감사와 개선",
+     P(role="AI 영상 제작 계약·검증 루프 설계",
        skills=[["에이전트 문서 설계", "grew"], ["근거 등급 관리", "first"], ["하드 게이트", "grew"]]),
      url="https://github.com/blackstarzck/sample-03", urlLabel="GitHub에서 보기",
      repos=["sample-03"])
 
 node("design-rulebook", "디자인 룰북", "ai", "개인 프로젝트",
-     "AI에게 디자인을 시킬 때 쓸 판단 기준을 룰북으로 모았습니다.",
-     "AI에게 UI를 만들라고 하면 그럴듯하지만 기준 없는 결과가 나옵니다. 디자인 리뷰에서 반복해 나오는 판단 기준을 뽑아 룰북으로 정리했습니다. 출발점이 되는 보편 원칙, 누적해 온 규칙, 프롬프트에 그대로 붙여 넣을 규칙을 나눠 두었습니다. 여기에 하나를 더 두었는데, 새로 본 것을 어떻게 누적 룰북으로 정제할지 그 기준입니다. 규칙 자체보다 규칙을 쌓는 방법을 정해두는 쪽이 오래 간다고 봤습니다.",
+     "추상적인 디자인 요청을 AI가 실행하고 사람이 확인할 수 있는 제약 문장으로 바꾸는 진행 중 실험입니다.",
+     "디자인 리뷰에서 반복되는 판단을 간격·대비·정렬·상태처럼 확인 가능한 규칙으로 바꿨습니다. 새 관찰을 바로 추가하지 않고 기존 규칙과 표현을 맞추고, 유사 항목을 묶고, 대표 문장을 선택한 뒤 실제 작업에서 다시 검증합니다.",
      "디자인 룰북",
      P(role="개인 프로젝트",
        skills=[["디자인 기준 문서화", "first"], ["AI 프롬프트 규칙", "grew"]]),
@@ -426,14 +585,6 @@ node("docs-comm", "문서화 · 비개발 직군 협업", "product", "지속",
      "문서화 · 협업",
      P(role="기능·정책 문서화 및 협업 자료 제작",
        skills=[["기술 문서화", "grew"], ["비개발 직군 커뮤니케이션", "core"]]))
-
-node("english", "영어 · 통역안내사", "product", "배경",
-     "영어영문학 전공과 관광통역안내사 경력. 해외 외주와 영문 기술 문서를 다루는 기반입니다.",
-     "성결대학교 영어영문학과를 졸업하고 2014년 관광통역안내사(영어) 자격을 취득했습니다. TOEIC 920. 여행업에서 고객과 국내외 협력업체 사이를 잇는 일을 하며 신뢰를 형성하고 소통하는 방법을 배웠습니다. 지금은 영문 기술 문서를 읽고 활용하는 일, 해외 외주 개발사와 요구사항을 조율하는 일에 그 경험이 쓰입니다.",
-     "영어영문학 · 관광통역안내사",
-     P(role="영어영문학 전공 · 관광통역안내사(영어)",
-       duration="성결대학교 2008.03 - 2014.03 · 자격 2014.12",
-       skills=[["영문 기술 문서", "core"], ["해외 외주 조율", "grew"]]))
 
 # ── lab ──────────────────────────────────────────────────────────────────
 node("lab", "실험실", "lab", "손이 기억하는 것",
@@ -496,8 +647,21 @@ node("game-lab", "게임 · 인터랙션", "lab", "실험",
             ["GAME CABINET 열기", "https://game-cabinet.vercel.app"],
             ["유리다리 건너기", "https://blackstarzck.github.io/bridge/"],
             ["1인칭 시점 실험", "https://blackstarzck.github.io/first-person-perspective/"]],
-     repos=["neon-fist", "game-cabinet", "bridge", "game-cards", "lets-fps", 
+     repos=["neon-fist", "game-cabinet", "bridge", "lets-fps",
             "first-person-perspective"])
+
+node("game-cards", "능력치 카드 게임", "lab", "2022 · 개인 프로젝트",
+     "얼굴 사진으로 능력치 카드를 만들고 보관해 친구와 대결하는 웹게임입니다.",
+     "얼굴이 보이는 사진을 올리면 능력치가 무작위로 부여된 카드가 만들어집니다. 로그인 후 카드를 보관하고 그룹을 구성해 친구와 대결할 수 있으며, 친구 목록과 알림, 전적까지 한 흐름으로 연결했습니다.",
+     "능력치 카드 게임",
+     P(role="개인 프로젝트 · 기획 · 디자인 · 구현",
+       duration="2022",
+       impact="카드 생성부터 보관·친구·대결·전적까지 이어지는 게임 흐름을 구현했습니다.",
+       scope="React 기반 웹게임. Firebase 인증·데이터 저장과 face-api.js 얼굴 감지를 연결했습니다.",
+       objectives=["사진으로 능력치 카드 생성", "로그인 사용자 카드 보관과 그룹 구성", "친구 대결과 전적 확인"],
+       skills=[["React", "first"], ["Firebase", "first"], ["face-api.js", "first"]]),
+     url="https://simple-gatcha.netlify.app/", urlLabel="카드 게임 열기",
+     repos=["game-cards"])
 
 node("trading-lab", "자동매매 시스템", "lab", "2026",
      "업비트 자동매매를 여덟 개 저장소에 걸쳐 만들고 다시 만든 기록입니다.",
@@ -551,9 +715,22 @@ node("react-basics", "React 학습기", "lab", "2022",
             "react-practice5", "react-practice6", "react-practice7", "react-router-practice1", 
             "react-router-practice2", "react-styled-component", "react-swiper", "react-todos", 
             "react-modeal", "react-modeal.net2", "react-CRUD", "react-axios-practice", 
-            "react-youtube", "react-face-detect", "pokemon", "memo", "business-card", 
+            "react-youtube", "react-face-detect", "memo", "business-card",
             "habit-tracker", "new-habit-tracker", "assignment", "data_structure", 
             "drag-n-drop", "canvas-test"])
+
+node("pokemon", "포켓몬 도감", "lab", "2022 · 개인 프로젝트",
+     "이름·번호·특성·타입으로 포켓몬을 찾고 번호순으로 정렬하는 도감입니다.",
+     "외부 포켓몬 데이터를 불러와 이름과 번호, 특성, 타입으로 검색할 수 있게 만들었습니다. 목록 정렬과 상세 화면 이동을 연결하고, 전역 상태와 화면 전환 애니메이션을 한 프로젝트 안에서 함께 다뤘습니다.",
+     "포켓몬 도감",
+     P(role="개인 프로젝트 · 기획 · 디자인 · 구현",
+       duration="2022",
+       impact="검색·분류·정렬·상세 탐색이 이어지는 도감 경험을 구현했습니다.",
+       scope="React·TypeScript 기반. PokeAPI 데이터, Redux Toolkit 전역 상태와 GSAP 화면 전환을 사용했습니다.",
+       objectives=["이름·번호·특성·타입 검색", "포켓몬 번호순 정렬", "목록에서 상세 화면으로 이어지는 탐색"],
+       skills=[["TypeScript", "grew"], ["Redux Toolkit", "first"], ["GSAP", "first"]]),
+     url="https://chanki-pokedx.netlify.app/", urlLabel="포켓몬 도감 열기",
+     repos=["pokemon"])
 
 # 카드가 있는 노드는 links/repos 를 지운다. 카드가 그 둘을 대신한다.
 _byid = {n["id"]: n for n in N}
@@ -611,30 +788,29 @@ for reg in AREA_ANGLE:
 # 서사를 잇는 교차 연결 — 지도에서 성장 경로가 보이도록
 E += [
     ["dealer-web", "dealer-admin"], ["dealer-admin", "legacy-cleanup"],
-    ["farm-3d", "three-lab"], ["farm-3d", "farm-api"],
-    ["connect-bee", "farm-api"],
-    ["topik-user", "topik-admin"], ["topik-admin", "supabase"], ["topik-user", "supabase"],
+    ["farm-3d", "three-lab"],
+    ["topik-user", "topik-admin"],
     ["topik-admin", "verify-loop"], ["doc-merge", "corp-sites"],
+    ["millie-admin-dashboard", "topik-admin"],
     ["gate-harness", "multi-agent"], ["multi-agent", "verify-loop"],
     ["gate-harness", "video-agent"], ["design-rulebook", "figma-gen"],
-    ["nest-sns", "supabase"], ["nest-sns", "farm-api"],
     ["figma-gen", "corp-sites"], ["my-skills", "gate-harness"],
     ["react-basics", "dealer-web"], ["canvas-lab", "three-lab"],
-    ["three-lab", "game-lab"], ["trading-lab", "supabase"],
+    ["three-lab", "game-lab"],
     ["canvas-lab", "multicanvas-lab"], ["multicanvas-lab", "three-lab"],
     ["scroll-3d", "three-lab"], ["space-3d", "three-lab"], ["space-3d", "game-lab"],
     ["detect-lab", "react-basics"], ["detect-lab", "canvas-lab"],
     ["ai-squads", "multi-agent"],
-    ["english", "dadoke"], ["docs-comm", "dealer-admin"],
+    ["docs-comm", "dealer-admin"],
     ["doc-merge", "backend"], ["dadoke", "topik-user"],
 ]
 
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
-SPINE = ["chanki", "contact", "english", "react-basics", "frontend", "dealer-web", "dealer-admin",
+SPINE = ["chanki", "contact", "react-basics", "pokemon", "frontend", "dealer-web", "dealer-admin",
          "legacy-cleanup", "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
-         "space-3d", "game-lab", "trading-lab", "detect-lab", "lab",
-         "farm-3d", "connect-bee", "farm-api", "backend", "nest-sns", "doc-merge", "supabase",
-         "corp-sites", "figma-gen", "design-rulebook", "dadoke", "docs-comm", "product",
+         "space-3d", "game-lab", "game-cards", "trading-lab", "detect-lab", "lab",
+         "farm-3d", "connect-bee", "backend", "nest-sns", "doc-merge",
+         "corp-sites", "millie-admin-dashboard", "figma-gen", "design-rulebook", "dadoke", "docs-comm", "product",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
          "verify-loop", "my-skills", "ai-squads", "video-agent"]
 
@@ -674,7 +850,7 @@ w("nodes.ts", f"{BANNER}import type {{ ContentNode }} from './types'\n\nexport c
 w("edges.ts", f"{BANNER}\nexport const EDGES: [string, string][] = {j(E)}\n")
 w("spine.ts", f"{BANNER}\nexport const SPINE: string[] = {j(SPINE)}\n")
 w("zmap.ts", f"{BANNER}\nexport const ZMAP: Record<string, number> = {j(ZMAP)}\n")
-w("config.ts", "export const CONTACT_EMAIL = 'bucheongosok@gmail.com'\n"
+w("config.ts", "export const CONTACT_EMAIL = 'blackstarzck@naver.com'\n"
               "// ContentNode.repos 의 저장소 칩이 가리킬 계정.\n"
               "export const GITHUB_USER = 'blackstarzck'\n")
 
@@ -736,12 +912,49 @@ export type ProjectCard = {{
   repo: string
   desc: string
   skills: string[]
+  /** false 이면 코드 버튼을 숨기고, 문자열이면 해당 코드 주소를 쓴다. */
+  code?: string | false
   /** 배포된 화면 주소. 없으면 코드 링크만 보인다. */
   demo?: string
+  /** 데모 버튼에 표시할 문구. */
+  demoLabel?: string
   /** /assets/<shot>.jpg 를 카드 썸네일로 쓴다. */
   shot?: string
+  /** 같은 작업물의 추가 이미지. 파일명에서 .jpg 를 뺀 값을 넣는다. */
+  images?: string[]
   /** 화면이 없는 이유 같은 단서. */
   note?: string
+}}
+
+export type ContactItem = {{
+  title: string
+  body: string
+}}
+
+export type ContactProof = ContactItem & {{
+  label: string
+}}
+
+export type ContactJourney = {{
+  year: string
+  title: string
+  body?: string
+  projects?: ContactItem[]
+}}
+
+export type ContactFields = {{
+  proofHeading: string
+  proofLead: string
+  proofs: ContactProof[]
+  journeyHeading: string
+  journeyLead: string
+  journey: ContactJourney[]
+  collaborationHeading: string
+  collaboration: ContactItem[]
+  fitHeading: string
+  fit: string[]
+  closingTitle: string
+  closingBody: string
 }}
 
 export type ContentNode = {{
@@ -763,6 +976,7 @@ export type ContentNode = {{
   /** 저장소가 여럿인 노드의 프로젝트 카드. 있으면 links/repos/스트립을 대신한다. */
   cards?: ProjectCard[]
   project?: ProjectFields
+  contact?: ContactFields
 }}
 """)
 

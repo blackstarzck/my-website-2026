@@ -97,6 +97,7 @@ export const PAGE_TEXT = {
   // 노드가 다루는 GitHub 저장소 칩 묶음의 라벨. 본문 문장 속 이름만으로는
   // 찾을 수 없어서(링크도 지도 라벨도 없다) 칩으로 따로 깐다.
   reposLabel: '저장소',
+  sitesLabel: '사이트',
   // 프로젝트 카드의 두 버튼.
   cardCode: '코드 ↗',
   cardDemo: '데모 열기 ↗',

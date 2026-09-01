@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // 리마운트되지 않으므로 엔진(파티클·전이 상태)이 계속 살아 있다.
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="ko">
       <body>
         <BodyClassSync />
         <CanvasHost />

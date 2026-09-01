@@ -30,7 +30,9 @@
 // ============================================================================
 
 import { EDGES } from '@/data/edges'
+import { AI_ARTICLES, type ArticleSource } from '@/data/aiArticles'
 import { NODES } from '@/data/nodes'
+import { PROJECT_ARTICLES } from '@/data/projectArticles'
 import {
   AGRAD, AREAS, CARD_IMG, COLOR, MULTI, PARENTS, RLAB, SHOTS, SLUG, THEMED, TREECOLS, VID,
 } from '@/data/regions'
@@ -58,6 +60,8 @@ import type { EngineDeps, EngineTestHandle } from './types'
 import { createViewport } from './viewport'
 import { CONTACT_ID, ENTRY_ID, HOME_ITEMS, MANIFESTO_ENTRY_IDS, MANIFESTO_ID, PAGE_TEXT, REG_TABS, SKILL_LEVEL, TAB_DESC, UI_TEXT } from '@/data/site'
 import { CONTACT_EMAIL, GITHUB_USER } from '@/data/config'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 /** 원본이 DB.N 에 런타임으로 붙이던 z(ZMAP)를 포함한 노드. cl(파티클)은 더 이상 노드에
  *  붙지 않는다 — engine/particles.ts 의 clouds[i](노드 인덱스 배열)로 옮겼다(Task 6).
@@ -76,6 +80,7 @@ type DevHooks = {
 
 
 export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineTestHandle {
+  gsap.registerPlugin(ScrollTrigger)
   // 파티클 배치(노드 클라우드/haze/별/origen 허브)의 유일한 난수원. 같은 시드 →
   // 같은 픽셀 — 골든/픽셀 회귀 테스트가 재현 가능해야 성립한다.
   const rng = mulberry32(seed)
@@ -161,7 +166,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   const { resize, miniResize } = createViewport(sim, canvases)
   on(window, 'resize', resize); resize()
 
-  // ── GLASS · refracción WebGL (Task 8: engine/renderers/glass.ts) ──
+  // ── GLASS · WebGL 굴절 (Task 8: engine/renderers/glass.ts) ──
   const glass = createGlass(canvases.glass, c)
 
   // ── 엔진 로컬 상태 (원본 L107–124). 매 프레임 바뀌는 스칼라 한 벌은 engine/sim.ts 의
@@ -216,6 +221,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   const win = window as unknown as Window & Partial<InlineHandlers> & Partial<DevHooks>
   let unsubscribeUI: () => void = () => {}
   let origenEntering = false
+  let contactRevealContext: gsap.Context | null = null
 
   function dispose(): void {
     disposed = true
@@ -223,6 +229,8 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     if (zinRaf) { cancelAnimationFrame(zinRaf); zinRaf = 0 }
     for (const off of listeners) off()
     listeners.length = 0
+    contactRevealContext?.revert()
+    contactRevealContext = null
     unsubscribeUI()
     // 줌인 도중에 dispose 되면 body.origen 이 남아 다음 엔진이 origen 화면으로 오인한다.
     if (origenEntering) {
@@ -605,7 +613,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     tip.style.borderColor = tc; tip.style.opacity = '1'
   }
   function hideTip(): void { tip.style.opacity = '0' }
-  // ── PÁGINA editorial ──
+  // ── 편집형 페이지 ──
   /** 노드별 인라인 임베드 URL. 필요해지면 여기에 추가한다. */
   const EMBED: Record<string, string> = {}
   /** 임베드의 전체보기 URL. */
@@ -633,7 +641,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     }
     galOrig = inner; galPos = 0
     const nav = (MULTI[n.id] >= 2)
-      ? `<button class="gnav gprev" onclick="galGo(event,-1)" aria-label="anterior">‹</button><button class="gnav gnext" onclick="galGo(event,1)" aria-label="siguiente">›</button>`
+      ? `<button class="gnav gprev" onclick="galGo(event,-1)" aria-label="이전">‹</button><button class="gnav gnext" onclick="galGo(event,1)" aria-label="다음">›</button>`
       : ''
     return `<figure class="${figCls}"${figAttrs}><div class="gview">${inner}</div>${nav}</figure>${cap}`
   }
@@ -723,12 +731,161 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     }
     return out
   }
+
+  function contactProfile(n: ENode): string {
+    const contact = n.contact
+    if (!contact) return ''
+
+    const proofs = contact.proofs.map((proof) => `<article class="contact-proof-card">
+      <span>${esc(proof.label)}</span>
+      <h3>${esc(proof.title)}</h3>
+      <p>${esc(proof.body)}</p>
+    </article>`).join('')
+    const journey = contact.journey.map((step) => {
+      const projects = step.projects?.map((project) => `<article class="contact-timeline-project">
+        <h4>${esc(project.title)}</h4>
+        <p>${esc(project.body)}</p>
+      </article>`).join('') || ''
+      const modifier = step.projects?.length
+        ? ' contact-timeline-item--company'
+        : step.body
+          ? ''
+          : ' contact-timeline-item--brief'
+
+      return `<li class="contact-timeline-item${modifier}" data-contact-timeline-item>
+        <span class="contact-timeline-year">${esc(step.year)}</span>
+        <h3>${esc(step.title)}</h3>
+        ${step.body ? `<p class="contact-timeline-summary">${esc(step.body)}</p>` : ''}
+        ${projects ? `<div class="contact-timeline-projects">${projects}</div>` : ''}
+      </li>`
+    }).join('')
+    const collaboration = contact.collaboration.map((item) => `<div class="contact-collab-item">
+      <h3>${esc(item.title)}</h3>
+      <p>${esc(item.body)}</p>
+    </div>`).join('')
+    const fit = contact.fit.map((item) => `<li>${esc(item)}</li>`).join('')
+
+    return `<article class="contact-profile" aria-label="김찬기와 함께 일하는 방식">
+      <section class="contact-section" aria-labelledby="contact-proof-heading">
+        <div class="contact-eyebrow">Proof of value</div>
+        <h2 id="contact-proof-heading">${esc(contact.proofHeading)}</h2>
+        <p class="contact-deck">${esc(contact.proofLead)}</p>
+        <div class="contact-proof-grid">${proofs}</div>
+      </section>
+      <section class="contact-section contact-journey" aria-labelledby="contact-journey-heading">
+        <div class="contact-eyebrow">Career journey</div>
+        <h2 id="contact-journey-heading">${esc(contact.journeyHeading)}</h2>
+        <p class="contact-deck">${esc(contact.journeyLead)}</p>
+        <ol>${journey}</ol>
+      </section>
+      <div class="contact-columns">
+        <section class="contact-section contact-collab" aria-labelledby="contact-collab-heading">
+          <div class="contact-eyebrow">How I work</div>
+          <h2 id="contact-collab-heading">${esc(contact.collaborationHeading)}</h2>
+          <div class="contact-collab-list">${collaboration}</div>
+        </section>
+        <section class="contact-section contact-fit" aria-labelledby="contact-fit-heading">
+          <div class="contact-eyebrow">Good fit</div>
+          <h2 id="contact-fit-heading">${esc(contact.fitHeading)}</h2>
+          <ul>${fit}</ul>
+        </section>
+      </div>
+      <section class="contact-close" aria-labelledby="contact-close-heading">
+        <div class="contact-eyebrow">Open to conversation</div>
+        <h2 id="contact-close-heading">${esc(contact.closingTitle)}</h2>
+        <p>${esc(contact.closingBody)}</p>
+        <div class="contact-actions">
+          <a class="contact-mail" href="mailto:${esc(CONTACT_EMAIL)}" aria-label="${esc(CONTACT_EMAIL)}으로 메일 보내기">${esc(CONTACT_EMAIL)}</a>
+          <button class="contact-copy" type="button" data-copy-email aria-label="이메일 주소를 클립보드에 복사" title="이메일 주소 복사">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="8" y="8" width="11" height="11" rx="2"></rect>
+              <path d="M16 8V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h1"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </article>`
+  }
+
+  function articleSource(source?: ArticleSource): string {
+    if (!source) return ''
+    return `<a class="ai-source" href="${esc(source.url)}" target="_blank" rel="noopener">출처 · ${esc(source.label)} ↗</a>`
+  }
+
+  function caseStudyArticle(id: string): string {
+    const article = AI_ARTICLES[id] || PROJECT_ARTICLES[id]
+    if (!article) return ''
+    const flowLabel: Record<string, string> = {
+      work: 'Work',
+      gate: 'Gate',
+      check: 'Check',
+      loop: 'Loop',
+    }
+
+    const sections = article.sections.map((section, index) => {
+      const paragraphs = section.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('')
+      const bullets = section.bullets?.length
+        ? `<ul class="ai-bullets">${section.bullets.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`
+        : ''
+      const quote = section.quote ? `<blockquote>${esc(section.quote)}</blockquote>` : ''
+      const workflow = section.workflow
+        ? `<figure class="ai-workflow">
+            <ol>${section.workflow.steps.map((step) => {
+              const tone = step.tone || 'work'
+              return `<li class="is-${tone}">
+                <span class="ai-flow-label">${esc(step.label)}</span>
+                <em>${flowLabel[tone]}</em>
+                <strong>${esc(step.title)}</strong>
+                ${step.detail ? `<p>${esc(step.detail)}</p>` : ''}
+              </li>`
+            }).join('')}</ol>
+            <figcaption><span>${esc(section.workflow.caption)}</span>${articleSource(section.workflow.source)}</figcaption>
+          </figure>`
+        : ''
+      const table = section.table
+        ? `<figure class="ai-table-figure">
+            <div class="ai-table-scroll"><table>
+              <caption>${esc(section.table.caption)}</caption>
+              <thead><tr>${section.table.headers.map((header) => `<th scope="col">${esc(header)}</th>`).join('')}</tr></thead>
+              <tbody>${section.table.rows.map((row) => `<tr>${row.map((cell, cellIndex) => `<td data-label="${esc(section.table?.headers[cellIndex])}">${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
+            </table></div>
+            ${articleSource(section.table.source)}
+          </figure>`
+        : ''
+
+      return `<section class="ai-article-section" aria-labelledby="ai-section-${id}-${index}">
+        ${section.eyebrow ? `<div class="ai-section-kicker">${esc(section.eyebrow)}</div>` : ''}
+        <h2 id="ai-section-${id}-${index}">${esc(section.title)}</h2>
+        <div class="ai-prose">${paragraphs}${bullets}${quote}</div>
+        ${workflow}${table}
+      </section>`
+    }).join('')
+
+    const caveat = article.caveat
+      ? `<aside class="ai-caveat"><strong>현재 한계</strong><p>${esc(article.caveat)}</p></aside>`
+      : ''
+    const sources = `<footer class="ai-sources"><div>원문 자료</div><ul>${article.sources.map((source) => `
+      <li>${articleSource(source)}</li>`).join('')}</ul></footer>`
+
+    return `<article class="ai-article">
+      <header class="ai-article-head">
+        <span>Repository case study</span>
+        <p>${esc(article.deck)}</p>
+      </header>
+      ${sections}
+      ${caveat}
+      ${sources}
+    </article>`
+  }
+
   function buildPage(n: ENode): void {
     const acc = COLOR[n.region]
     document.documentElement.style.setProperty('--acc', acc)
     const _pg = gid('page')
     _pg.style.setProperty('--ag', areaGrad(n.region))
     _pg.style.setProperty('--cc', acc)
+    contactRevealContext?.revert()
+    contactRevealContext = null
     
     const cta = n.url
       ? (n.url.charAt(0) === '#'
@@ -753,9 +910,14 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       ? PAGE_TEXT.relatedNote
       : PAGE_TEXT.relatedNoteAll
     const links = n.links
-      ? `<div class="links">${n.links.map(([t, u]) => (u.charAt(0) === '#' || u.charAt(0) === '/')
-        ? `<a class="lk" href="${u}">${esc(t)} →</a>`
-        : `<a class="lk" href="${u}" target="_blank">${esc(t)} ↗</a>`).join('')}</div>`
+      ? `<div class="links">${n.links.map(([t, u]) => {
+        if (n.id === CONTACT_ID && u === '/chanki-resume.pdf') {
+          return `<a class="lk resume-download" href="${u}" download="chanki-resume.pdf">${esc(t)}</a>`
+        }
+        return (u.charAt(0) === '#' || u.charAt(0) === '/')
+          ? `<a class="lk" href="${u}">${esc(t)} →</a>`
+          : `<a class="lk" href="${u}" target="_blank">${esc(t)} ↗</a>`
+      }).join('')}</div>`
       : ''
     const workCards = projectCardsFor(n)
     const foot = `<div class="pgfoot">${n.id !== CONTACT_ID ? `<span class="lk" data-go="${CONTACT_ID}">↦ ${esc(byId[CONTACT_ID]?.name ?? '')}</span>` : ''}<span class="lk" data-go="${ENTRY_ID}">↑ 지도의 중심으로</span></div>`
@@ -767,12 +929,68 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    ${meta}
    ${repoChips(n)}
    ${projectDetail(n)}
-   <div class="media">${media(n)}${imgStrip(n)}</div>
+   ${contactProfile(n)}
+   ${AI_ARTICLES[n.id] || n.id === CONTACT_ID ? '' : `<div class="media">${media(n)}${imgStrip(n)}</div>`}
+   ${caseStudyArticle(n.id)}
    ${projectCards(n)}
    <div class="seclab">${esc(seclab)}</div><div class="seclab2">${secl2}</div>
    <div class="cardgrid">${cards}</div>
    ${foot}
    <div class="treelab2">${PAGE_TEXT.treeFull}</div>${siteTreeHTML()}`
+    _pg.scrollTop = 0
+    const revealSections = [...gid('doc').querySelectorAll<HTMLElement>('.contact-profile .contact-section, .contact-profile .contact-close')]
+    const timelineItems = [...gid('doc').querySelectorAll<HTMLElement>('[data-contact-timeline-item]')]
+    if (revealSections.length || timelineItems.length) {
+      revealSections.forEach((section) => section.classList.add('contact-reveal'))
+      timelineItems.forEach((item) => item.classList.add('contact-timeline-reveal'))
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        revealSections.forEach((section) => section.classList.add('is-visible'))
+        timelineItems.forEach((item) => item.classList.add('is-visible'))
+      } else {
+        contactRevealContext = gsap.context(() => {
+          revealSections.forEach((section) => {
+            gsap.fromTo(section,
+              { autoAlpha: 0, y: 30 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                onStart: () => section.classList.add('is-visible'),
+                scrollTrigger: {
+                  trigger: section,
+                  scroller: _pg,
+                  start: 'top 88%',
+                  once: true,
+                },
+              },
+            )
+          })
+          if (timelineItems.length) {
+            gsap.set(timelineItems, { autoAlpha: 0, y: 24 })
+            ScrollTrigger.batch(timelineItems, {
+              scroller: _pg,
+              start: 'top 88%',
+              once: true,
+              interval: 0.12,
+              batchMax: 3,
+              onEnter: (batch) => {
+                batch.forEach((item) => item.classList.add('is-visible'))
+                gsap.to(batch, {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: 0.45,
+                  stagger: 0.06,
+                  ease: 'power2.out',
+                  overwrite: true,
+                })
+              },
+            })
+          }
+        }, gid('doc'))
+        ScrollTrigger.refresh()
+      }
+    }
     ;(function () {
       const dv = document.querySelector('#doc [data-dive]') as HTMLElement | null
       if (!dv) return
@@ -785,13 +1003,27 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         } else { d.setAttribute('hidden', ''); dv.classList.remove('on'); i.textContent = '↓' }
       }
     })()
+    const copyEmailButton = gid('doc').querySelector<HTMLButtonElement>('[data-copy-email]')
+    if (copyEmailButton) {
+      copyEmailButton.onclick = async function () {
+        try {
+          await navigator.clipboard.writeText(CONTACT_EMAIL)
+          window.dispatchEvent(new CustomEvent('portfolio:message', {
+            detail: { text: '이메일 주소가 클립보드에 복사되었습니다.', tone: 'success' },
+          }))
+        } catch {
+          window.dispatchEvent(new CustomEvent('portfolio:message', {
+            detail: { text: '복사하지 못했습니다. 이메일 주소를 직접 선택해 주세요.', tone: 'error' },
+          }))
+        }
+      }
+    }
     if (workCards.length) wireProjectCards(n, workCards)
     else wireNodeLightbox(n)
     gid('doc').querySelectorAll('[data-go]').forEach((p) => {
       (p as HTMLElement).onclick = (ev) => { ev.preventDefault(); navigate((p as HTMLElement).dataset.go as string) }
     })
     gid('chnum').textContent = ''
-    gid('page').scrollTop = 0
   }
   function openPage(id: string, fromPage?: boolean): void {
     const n = byId[id]; if (!n) return
@@ -883,20 +1115,23 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       : ''
     const actions = gid('lbactions')
     actions.innerHTML = ''
-    const codeLink = document.createElement('a')
-    codeLink.className = 'lb-action lb-code'
-    codeLink.href = `https://github.com/${GITHUB_USER}/${encodeURIComponent(card.repo)}`
-    codeLink.target = '_blank'
-    codeLink.rel = 'noopener'
-    codeLink.textContent = PAGE_TEXT.cardCode
-    actions.appendChild(codeLink)
+    const codeUrl = projectCardCodeUrl(card)
+    if (codeUrl) {
+      const codeLink = document.createElement('a')
+      codeLink.className = 'lb-action lb-code'
+      codeLink.href = codeUrl
+      codeLink.target = '_blank'
+      codeLink.rel = 'noopener'
+      codeLink.textContent = PAGE_TEXT.cardCode
+      actions.appendChild(codeLink)
+    }
     if (card.demo) {
       const demoLink = document.createElement('a')
       demoLink.className = 'lb-action lb-demo'
       demoLink.href = card.demo
       demoLink.target = '_blank'
       demoLink.rel = 'noopener'
-      demoLink.textContent = PAGE_TEXT.cardDemo
+      demoLink.textContent = card.demoLabel || PAGE_TEXT.cardDemo
       actions.appendChild(demoLink)
     }
     ;(['lbprev', 'lbnext'] as const).forEach((id) => {
@@ -1062,6 +1297,11 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     return images
   }
 
+  function projectCardCodeUrl(card: ProjectCard): string | null {
+    if (card.code === false) return null
+    return card.code || `https://github.com/${GITHUB_USER}/${encodeURIComponent(card.repo)}`
+  }
+
   function projectCards(n: ENode): string {
     const cards = projectCardsFor(n)
     if (!cards.length) return ''
@@ -1071,8 +1311,12 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         ? `<img src="/assets/${thumbId}.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
         : ''
       const sk = c.skills.map((x) => `<span class="pc-s">${esc(x)}</span>`).join('')
+      const codeUrl = projectCardCodeUrl(c)
+      const code = codeUrl
+        ? `<a class="pc-code" href="${codeUrl}" target="_blank" rel="noopener">${PAGE_TEXT.cardCode}</a>`
+        : ''
       const demo = c.demo
-        ? `<a class="pc-go" href="${c.demo}" target="_blank" rel="noopener">${PAGE_TEXT.cardDemo}</a>`
+        ? `<a class="pc-go" href="${c.demo}" target="_blank" rel="noopener">${esc(c.demoLabel || PAGE_TEXT.cardDemo)}</a>`
         : (c.note ? `<span class="pc-note">${esc(c.note)}</span>` : '')
       return `<article class="pc${index === 0 ? ' is-selected' : ''}" data-project-index="${index}">
    <button class="pc-hit" type="button" aria-label="${esc(c.repo)} 이미지를 상단에서 보기" aria-pressed="${index === 0}"></button>
@@ -1081,11 +1325,12 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
      <div class="pc-n">${esc(c.repo)}</div>
      <p class="pc-d">${esc(c.desc)}</p>
      <div class="pc-sk">${sk}</div>
-     <div class="pc-a"><a class="pc-code" href="https://github.com/${GITHUB_USER}/${encodeURIComponent(c.repo)}" target="_blank" rel="noopener">${PAGE_TEXT.cardCode}</a>${demo}</div>
+     <div class="pc-a">${code}${demo}</div>
    </div>
  </article>`
     }).join('')
-    return `<div class="pcwrap"><div class="repolab">${esc(PAGE_TEXT.reposLabel)} · ${cards.length}</div><div class="pcards">${items}</div></div>`
+    const label = cards.every((card) => card.code === false) ? PAGE_TEXT.sitesLabel : PAGE_TEXT.reposLabel
+    return `<div class="pcwrap"><div class="repolab">${esc(label)} · ${cards.length}</div><div class="pcards">${items}</div></div>`
   }
 
   function selectProjectCard(n: ENode, cards: ProjectCard[], projectIndex: number): void {
@@ -1276,7 +1521,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   })
   on(gid('spacer'), 'pointerleave', () => { if (U().mode === 'page') { setHoverId(null); hideTip() } })
   on<MouseEvent>(qs('#spacer .ret'), 'click', (e) => { e.stopPropagation(); returnHome() })
-  // ── INTERACCIÓN canvas ──
+  // ── 캔버스 상호작용 ──
   function pick(mx: number, my: number): number | null {
     const s = U()
     const ai = s.activeId ? idIndex[s.activeId] : -1

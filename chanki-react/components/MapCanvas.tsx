@@ -5,6 +5,7 @@ import { createEngine } from '@/engine/legacy'
 import type { EngineHandle, EngineTestHandle } from '@/engine/types'
 import { engineStore } from '@/stores/engineStore'
 import { uiStore } from '@/stores/uiStore'
+import Message from './Message'
 
 // 테스트 훅. 프로덕션 번들에는 들어가지 않는다.
 const TEST_KEYS = ['__engine', '__engineStore', '__uiStore'] as const
@@ -97,6 +98,7 @@ export default function MapCanvas() {
           </div>
         </div>
       </div>
+      <Message />
       <div id="coldtitle">CHANKI KIM</div>
       <div id="caminos"></div>
     </>

@@ -48,6 +48,10 @@ export const EDGES: [string, string][] = [
   ],
   [
     "frontend",
+    "millie-admin-dashboard"
+  ],
+  [
+    "frontend",
     "dealer-web"
   ],
   [
@@ -92,14 +96,6 @@ export const EDGES: [string, string][] = [
   ],
   [
     "backend",
-    "supabase"
-  ],
-  [
-    "backend",
-    "farm-api"
-  ],
-  [
-    "backend",
     "nest-sns"
   ],
   [
@@ -113,10 +109,6 @@ export const EDGES: [string, string][] = [
   [
     "product",
     "docs-comm"
-  ],
-  [
-    "product",
-    "english"
   ],
   [
     "lab",
@@ -140,6 +132,10 @@ export const EDGES: [string, string][] = [
   ],
   [
     "lab",
+    "game-cards"
+  ],
+  [
+    "lab",
     "trading-lab"
   ],
   [
@@ -155,6 +151,10 @@ export const EDGES: [string, string][] = [
     "react-basics"
   ],
   [
+    "lab",
+    "pokemon"
+  ],
+  [
     "dealer-web",
     "dealer-admin"
   ],
@@ -167,24 +167,8 @@ export const EDGES: [string, string][] = [
     "three-lab"
   ],
   [
-    "farm-3d",
-    "farm-api"
-  ],
-  [
-    "connect-bee",
-    "farm-api"
-  ],
-  [
     "topik-user",
     "topik-admin"
-  ],
-  [
-    "topik-admin",
-    "supabase"
-  ],
-  [
-    "topik-user",
-    "supabase"
   ],
   [
     "topik-admin",
@@ -193,6 +177,10 @@ export const EDGES: [string, string][] = [
   [
     "doc-merge",
     "corp-sites"
+  ],
+  [
+    "millie-admin-dashboard",
+    "topik-admin"
   ],
   [
     "gate-harness",
@@ -209,14 +197,6 @@ export const EDGES: [string, string][] = [
   [
     "design-rulebook",
     "figma-gen"
-  ],
-  [
-    "nest-sns",
-    "supabase"
-  ],
-  [
-    "nest-sns",
-    "farm-api"
   ],
   [
     "figma-gen",
@@ -237,10 +217,6 @@ export const EDGES: [string, string][] = [
   [
     "three-lab",
     "game-lab"
-  ],
-  [
-    "trading-lab",
-    "supabase"
   ],
   [
     "canvas-lab",
@@ -273,10 +249,6 @@ export const EDGES: [string, string][] = [
   [
     "ai-squads",
     "multi-agent"
-  ],
-  [
-    "english",
-    "dadoke"
   ],
   [
     "docs-comm",

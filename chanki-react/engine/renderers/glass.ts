@@ -1,4 +1,4 @@
-// createGlass — initGlass/renderGlass(원본 index.html의 GLASS · refracción WebGL 절)를
+// createGlass — initGlass/renderGlass(원본 index.html의 GLASS · WebGL 굴절 절)를
 // 그대로 옮긴 것. #glass 캔버스에 WebGL 컨텍스트를 만들어 #c(필드 캔버스)를 텍스처로
 // 읽어 굴절시킨다.
 //
