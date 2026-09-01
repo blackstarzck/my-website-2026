@@ -16,7 +16,7 @@ export const CONTACT_ID = 'contact'
 export const REG_TABS: [Region, string][] = [
   ['entry', '김찬기'],
   ['frontend', 'FRONTEND'],
-  ['backend', 'SERVER'],
+  ['backend', 'BACKEND'],
   ['ai', 'AI'],
   ['product', 'PRODUCT'],
   ['lab', 'LAB'],
