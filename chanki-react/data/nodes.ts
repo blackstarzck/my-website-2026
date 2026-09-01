@@ -75,12 +75,12 @@ export const NODES: ContentNode[] = [
           "body": "영어영문학과"
         },
         {
-          "year": "경력 초반",
-          "title": "여행사 A"
+          "year": "2015.11 – 2018.05 · 2년 7개월",
+          "title": "가자하와이"
         },
         {
-          "year": "경력 초반",
-          "title": "여행사 B"
+          "year": "2018.10 – 2019.07 · 10개월",
+          "title": "G-Bridge"
         },
         {
           "year": "2020",
