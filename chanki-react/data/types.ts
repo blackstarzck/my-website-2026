@@ -21,6 +21,8 @@ export type ProjectCard = {
   demo?: string
   /** /assets/<shot>.jpg 를 카드 썸네일로 쓴다. */
   shot?: string
+  /** 같은 작업물의 추가 이미지. 파일명에서 .jpg 를 뺀 값을 넣는다. */
+  images?: string[]
   /** 화면이 없는 이유 같은 단서. */
   note?: string
 }
@@ -41,7 +43,7 @@ export type ContentNode = {
   links?: [string, string][]
   /** 이 노드가 다루는 GitHub 저장소 이름. 페이지에 칩으로 그려진다. */
   repos?: string[]
-  /** 저장소가 여럿인 노드의 프로젝트 카드. 있으면 links/repos/스트립을 대신한다. */
+  /** 저장소별 프로젝트 카드. */
   cards?: ProjectCard[]
   project?: ProjectFields
 }

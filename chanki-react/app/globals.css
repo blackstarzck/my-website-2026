@@ -91,8 +91,11 @@
 /* 프로젝트 카드 — 저장소 하나가 한 덩어리. 썸네일·이름·설명·스킬·코드·데모. */
 #page .pcwrap{margin:34px 0 8px}
 #page .pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:14px;margin-top:12px}
-#page .pc{display:flex;border:1px solid rgba(255,255,255,.13);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.028);transition:border-color .16s}
+#page .pc{position:relative;display:flex;border:1px solid rgba(255,255,255,.13);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.028);transition:border-color .16s,background .16s,box-shadow .16s}
 #page .pc:hover{border-color:rgba(255,255,255,.26)}
+#page .pc.is-selected{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 6%,rgba(255,255,255,.028));box-shadow:0 0 0 1px color-mix(in srgb,var(--acc) 28%,transparent)}
+#page .pc-hit{position:absolute;inset:0;z-index:2;border:0;background:transparent;cursor:pointer}
+#page .pc-hit:focus-visible{outline:2px solid var(--acc);outline-offset:-4px;border-radius:10px}
 #page .pc-th{width:186px;flex:none;background:#07080c;align-self:stretch}
 #page .pc-th img{width:100%;height:100%;object-fit:cover;display:block}
 #page .pc-th.none{width:0}
@@ -101,7 +104,7 @@
 #page .pc-d{font-size:12.5px;line-height:1.75;color:var(--ink2);word-break:keep-all}
 #page .pc-sk{display:flex;flex-wrap:wrap;gap:6px}
 #page .pc-s{font-family:var(--mono);font-size:10.5px;color:var(--acc);border:1px solid rgba(6,214,196,.4);border-radius:999px;padding:3px 9px}
-#page .pc-a{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:3px}
+#page .pc-a{position:relative;z-index:3;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:3px}
 #page .pc-code,#page .pc-go{font-family:var(--mono);font-size:11px;border-radius:7px;padding:7px 12px;text-decoration:none;transition:.14s}
 #page .pc-code{color:var(--ink2);border:1px solid rgba(255,255,255,.2)}
 #page .pc-code:hover{border-color:var(--acc);color:var(--acc)}
@@ -109,6 +112,7 @@
 #page .pc-go:hover{filter:brightness(1.12)}
 #page .pc-note{font-family:var(--mono);font-size:10.5px;color:var(--ink3);border:1px dashed rgba(255,255,255,.18);border-radius:7px;padding:6px 10px}
 body.light #page .pc{border-color:rgba(0,0,0,.14);background:rgba(0,0,0,.025)}
+body.light #page .pc.is-selected{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 8%,rgba(255,255,255,.7))}
 body.light #page .pc-code{border-color:rgba(0,0,0,.2)}
 body.light #page .pc-note{border-color:rgba(0,0,0,.2)}
 #page .meta .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
@@ -126,6 +130,9 @@ body.light .mediaframe iframe{background:#EFE7D4}
 @media(max-width:760px){
  #page .media{max-width:none}
  .mediaframe.emb{width:calc(100% + 12vw);margin-left:-6vw;border-radius:0;border-left:none;border-right:none;aspect-ratio:3/4}
+ #page .pcards{grid-template-columns:minmax(0,1fr)}
+ #page .pc{flex-direction:column}
+ #page .pc-th{width:100%;aspect-ratio:16/9}
 }
 .mediaframe.clk{cursor:pointer}
 .gview{width:100%;height:100%}
@@ -392,27 +399,76 @@ body.origen #gallery,body.origen #page{opacity:0!important;transform:translateX(
  #pagetop{top:auto!important;bottom:16px!important;right:16px!important;left:auto!important}
 }
 
-/* ===== 원본 이미지 모달 =====
-   노드 이미지를 누르면 잘리지 않은 원본을 띄운다. 세로로 긴 캡처가 있어
-   안쪽은 스크롤된다. display 를 주면 [hidden] 을 이기므로 따로 눌러 준다. */
+/* ===== 작업물 이미지 모달 ===== */
 #lightbox{position:fixed;inset:0;z-index:200;background:rgba(4,4,6,.92);
-  display:flex;align-items:flex-start;justify-content:center;
+  display:flex;align-items:center;justify-content:center;padding:24px;
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   animation:lbin .18s ease-out both}
 #lightbox[hidden]{display:none}
 @keyframes lbin{from{opacity:0}to{opacity:1}}
-#lbscroll{max-width:min(1100px,92vw);max-height:100vh;overflow:auto;overscroll-behavior:contain;
-  padding:56px 0 40px;scrollbar-width:thin}
-#lbimg{display:block;width:100%;height:auto;border-radius:10px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6)}
-#lbclose{position:fixed;top:18px;right:22px;z-index:201;
-  width:38px;height:38px;border-radius:50%;cursor:pointer;
+#lbpanel{position:relative;width:min(1180px,100%);height:min(900px,92dvh);min-height:0;overflow:hidden;border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);background:#0b0d14;box-shadow:0 30px 90px rgba(0,0,0,.62)}
+#lbhead{position:absolute;inset:0 0 auto;z-index:3;display:flex;align-items:flex-start;justify-content:center;
+  min-height:112px;padding:10px 64px 12px;background:linear-gradient(180deg,rgba(3,4,8,.96) 0%,rgba(3,4,8,.55) 45%,rgba(3,4,8,.18) 78%,rgba(3,4,8,0) 100%)}
+#lbcopy{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;text-align:center}
+#lbtitle{max-width:36ch;overflow:hidden;font-family:var(--display);font-size:18px;color:#fff;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 2px 14px #000}
+#lbcounter{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:rgba(255,255,255,.64);text-shadow:0 1px 8px #000}
+#lbactions{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:4px}
+.lb-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 13px;
+  border:0;border-radius:4px;background:transparent;font-family:var(--mono);font-size:11px;font-weight:700;
+  text-shadow:0 1px 8px #000;text-underline-offset:6px;text-decoration-thickness:1px;
+  text-decoration-color:rgba(255,255,255,.48);transition:color .16s ease,text-decoration-color .16s ease}
+.lb-code{color:rgba(255,255,255,.86);text-decoration:underline}
+.lb-demo{color:var(--acc);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--acc) 64%,transparent)}
+.lb-action:hover{color:#fff;text-decoration-color:var(--acc)}
+.lb-action:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#lbprev,#lbnext{min-width:112px;min-height:44px;padding:9px 14px;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;
+  background:#05060a;border:1px solid rgba(255,255,255,.72);text-shadow:0 1px 2px #000;transition:.16s}
+#lbprev,#lbnext{position:absolute;top:50%;z-index:2;transform:translateY(-50%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.42)}
+#lbprev{left:16px}#lbnext{right:16px}
+#lbprev:hover,#lbnext:hover{color:#fff;background:#05060a;border-color:var(--acc)}
+#lbprev:focus-visible,#lbnext:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+#lbprev[hidden],#lbnext[hidden],#lbrelated[hidden],#lbempty[hidden]{display:none}
+#lbmain{position:absolute;inset:0;min-height:0;overflow:hidden;display:grid;place-items:center;background:#05060a}
+#lbimg{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#05060a}
+#lbimg[hidden]{display:none}
+#lbempty{place-self:center;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink3)}
+#lbrelated{position:absolute;inset:auto 0 0;z-index:3;padding:12px 16px 10px;
+  background:linear-gradient(0deg,rgba(3,4,8,.96) 0%,rgba(3,4,8,.55) 45%,rgba(3,4,8,.18) 78%,rgba(3,4,8,0) 100%)}
+#lblabel{margin-bottom:9px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.64);text-shadow:0 1px 8px #000}
+#lbthumbs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:thin;padding:2px}
+.lbthumb{width:108px;height:68px;flex:none;padding:0;overflow:hidden;border-radius:8px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);background:#05060a;opacity:.62;transition:.16s}
+.lbthumb:hover,.lbthumb.is-selected{opacity:1;border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.lbthumb:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.lbthumb img{display:block;width:100%;height:100%;object-fit:cover}
+#lbclose{position:fixed;top:calc(4dvh + 16px);right:max(calc((100vw - 1180px)/2 + 18px),18px);z-index:201;
+  width:44px;height:44px;border-radius:50%;cursor:pointer;
   font-family:var(--mono);font-size:15px;line-height:1;
   color:var(--ink);background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.18)}
 #lbclose:hover{background:rgba(255,255,255,.16)}
 body.light #lightbox{background:rgba(240,240,244,.92)}
-body.light #lbclose{color:#111;background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.16)}
+body.light #lbpanel{background:#05060a;border-color:rgba(255,255,255,.22);box-shadow:0 30px 90px rgba(70,60,40,.28)}
+body.light #lbmain,body.light #lbimg{background:#05060a}
+body.light #lbprev,body.light #lbnext{color:#fff;background:#05060a;border-color:rgba(255,255,255,.72)}
+body.light #lbclose{color:#111;background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.16)}
+body.light .lbthumb{border-color:rgba(255,255,255,.2);background:#05060a}
+
+@media(max-width:760px){
+ #lightbox{padding:0}
+ #lbpanel{width:100%;height:100dvh;border:0;border-radius:0}
+ #lbhead{min-height:110px;padding:9px 60px 11px}
+ .lb-action{min-height:44px;padding:8px 4px;font-size:10px}
+ #lbprev,#lbnext{min-width:0;min-height:44px;padding:8px 10px;font-size:10px}
+ #lbprev{left:10px}#lbnext{right:10px}
+ #lbtitle{max-width:22ch;font-size:15px}
+ #lbclose{top:10px;right:8px;width:44px;height:44px}
+ #lbrelated{padding:11px 12px 10px}
+ .lbthumb{width:88px;height:58px}
+}
 
 /* 원본이 있는 이미지에만 커서를 바꿔 누를 수 있다는 걸 알린다 */
 .mediaframe.zoomable{cursor:zoom-in}

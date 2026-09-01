@@ -35,7 +35,7 @@ import {
   AGRAD, AREAS, CARD_IMG, COLOR, MULTI, PARENTS, RLAB, SHOTS, SLUG, THEMED, TREECOLS, VID,
 } from '@/data/regions'
 import { SPINE } from '@/data/spine'
-import type { ContentNode, Region } from '@/data/types'
+import type { ContentNode, ProjectCard, Region } from '@/data/types'
 import { ZMAP } from '@/data/zmap'
 import { engineStore } from '@/stores/engineStore'
 import { uiStore, type UISnapshot } from '@/stores/uiStore'
@@ -757,6 +757,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         ? `<a class="lk" href="${u}">${esc(t)} →</a>`
         : `<a class="lk" href="${u}" target="_blank">${esc(t)} ↗</a>`).join('')}</div>`
       : ''
+    const workCards = projectCardsFor(n)
     const foot = `<div class="pgfoot">${n.id !== CONTACT_ID ? `<span class="lk" data-go="${CONTACT_ID}">↦ ${esc(byId[CONTACT_ID]?.name ?? '')}</span>` : ''}<span class="lk" data-go="${ENTRY_ID}">↑ 지도의 중심으로</span></div>`
     gid('doc').innerHTML = `
    <div class="kicker">${esc(n.kicker || '')}</div>
@@ -784,20 +785,8 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         } else { d.setAttribute('hidden', ''); dv.classList.remove('on'); i.textContent = '↓' }
       }
     })()
-    // 원본(<id>-full.jpg)이 있는 노드만 이미지를 눌러 모달로 볼 수 있다.
-    // 있는지 없는지는 목록으로 들고 있지 않고 실제로 불러 보고 판단한다 —
-    // 이미지를 추가하면 데이터를 고치지 않아도 따라온다.
-    ;(function () {
-      const mf = document.querySelector('#doc .mediaframe') as HTMLElement | null
-      if (!mf) return
-      const src = '/assets/' + n.id + '-full.jpg'
-      const probe = new Image()
-      probe.onload = function () {
-        mf.classList.add('zoomable')
-        mf.onclick = function () { openLightbox(src, n.name) }
-      }
-      probe.src = src
-    })()
+    if (workCards.length) wireProjectCards(n, workCards)
+    else wireNodeLightbox(n)
     gid('doc').querySelectorAll('[data-go]').forEach((p) => {
       (p as HTMLElement).onclick = (ev) => { ev.preventDefault(); navigate((p as HTMLElement).dataset.go as string) }
     })
@@ -843,31 +832,152 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   }
   on(gid('back'), 'click', returnHome)
 
-  // ── 원본 이미지 모달 ─────────────────────────────────────────────────
-  // 노드 페이지의 이미지는 16:10 으로 잘라 놓은 것이라 원본에서 빠진 부분이
-  // 있다. 눌러서 잘리지 않은 원본을 보게 한다.
-  function openLightbox(src: string, alt: string): void {
+  // ── 작업물 이미지 모달 ───────────────────────────────────────────────
+  let lbNode: ENode | null = null
+  let lbCards: ProjectCard[] = []
+  let lbProjectIndex = 0
+  let lbImageIndex = 0
+  let lbImageRequest = 0
+  let lbReturnFocus: HTMLElement | null = null
+
+  function renderLightboxImage(): void {
+    const card = lbCards[lbProjectIndex]
+    const images = card ? projectCardImages(card) : []
+    const imageId = images[lbImageIndex]
     const im = gid('lbimg') as HTMLImageElement
-    im.src = src
-    im.alt = alt
-    gid('lbscroll').scrollTop = 0
-    gid('lightbox').removeAttribute('hidden')
+    const empty = gid('lbempty')
+    gid('lbmain').scrollTop = 0
+    if (!imageId) {
+      lbImageRequest++
+      im.hidden = true
+      im.removeAttribute('src')
+      empty.removeAttribute('hidden')
+      return
+    }
+
+    const request = ++lbImageRequest
+    const baseSrc = `/assets/${imageId}.jpg`
+    const fullSrc = `/assets/${imageId}-full.jpg`
+    im.hidden = false
+    empty.setAttribute('hidden', '')
+    im.alt = `${card.repo} 이미지 ${lbImageIndex + 1}`
+    im.src = baseSrc
+    const probe = new Image()
+    probe.onload = function () { if (request === lbImageRequest) im.src = fullSrc }
+    probe.src = fullSrc
+
+    gid('lbthumbs').querySelectorAll<HTMLButtonElement>('.lbthumb').forEach((thumb, index) => {
+      const selected = index === lbImageIndex
+      thumb.classList.toggle('is-selected', selected)
+      thumb.setAttribute('aria-pressed', String(selected))
+    })
   }
+
+  function renderLightbox(): void {
+    const card = lbCards[lbProjectIndex]
+    if (!card) return
+    const images = projectCardImages(card)
+    gid('lbtitle').textContent = card.repo
+    gid('lbcounter').textContent = lbCards.length > 1
+      ? `${lbProjectIndex + 1} / ${lbCards.length}`
+      : ''
+    const actions = gid('lbactions')
+    actions.innerHTML = ''
+    const codeLink = document.createElement('a')
+    codeLink.className = 'lb-action lb-code'
+    codeLink.href = `https://github.com/${GITHUB_USER}/${encodeURIComponent(card.repo)}`
+    codeLink.target = '_blank'
+    codeLink.rel = 'noopener'
+    codeLink.textContent = PAGE_TEXT.cardCode
+    actions.appendChild(codeLink)
+    if (card.demo) {
+      const demoLink = document.createElement('a')
+      demoLink.className = 'lb-action lb-demo'
+      demoLink.href = card.demo
+      demoLink.target = '_blank'
+      demoLink.rel = 'noopener'
+      demoLink.textContent = PAGE_TEXT.cardDemo
+      actions.appendChild(demoLink)
+    }
+    ;(['lbprev', 'lbnext'] as const).forEach((id) => {
+      const button = gid(id) as HTMLButtonElement
+      button.hidden = lbCards.length < 2
+    })
+    const related = gid('lbrelated')
+    related.hidden = images.length === 0
+    gid('lbthumbs').innerHTML = images.map((imageId, index) => `
+      <button class="lbthumb${index === lbImageIndex ? ' is-selected' : ''}" type="button" data-lb-image="${index}"
+        aria-label="${esc(card.repo)} 관련 이미지 ${index + 1}" aria-pressed="${index === lbImageIndex}">
+        <img src="/assets/${imageId}.jpg" alt="" loading="lazy">
+      </button>`).join('')
+    gid('lbthumbs').querySelectorAll<HTMLButtonElement>('.lbthumb').forEach((thumb) => {
+      thumb.onclick = function () {
+        lbImageIndex = Number(thumb.dataset.lbImage || 0)
+        renderLightboxImage()
+      }
+    })
+    renderLightboxImage()
+  }
+
+  function openProjectLightbox(n: ENode, cards: ProjectCard[], projectIndex: number): void {
+    lbNode = n
+    lbCards = cards
+    lbProjectIndex = projectIndex
+    lbImageIndex = 0
+    lbReturnFocus = document.activeElement as HTMLElement | null
+    renderLightbox()
+    gid('lightbox').removeAttribute('hidden')
+    ;(gid('lbclose') as HTMLButtonElement).focus()
+  }
+
+  function changeLightboxProject(direction: -1 | 1): void {
+    if (lbCards.length < 2) return
+    lbProjectIndex = (lbProjectIndex + direction + lbCards.length) % lbCards.length
+    lbImageIndex = 0
+    if (lbNode) selectProjectCard(lbNode, lbCards, lbProjectIndex)
+    renderLightbox()
+  }
+
   function closeLightbox(): void {
     const lb = gid('lightbox')
     if (lb.hasAttribute('hidden')) return
     lb.setAttribute('hidden', '')
-    // 큰 이미지를 물고 있지 않도록 비운다
+    lbImageRequest++
     ;(gid('lbimg') as HTMLImageElement).removeAttribute('src')
+    gid('lbthumbs').innerHTML = ''
+    gid('lbactions').innerHTML = ''
+    lbReturnFocus?.focus()
+    lbReturnFocus = null
   }
+  on(gid('lbprev'), 'click', () => changeLightboxProject(-1))
+  on(gid('lbnext'), 'click', () => changeLightboxProject(1))
   on(gid('lbclose'), 'click', closeLightbox)
   on(gid('lightbox'), 'click', function (ev: MouseEvent) {
-    // 이미지 자체가 아니라 배경을 눌렀을 때만 닫는다
     const t = ev.target as HTMLElement
-    if (t.id === 'lightbox' || t.id === 'lbscroll') closeLightbox()
+    if (t.id === 'lightbox') closeLightbox()
   })
   on(document, 'keydown', function (ev: KeyboardEvent) {
-    if (ev.key === 'Escape') closeLightbox()
+    const lb = gid('lightbox')
+    if (lb.hasAttribute('hidden')) return
+    if (ev.key === 'Escape') {
+      ev.preventDefault(); ev.stopPropagation(); closeLightbox(); return
+    }
+    if (ev.key === 'ArrowLeft') {
+      ev.preventDefault(); changeLightboxProject(-1); return
+    }
+    if (ev.key === 'ArrowRight') {
+      ev.preventDefault(); changeLightboxProject(1); return
+    }
+    if (ev.key !== 'Tab') return
+    const focusable = [...lb.querySelectorAll<HTMLElement>('button:not([hidden]), a[href]:not([hidden])')]
+    if (!focusable.length) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (ev.shiftKey && document.activeElement === first) {
+      ev.preventDefault(); last.focus()
+    } else if (!ev.shiftKey && document.activeElement === last) {
+      ev.preventDefault(); first.focus()
+    }
   })
   // 워드마크는 장식이다. 진입 노드는 페이지를 열지 않고 갤러리로 간다 —
   // 지도의 중심을 누르면 지도로 돌아가는 것이 맞고, 프로필은 갤러리가 보여준다.
@@ -923,25 +1033,50 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    * 그래서 이름을 눌러서 저장소로 갈 수 있게 따로 그린다.
    */
   /**
-   * 저장소가 여럿인 노드의 프로젝트 카드.
+   * 저장소를 보여주는 프로젝트 카드.
    *
    * 카드 하나가 화면·이름·설명·스킬·코드·데모를 다 들고 있다. 이전에는 같은
    * 저장소가 본문 문장 · 링크 칩 · 저장소 칩 · 썸네일 네 군데에 흩어져 있었고
    * 어느 줄도 전부를 담지 못했다(링크 4 / 칩 6 / 썸네일 4 식). 그래서 카드가
    * 있는 노드에서는 links·repos·스트립을 아예 그리지 않는다.
    */
+  function projectCardsFor(n: ENode): ProjectCard[] {
+    if (n.cards?.length) return n.cards
+    if (n.repos?.length === 1 && n.project) {
+      const demo = [n.url, ...(n.links || []).map(([, url]) => url)]
+        .find((url) => url?.startsWith('http') && !url.includes('github.com/'))
+      return [{
+        repo: n.repos[0],
+        desc: n.sum || n.body,
+        skills: (n.project.skills || []).map(([name]) => name),
+        demo,
+        shot: n.id,
+      }]
+    }
+    return []
+  }
+
+  function projectCardImages(card: ProjectCard): string[] {
+    const images = card.shot ? [card.shot] : []
+    for (const image of card.images || []) if (!images.includes(image)) images.push(image)
+    return images
+  }
+
   function projectCards(n: ENode): string {
-    if (!n.cards || !n.cards.length) return ''
-    const items = n.cards.map((c) => {
-      const th = c.shot
-        ? `<img src="/assets/${c.shot}.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
+    const cards = projectCardsFor(n)
+    if (!cards.length) return ''
+    const items = cards.map((c, index) => {
+      const thumbId = projectCardImages(c)[0]
+      const th = thumbId
+        ? `<img src="/assets/${thumbId}.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
         : ''
       const sk = c.skills.map((x) => `<span class="pc-s">${esc(x)}</span>`).join('')
       const demo = c.demo
         ? `<a class="pc-go" href="${c.demo}" target="_blank" rel="noopener">${PAGE_TEXT.cardDemo}</a>`
         : (c.note ? `<span class="pc-note">${esc(c.note)}</span>` : '')
-      return `<article class="pc">
-   <div class="pc-th${c.shot ? '' : ' none'}">${th}</div>
+      return `<article class="pc${index === 0 ? ' is-selected' : ''}" data-project-index="${index}">
+   <button class="pc-hit" type="button" aria-label="${esc(c.repo)} 이미지를 상단에서 보기" aria-pressed="${index === 0}"></button>
+   <div class="pc-th${thumbId ? '' : ' none'}">${th}</div>
    <div class="pc-b">
      <div class="pc-n">${esc(c.repo)}</div>
      <p class="pc-d">${esc(c.desc)}</p>
@@ -950,7 +1085,78 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
    </div>
  </article>`
     }).join('')
-    return `<div class="pcwrap"><div class="repolab">${esc(PAGE_TEXT.reposLabel)} · ${n.cards.length}</div><div class="pcards">${items}</div></div>`
+    return `<div class="pcwrap"><div class="repolab">${esc(PAGE_TEXT.reposLabel)} · ${cards.length}</div><div class="pcards">${items}</div></div>`
+  }
+
+  function selectProjectCard(n: ENode, cards: ProjectCard[], projectIndex: number): void {
+    const card = cards[projectIndex]
+    if (!card) return
+    const imageId = projectCardImages(card)[0]
+    const frame = document.querySelector('#doc .mediaframe') as HTMLElement | null
+    const view = document.querySelector('#doc .gview') as HTMLElement | null
+    if (!frame || !view) return
+
+    gid('doc').querySelectorAll<HTMLElement>('.pc').forEach((item, index) => {
+      const selected = index === projectIndex
+      item.classList.toggle('is-selected', selected)
+      item.querySelector('.pc-hit')?.setAttribute('aria-pressed', String(selected))
+    })
+    const capEl = document.querySelector('#doc .mediaframe + .cap')
+    if (capEl) capEl.textContent = card.repo
+
+    if (!imageId) {
+      view.innerHTML = ''
+      frame.classList.add('noimg')
+      frame.classList.remove('zoomable')
+      frame.removeAttribute('role')
+      frame.removeAttribute('tabindex')
+      frame.removeAttribute('aria-label')
+      frame.onclick = null
+      frame.onkeydown = null
+      return
+    }
+
+    view.innerHTML = `<img src="/assets/${imageId}.jpg" alt="${esc(card.repo)}" onerror="this.parentNode.parentNode.classList.add('noimg');this.remove()">`
+    frame.classList.remove('noimg')
+    frame.classList.add('zoomable')
+    frame.setAttribute('role', 'button')
+    frame.setAttribute('tabindex', '0')
+    frame.setAttribute('aria-label', `${card.repo} 이미지 확대 보기`)
+    frame.onclick = function () { openProjectLightbox(n, cards, projectIndex) }
+    frame.onkeydown = function (ev: KeyboardEvent) {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return
+      ev.preventDefault(); openProjectLightbox(n, cards, projectIndex)
+    }
+  }
+
+  function wireProjectCards(n: ENode, cards: ProjectCard[]): void {
+    gid('doc').querySelectorAll<HTMLButtonElement>('.pc-hit').forEach((button) => {
+      button.onclick = function () {
+        const card = button.closest<HTMLElement>('.pc')
+        selectProjectCard(n, cards, Number(card?.dataset.projectIndex || 0))
+      }
+    })
+    if (cards.length) selectProjectCard(n, cards, 0)
+  }
+
+  function wireNodeLightbox(n: ENode): void {
+    const frame = document.querySelector('#doc .mediaframe') as HTMLElement | null
+    if (!frame) return
+    const src = `/assets/${n.id}-full.jpg`
+    const probe = new Image()
+    probe.onload = function () {
+      const card: ProjectCard = { repo: n.name, desc: '', skills: [], shot: n.id }
+      frame.classList.add('zoomable')
+      frame.setAttribute('role', 'button')
+      frame.setAttribute('tabindex', '0')
+      frame.setAttribute('aria-label', `${n.name} 이미지 확대 보기`)
+      frame.onclick = function () { openProjectLightbox(n, [card], 0) }
+      frame.onkeydown = function (ev: KeyboardEvent) {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return
+        ev.preventDefault(); openProjectLightbox(n, [card], 0)
+      }
+    }
+    probe.src = src
   }
   function repoChips(n: ENode): string {
     if (!n.repos || !n.repos.length) return ''
