@@ -292,20 +292,25 @@ test('연락 페이지가 경력 근거와 협업 방식을 채용 담당자에�
 
   await expect(page.locator('#doc .title')).toContainText('사용자의 불편')
   await expect(page.locator('#doc .meta .v').nth(1)).toHaveText('blackstarzck@naver.com')
-  await expect(page.locator('#doc .contact-proof-card')).toHaveCount(4)
   const timelineItems = page.locator('#doc [data-contact-timeline-item]')
   await expect(timelineItems).toHaveCount(8)
   await expect(page.locator('#doc .contact-timeline-project')).toHaveCount(10)
   await expect(page.locator('#doc .contact-timeline-item', { hasText: '코로나19' })).toContainText('웹 개발을 새로운 커리어로 결정했습니다.')
-  await expect(page.locator('#doc .contact-timeline-item', { hasText: '여행사 A' }).locator('p')).toHaveCount(0)
-  await expect(page.locator('#doc .contact-timeline-item', { hasText: '여행사 B' }).locator('p')).toHaveCount(0)
+  // 본문 없는 이력은 제목만 남는다. toHaveCount(1) 이 없으면 항목을 못 찾아도 통과한다.
+  for (const brief of ['가자하와이', 'G-Bridge']) {
+    const briefItem = page.locator('#doc .contact-timeline-item', { hasText: brief })
+    await expect(briefItem).toHaveCount(1)
+    await expect(briefItem.locator('p')).toHaveCount(0)
+  }
+  // 카드에서 이어지는 노드 칩. 스마트팜 관리자 페이지만 대응 노드가 없어 칩이 빠진다.
+  await expect(page.locator('#doc .contact-timeline-link')).toHaveCount(11)
   await expect(page.locator('#doc .contact-collab-item')).toHaveCount(4)
   await expect(page.locator('#doc .contact-fit li')).toHaveCount(4)
   const revealSections = page.locator('#doc .contact-reveal')
-  await expect(revealSections).toHaveCount(5)
+  await expect(revealSections).toHaveCount(4)
   await expect(revealSections.last()).not.toHaveClass(/is-visible/)
   expect(await revealSections.first().evaluate((element) => parseFloat(getComputedStyle(element).marginBottom))).toBeGreaterThanOrEqual(96)
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 4; index++) {
     await revealSections.nth(index).scrollIntoViewIfNeeded()
     await expect(revealSections.nth(index)).toHaveClass(/is-visible/)
   }
@@ -338,6 +343,47 @@ test('연락 페이지가 경력 근거와 협업 방식을 채용 담당자에�
   expect(pageWidth).toBeLessThanOrEqual(390)
 })
 
+test('연락 타임라인 카드의 칩이 연관 프로젝트 페이지로 이동한다', async ({ page }) => {
+  // 움직임 줄이기로 두면 타임라인 항목이 gsap 없이 바로 보여서 클릭이 안정적이다.
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/', { waitUntil: 'networkidle' })
+  await page.waitForFunction(() => '__engine' in window, undefined, { polling: 100 })
+
+  await page.evaluate(() => {
+    ;(window as unknown as { __open(id: string): void }).__open('contact')
+  })
+
+  const topikChips = page
+    .locator('#doc .contact-timeline-project', { hasText: '도토리 TOPIK 학습 서비스' })
+    .locator('.contact-timeline-link')
+  await expect(topikChips).toHaveCount(3)
+  await expect(topikChips).toHaveText([
+    '도토리 토픽 · 사용자단→',
+    '도토리 토픽 · 관리자단→',
+    'TOPIK AI 검증 하네스→',
+  ])
+  await expect(topikChips.first()).toHaveAttribute('href', '#/topik-user')
+  await expect(topikChips.first()).toHaveAttribute('data-go', 'topik-user')
+  // 칩 색은 대상 노드의 region 색을 따른다 — frontend #4FC3F7, ai #CFFF04.
+  await expect(topikChips.nth(0)).toHaveCSS('color', 'rgb(79, 195, 247)')
+  await expect(topikChips.nth(2)).toHaveCSS('color', 'rgb(207, 255, 4)')
+
+  // 대응 노드가 없는 카드에는 칩이 붙지 않는다.
+  await expect(
+    page.locator('#doc .contact-timeline-project', { hasText: '스마트팜 관리자 페이지' })
+      .locator('.contact-timeline-link'),
+  ).toHaveCount(0)
+
+  const dealerChip = page
+    .locator('#doc .contact-timeline-project', { hasText: '관리자 페이지 UI 개선' })
+    .locator('.contact-timeline-link')
+  await dealerChip.scrollIntoViewIfNeeded()
+  await dealerChip.click()
+
+  await expect.poll(() => page.evaluate(() => location.hash)).toBe('#/dealer-admin')
+  await expect(page.locator('#doc .title')).toContainText('반복 입력이 많던 관리자 화면')
+})
+
 test('움직임 줄이기 설정에서는 연락 섹션을 즉시 보여준다', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/', { waitUntil: 'networkidle' })
@@ -348,8 +394,8 @@ test('움직임 줄이기 설정에서는 연락 섹션을 즉시 보여준다',
   })
 
   const revealSections = page.locator('#doc .contact-reveal')
-  await expect(revealSections).toHaveCount(5)
-  for (let index = 0; index < 5; index++) {
+  await expect(revealSections).toHaveCount(4)
+  for (let index = 0; index < 4; index++) {
     await expect(revealSections.nth(index)).toHaveClass(/is-visible/)
     await expect(revealSections.nth(index)).toHaveCSS('opacity', '1')
   }

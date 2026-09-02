@@ -387,11 +387,6 @@ body.light .glance .gl-skills{border-top-color:rgba(0,0,0,.08)}
 .contact-eyebrow{font-family:var(--mono);font-size:10px;line-height:1.4;letter-spacing:.18em;text-transform:uppercase;color:var(--cc);margin-bottom:10px}
 .contact-section>h2,.contact-close>h2{font-family:var(--display),var(--sans);font-size:clamp(28px,3.8vw,52px);font-weight:550;line-height:1.12;letter-spacing:-.035em;color:var(--ink);max-width:18ch;margin:0;word-break:keep-all}
 .contact-deck{font-size:clamp(16px,1.5vw,19px);line-height:1.72;color:var(--ink2);max-width:64ch;margin:18px 0 30px;word-break:keep-all}
-.contact-proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.contact-proof-card{min-height:224px;padding:23px 24px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 10%,transparent),rgba(255,255,255,.025) 55%)}
-.contact-proof-card>span{display:inline-flex;font-family:var(--mono);font-size:9px;line-height:1;letter-spacing:.13em;color:#080910;background:var(--cc);border-radius:999px;padding:6px 10px;text-transform:uppercase}
-.contact-proof-card h3{font-family:var(--display),var(--sans);font-size:clamp(20px,2vw,28px);font-weight:600;line-height:1.28;letter-spacing:-.025em;color:var(--ink);max-width:15ch;margin:25px 0 11px;word-break:keep-all}
-.contact-proof-card p{font-size:14.5px;line-height:1.7;color:var(--ink2);max-width:39ch;margin:0;word-break:keep-all}
 .contact-journey{padding-top:30px;border-top:1px solid rgba(255,255,255,.13)}
 .contact-journey ol{position:relative;list-style:none;margin:42px 0 0;padding:0 0 0 34px}
 .contact-journey ol::before{content:"";position:absolute;left:7px;top:7px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--cc),color-mix(in srgb,var(--cc) 24%,transparent))}
@@ -406,6 +401,12 @@ body.light .glance .gl-skills{border-top-color:rgba(0,0,0,.08)}
 .contact-timeline-project{padding:20px 21px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.025)}
 .contact-timeline-project h4{font-size:15.5px;line-height:1.45;color:var(--ink);margin:0 0 8px;word-break:keep-all}
 .contact-timeline-project p{font-size:13.5px;line-height:1.68;color:var(--ink2);margin:0;word-break:keep-all}
+/* 카드에서 이어지는 노드로 가는 칩. --cc 는 대상 노드의 region 색으로 덮인다. */
+.contact-timeline-links{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:16px}
+.contact-timeline-link{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:7px 12px;font-size:12px;line-height:1.35;color:var(--cc);text-decoration:none;word-break:keep-all;border:1px solid color-mix(in srgb,var(--cc) 42%,transparent);border-radius:999px;background:color-mix(in srgb,var(--cc) 9%,transparent);cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.contact-timeline-link:hover{color:#080910;background:var(--cc);border-color:var(--cc)}
+.contact-timeline-link:focus-visible{outline:2px solid var(--cc);outline-offset:3px}
+.contact-timeline-link i{font-style:normal;font-size:11px;opacity:.75}
 .contact-columns{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(72px,8vw,112px);margin-bottom:clamp(120px,13vw,176px)}
 .contact-columns .contact-section{margin:0}
 .contact-columns .contact-section>h2{font-size:clamp(27px,3vw,40px)}
@@ -428,18 +429,17 @@ body.light .glance .gl-skills{border-top-color:rgba(0,0,0,.08)}
 .contact-copy:focus-visible{outline:2px solid var(--cc);outline-offset:3px}
 .contact-copy svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 @media(min-width:761px){.contact-profile{margin-left:148px}}
-body.light .contact-proof-card,body.light .contact-fit{border-color:rgba(0,0,0,.13);background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 9%,transparent),rgba(0,0,0,.018) 55%)}
+body.light .contact-fit{border-color:rgba(0,0,0,.13);background:linear-gradient(145deg,color-mix(in srgb,var(--cc) 9%,transparent),rgba(0,0,0,.018) 55%)}
 body.light .contact-timeline-project{border-color:rgba(0,0,0,.12);background:rgba(0,0,0,.018)}
 body.light .contact-journey,body.light .contact-collab-item,body.light .contact-fit li{border-color:rgba(0,0,0,.12)}
 body.light .contact-close{background:radial-gradient(120% 180% at 100% 0,color-mix(in srgb,var(--cc) 19%,transparent),transparent 52%),rgba(0,0,0,.025)}
 @media(max-width:760px){
  .contact-profile{margin-top:44px}.contact-section{margin-bottom:96px}
  .contact-section>h2,.contact-close>h2{font-size:30px;max-width:24ch}.contact-deck{font-size:16px;margin-bottom:23px}
- .contact-proof-grid{grid-template-columns:1fr}.contact-proof-card{min-height:0;padding:21px}
- .contact-proof-card h3{font-size:23px;max-width:20ch;margin-top:20px}
  .contact-journey ol{margin-top:30px;padding-left:25px}.contact-journey ol::before{left:5px}
  .contact-timeline-item{padding:0 0 52px 25px}.contact-timeline-item:last-child{padding-bottom:0}.contact-timeline-item::before{top:4px;left:-25px;width:11px;height:11px}
  .contact-timeline-item--brief{padding-bottom:30px}.contact-timeline-item h3{font-size:23px}.contact-timeline-summary{font-size:14px}.contact-timeline-projects{grid-template-columns:1fr;margin-top:20px}.contact-timeline-project{padding:18px}
+ .contact-timeline-link{min-height:38px;padding:9px 13px}
  .contact-columns{grid-template-columns:1fr;gap:96px;margin-bottom:108px}.contact-collab-list{grid-template-columns:1fr;margin-top:24px}
  .contact-fit{padding:21px}.contact-close{padding:28px 22px}.contact-close::after{opacity:.6}
 }

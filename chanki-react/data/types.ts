@@ -36,21 +36,22 @@ export type ContactItem = {
   body: string
 }
 
-export type ContactProof = ContactItem & {
-  label: string
+/**
+ * 타임라인 카드. refs 는 이 작업과 이어지는 노드 id 다.
+ * 지도에 없는 id 는 칩으로 그려지지 않는다 — engine/legacy.ts contactProfile().
+ */
+export type ContactProject = ContactItem & {
+  refs?: string[]
 }
 
 export type ContactJourney = {
   year: string
   title: string
   body?: string
-  projects?: ContactItem[]
+  projects?: ContactProject[]
 }
 
 export type ContactFields = {
-  proofHeading: string
-  proofLead: string
-  proofs: ContactProof[]
   journeyHeading: string
   journeyLead: string
   journey: ContactJourney[]

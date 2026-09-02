@@ -732,19 +732,32 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     return out
   }
 
+  /**
+   * 타임라인 카드에서 이어지는 노드로 가는 칩.
+   *
+   * 지도에 없는 id 는 조용히 빠진다 — 아직 노드가 없는 작업(팜커넥트 관리자 페이지)과
+   * 오타를 같은 경로로 처리한다. 오타 자체는 gen-content.py 의 무결성 검사와
+   * data/__tests__/contact-refs.test.ts 가 막는다.
+   *
+   * href 를 함께 두어 새 탭·북마크·우클릭이 되고, #doc 의 [data-go] 핸들러가
+   * preventDefault 후 navigate() 를 돌려 지도 전환은 그대로 유지된다.
+   */
+  function timelineRefs(refs?: string[]): string {
+    const targets = (refs || []).map((id) => byId[id]).filter(Boolean)
+    if (!targets.length) return ''
+    const chips = targets.map((m) => `<a class="contact-timeline-link" href="#/${encodeURIComponent(m.id)}" data-go="${esc(m.id)}" style="--cc:${COLOR[m.region]}">${esc(m.name)}<i aria-hidden="true">→</i></a>`).join('')
+    return `<div class="contact-timeline-links">${chips}</div>`
+  }
+
   function contactProfile(n: ENode): string {
     const contact = n.contact
     if (!contact) return ''
 
-    const proofs = contact.proofs.map((proof) => `<article class="contact-proof-card">
-      <span>${esc(proof.label)}</span>
-      <h3>${esc(proof.title)}</h3>
-      <p>${esc(proof.body)}</p>
-    </article>`).join('')
     const journey = contact.journey.map((step) => {
       const projects = step.projects?.map((project) => `<article class="contact-timeline-project">
         <h4>${esc(project.title)}</h4>
         <p>${esc(project.body)}</p>
+        ${timelineRefs(project.refs)}
       </article>`).join('') || ''
       const modifier = step.projects?.length
         ? ' contact-timeline-item--company'
@@ -766,12 +779,6 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const fit = contact.fit.map((item) => `<li>${esc(item)}</li>`).join('')
 
     return `<article class="contact-profile" aria-label="김찬기와 함께 일하는 방식">
-      <section class="contact-section" aria-labelledby="contact-proof-heading">
-        <div class="contact-eyebrow">Proof of value</div>
-        <h2 id="contact-proof-heading">${esc(contact.proofHeading)}</h2>
-        <p class="contact-deck">${esc(contact.proofLead)}</p>
-        <div class="contact-proof-grid">${proofs}</div>
-      </section>
       <section class="contact-section contact-journey" aria-labelledby="contact-journey-heading">
         <div class="contact-eyebrow">Career journey</div>
         <h2 id="contact-journey-heading">${esc(contact.journeyHeading)}</h2>

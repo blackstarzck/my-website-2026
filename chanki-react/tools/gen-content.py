@@ -192,30 +192,6 @@ node("contact", "연락", "entry", "함께 제품을 더 낫게",
              ["2024 소개, 이력서", "/chanki-resume.pdf"],
             ["이 포트폴리오 코드", "https://github.com/blackstarzck/my-website-2026"]],
      contact={
-         "proofHeading": "사용자 경험을 제품 가치로 바꾸는 네 가지 방식",
-         "proofLead": "화면의 완성도만으로 끝내지 않고 사용자의 이해, 운영자의 시간, 팀의 검증 비용까지 함께 줄이는 방향으로 일합니다.",
-         "proofs": [
-             {
-                 "label": "운영 효율",
-                 "title": "반복을 찾아 업무 흐름을 줄입니다.",
-                 "body": "관리자 화면에 공통 입력 일괄 적용과 게시 전 미리보기를 더해 반복 작업과 검수 과정의 마찰을 줄였습니다."
-             },
-             {
-                 "label": "정보 시각화",
-                 "title": "복잡한 데이터를 한눈에 보이게 만듭니다.",
-                 "body": "30개 이상 센서의 온도·습도 데이터를 3D 대시보드로 풀어 농장주가 환경 상태를 직관적으로 파악하도록 만들었습니다."
-             },
-             {
-                 "label": "0→1 실행",
-                 "title": "문제를 서비스로 끝까지 연결합니다.",
-                 "body": "여러 엑셀과 문서의 중복 입력 문제를 발견하고 문서 통합 서비스를 기획부터 프론트엔드·서버·데이터 구조까지 1인 개발했습니다."
-             },
-             {
-                 "label": "검증 가능한 AI",
-                 "title": "속도만큼 결과의 신뢰를 관리합니다.",
-                 "body": "AI를 요구사항 정리·구현·리뷰·테스트·문서화에 활용하되 테스트·보안·배포 게이트와 Git 이력으로 결과를 검증합니다."
-             }
-         ],
          "journeyHeading": "관심을 결과물로, 화면을 제품으로",
          "journeyLead": "퍼블리싱에서 시작해 프론트엔드와 서버, 데이터, AI 검증까지 해결 범위를 넓혀 왔습니다.",
          "journey": [
@@ -246,18 +222,22 @@ node("contact", "연락", "entry", "함께 제품을 더 낫게",
                  "year": "2020.06 - 2022.06",
                  "title": "모두가딜러",
                  "body": "반응형 웹과 신규 콘텐츠 개발에서 시작해 데이터 조회, 사용자 인터랙션, 관리자 기능까지 담당하며 퍼블리셔에서 프론트엔드 개발자로 역할을 넓혔습니다.",
+                 # refs: 이 카드에서 이어지는 노드 id. 지도에 없는 id 는 칩이 그려지지 않는다.
                  "projects": [
                      {
                          "title": "반응형 서비스 운영 및 신규 콘텐츠 개발",
-                         "body": "웹과 앱의 화면을 개선하고 동적 콘텐츠와 개인화 기능을 구현해 화면의 완성도와 운영 편의성을 함께 높였습니다."
+                         "body": "웹과 앱의 화면을 개선하고 동적 콘텐츠와 개인화 기능을 구현해 화면의 완성도와 운영 편의성을 함께 높였습니다.",
+                         "refs": ["dealer-web"]
                      },
                      {
                          "title": "관리자 페이지 UI 개선",
-                         "body": "조건별 입력 화면과 일괄 적용, 미리보기 기능을 추가해 반복 작업을 줄이고 검수 정확도를 높였습니다."
+                         "body": "조건별 입력 화면과 일괄 적용, 미리보기 기능을 추가해 반복 작업을 줄이고 검수 정확도를 높였습니다.",
+                         "refs": ["dealer-admin"]
                      },
                      {
                          "title": "레거시 코드와 데이터 조회 구조 정리",
-                         "body": "불필요한 데이터 호출과 사용하지 않는 자산을 제거하고 조회 구조와 추적 스크립트를 정리해 유지보수성을 높였습니다."
+                         "body": "불필요한 데이터 호출과 사용하지 않는 자산을 제거하고 조회 구조와 추적 스크립트를 정리해 유지보수성을 높였습니다.",
+                         "refs": ["legacy-cleanup"]
                      }
                  ]
              },
@@ -268,13 +248,16 @@ node("contact", "연락", "entry", "함께 제품을 더 낫게",
                  "projects": [
                      {
                          "title": "센서 데이터 3D 시각화 대시보드",
-                         "body": "30개 이상 센서의 온도·습도 데이터를 3D로 시각화해 농장주가 실시간 환경과 AI 권장값을 직관적으로 비교하도록 만들었습니다."
+                         "body": "30개 이상 센서의 온도·습도 데이터를 3D로 시각화해 농장주가 실시간 환경과 AI 권장값을 직관적으로 비교하도록 만들었습니다.",
+                         "refs": ["farm-3d"]
                      },
                      {
                          "title": "CONNECT BEE 하이브리드 앱",
-                         "body": "센서 데이터 확인과 팬·열선·쿨러 제어를 하나의 화면 흐름으로 연결했습니다."
+                         "body": "센서 데이터 확인과 팬·열선·쿨러 제어를 하나의 화면 흐름으로 연결했습니다.",
+                         "refs": ["connect-bee"]
                      },
                      {
+                         # 대응 노드가 아직 없다. 노드를 만들면 여기에 id 를 넣는다.
                          "title": "스마트팜 관리자 페이지",
                          "body": "농장주와 농장, 센서 정보를 관리하고 환경 상태를 빠르게 확인할 수 있는 운영 화면을 개발했습니다."
                      }
@@ -287,19 +270,23 @@ node("contact", "연락", "entry", "함께 제품을 더 낫게",
                  "projects": [
                      {
                          "title": "도토리 TOPIK 학습 서비스",
-                         "body": "문제 풀이와 AI 피드백, 추천, 학습 이력, 다국어 경험을 구현하고 테스트·보안·배포 검증 과정을 연결했습니다."
+                         "body": "문제 풀이와 AI 피드백, 추천, 학습 이력, 다국어 경험을 구현하고 테스트·보안·배포 검증 과정을 연결했습니다.",
+                         "refs": ["topik-user", "topik-admin", "verify-loop"]
                      },
                      {
                          "title": "도서 재고 문서 통합 관리 서비스",
-                         "body": "여러 문서에 같은 정보를 반복 입력하던 업무를 하나의 시스템으로 통합하고 기획부터 화면과 서버까지 1인 개발했습니다."
+                         "body": "여러 문서에 같은 정보를 반복 입력하던 업무를 하나의 시스템으로 통합하고 기획부터 화면과 서버까지 1인 개발했습니다.",
+                         "refs": ["doc-merge"]
                      },
                      {
                          "title": "법인별 홈페이지",
-                         "body": "기획과 디자인부터 반응형 웹 개발, 배포와 운영까지 단독으로 수행해 유지보수성과 확장성을 높였습니다."
+                         "body": "기획과 디자인부터 반응형 웹 개발, 배포와 운영까지 단독으로 수행해 유지보수성과 확장성을 높였습니다.",
+                         "refs": ["corp-sites"]
                      },
                      {
                          "title": "DADOKe 전자책·오디오북 플랫폼",
-                         "body": "시장과 경쟁사를 분석하고 요구사항 정의와 해외 개발업체 커뮤니케이션을 총괄했습니다."
+                         "body": "시장과 경쟁사를 분석하고 요구사항 정의와 해외 개발업체 커뮤니케이션을 총괄했습니다.",
+                         "refs": ["dadoke"]
                      }
                  ]
              }
@@ -834,6 +821,13 @@ for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"
 assert set(ZMAP) == ids
+# contact 타임라인 카드의 refs 는 실제 노드를 가리켜야 한다. 오타는 화면에서 칩이
+# 조용히 사라지는 형태로만 드러나므로 여기서 막는다.
+for n in N:
+    for step in (n.get("contact") or {}).get("journey", []):
+        for card in step.get("projects", []):
+            for ref in card.get("refs", []):
+                assert ref in ids, f"contact refs 미상 노드: {step['title']} / {card['title']} → {ref}"
 for reg in REGIONS:
     if reg != "entry":
         assert any(n["id"] == reg for n in N), f"area 노드 없음: {reg}"
@@ -931,21 +925,22 @@ export type ContactItem = {{
   body: string
 }}
 
-export type ContactProof = ContactItem & {{
-  label: string
+/**
+ * 타임라인 카드. refs 는 이 작업과 이어지는 노드 id 다.
+ * 지도에 없는 id 는 칩으로 그려지지 않는다 — engine/legacy.ts contactProfile().
+ */
+export type ContactProject = ContactItem & {{
+  refs?: string[]
 }}
 
 export type ContactJourney = {{
   year: string
   title: string
   body?: string
-  projects?: ContactItem[]
+  projects?: ContactProject[]
 }}
 
 export type ContactFields = {{
-  proofHeading: string
-  proofLead: string
-  proofs: ContactProof[]
   journeyHeading: string
   journeyLead: string
   journey: ContactJourney[]
