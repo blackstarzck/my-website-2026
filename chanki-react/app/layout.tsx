@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import AnalyticsGate from '@/components/AnalyticsGate'
 import BodyClassSync from '@/components/BodyClassSync'
 import CanvasHost from '@/components/CanvasHost'
+import ClarityGate from '@/components/ClarityGate'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <CanvasHost />
         {children}
         <AnalyticsGate />
+        <ClarityGate />
       </body>
     </html>
   )
