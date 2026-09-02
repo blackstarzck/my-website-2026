@@ -1,6 +1,6 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import AnalyticsGate from '@/components/AnalyticsGate'
 import BodyClassSync from '@/components/BodyClassSync'
 import CanvasHost from '@/components/CanvasHost'
 import './globals.css'
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <BodyClassSync />
         <CanvasHost />
         {children}
-        <Analytics />
+        <AnalyticsGate />
       </body>
     </html>
   )
