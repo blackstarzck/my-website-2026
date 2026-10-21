@@ -630,7 +630,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       cap = `<span class="cap">${esc(n.cap || n.name)} · ${PAGE_TEXT.embedHint}</span>`
         + (EMBED_FULL[n.id] ? `<a class="embfull" href="${EMBED_FULL[n.id]}" target="_blank">${PAGE_TEXT.embedFull}</a>` : '')
     } else if (VID[n.id]) {
-      inner = `<video src="${VID[n.id]}" controls autoplay loop muted playsinline preload="metadata" poster="/assets/${n.id}.jpg"></video>`
+      inner = `<video src="${VID[n.id]}" controls autoplay loop muted playsinline preload="metadata" poster="${cardImgSrc(n.id)}"></video>`
       cap = n.cap ? `<span class="cap">${esc(n.cap)}</span>` : ''
     } else {
       inner = `<img src="${imgSrc(n.id)}" alt="" onerror="this.parentNode?.classList.add('noimg');this.remove()">`
@@ -1285,7 +1285,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     }).join('') + '</nav>'
   }
   function imgSrc(id: string): string { return '/assets/' + id + ((THEMED[id] && U().theme === 'light') ? '-light' : '') + '.jpg' }
-  function cardImgSrc(id: string): string { return CARD_IMG[id] ? '/assets/' + CARD_IMG[id] + '.jpg' : imgSrc(id) }
+  function cardImgSrc(id: string): string { return CARD_IMG[id] || imgSrc(id) }
   /**
    * 이 노드가 다루는 GitHub 저장소를 칩으로 깐다.
    *
@@ -1336,7 +1336,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const items = cards.map((c, index) => {
       const thumbId = projectCardImages(c)[0]
       const th = thumbId
-        ? `<img src="/assets/${thumbId}.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
+        ? `<img src="${cardImgSrc(thumbId)}" alt="" loading="lazy" onerror="this.parentNode.classList.add('none');this.remove()">`
         : ''
       const sk = c.skills.map((x) => `<span class="pc-s">${esc(x)}</span>`).join('')
       const codeUrl = projectCardCodeUrl(c)
@@ -1380,7 +1380,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     if (card.video) {
       // 초기 미리보기가 같은 영상이면 재생 위치와 컨트롤 상태를 유지한다.
       if (view.querySelector('video')?.getAttribute('src') !== card.video) {
-        view.innerHTML = `<video src="${esc(card.video)}" controls autoplay loop muted playsinline preload="metadata"${imageId ? ` poster="/assets/${imageId}.jpg"` : ''}></video>`
+        view.innerHTML = `<video src="${esc(card.video)}" controls autoplay loop muted playsinline preload="metadata"${imageId ? ` poster="${cardImgSrc(imageId)}"` : ''}></video>`
       }
       frame.classList.remove('noimg', 'zoomable', 'clk')
       frame.removeAttribute('role')

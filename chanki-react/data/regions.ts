@@ -123,8 +123,10 @@ export const SHOTS: Record<string, string[]> = {
   ]
 }
 
-/** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
-export const CARD_IMG: Record<string, string> = {}
+/** 기본 이미지 대신 사용하는 썸네일의 public 기준 경로. */
+export const CARD_IMG: Record<string, string> = {
+  "ttokttok": "/ttok-ttok-thumbnail.png"
+}
 
 /** 프로젝트 미리보기 영상의 public 기준 경로. */
 export const VID: Record<string, string> = {
