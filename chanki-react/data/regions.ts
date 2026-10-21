@@ -16,7 +16,7 @@ export const RLAB: Record<Region, string> = {
   "frontend": "프론트엔드",
   "backend": "서버 · 데이터",
   "ai": "AI 개발 프로세스",
-  "product": "제품 · 협업",
+  "product": "독서 경험 · 제품",
   "lab": "실험실"
 }
 
@@ -126,8 +126,11 @@ export const SHOTS: Record<string, string[]> = {
 /** 카드 이미지를 다른 파일명으로 쓰는 노드. 아직 없음. */
 export const CARD_IMG: Record<string, string> = {}
 
-/** 영상(<id>.mp4)이 있는 노드. 아직 없음. */
-export const VID: Record<string, number> = {}
+/** 프로젝트 미리보기 영상의 public 기준 경로. */
+export const VID: Record<string, string> = {
+  "ttokttok": "/ttok-ttok-trailer-web.mp4",
+  "on-the-book": "/on-the-book-trailer.mp4"
+}
 
 export const PARENTS: ReadonlySet<Region> = new Set([
   "frontend",

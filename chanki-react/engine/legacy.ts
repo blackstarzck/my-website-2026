@@ -222,6 +222,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   let unsubscribeUI: () => void = () => {}
   let origenEntering = false
   let contactRevealContext: gsap.Context | null = null
+  let projectVideoObserver: IntersectionObserver | null = null
 
   function dispose(): void {
     disposed = true
@@ -231,6 +232,8 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     listeners.length = 0
     contactRevealContext?.revert()
     contactRevealContext = null
+    projectVideoObserver?.disconnect()
+    projectVideoObserver = null
     unsubscribeUI()
     // 줌인 도중에 dispose 되면 body.origen 이 남아 다음 엔진이 origen 화면으로 오인한다.
     if (origenEntering) {
@@ -627,13 +630,13 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       cap = `<span class="cap">${esc(n.cap || n.name)} · ${PAGE_TEXT.embedHint}</span>`
         + (EMBED_FULL[n.id] ? `<a class="embfull" href="${EMBED_FULL[n.id]}" target="_blank">${PAGE_TEXT.embedFull}</a>` : '')
     } else if (VID[n.id]) {
-      inner = `<video src="/assets/${n.id}.mp4" autoplay loop muted playsinline poster="/assets/${n.id}.jpg" onerror="this.parentNode.classList.add('noimg');this.remove()"></video>`
+      inner = `<video src="${VID[n.id]}" controls autoplay loop muted playsinline preload="metadata" poster="/assets/${n.id}.jpg"></video>`
       cap = n.cap ? `<span class="cap">${esc(n.cap)}</span>` : ''
     } else {
-      inner = `<img src="${imgSrc(n.id)}" alt="" onerror="this.parentNode.classList.add('noimg');this.remove()">`
+      inner = `<img src="${imgSrc(n.id)}" alt="" onerror="this.parentNode?.classList.add('noimg');this.remove()">`
       cap = n.cap ? `<span class="cap">${esc(n.cap)}</span>` : ''
     }
-    if (!EMBED[n.id] && n.url) {
+    if (!EMBED[n.id] && !VID[n.id] && n.url) {
       figCls += ' clk'
       figAttrs = n.url.charAt(0) === '#'
         ? ` onclick="location.hash='${n.url.slice(1)}'" title="${esc(n.urlLabel || PAGE_TEXT.openFallback)}"`
@@ -676,9 +679,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     if (capEl) capEl.textContent = nm ? (n.cap ? n.cap + ' · ' + nm : nm) : (n.cap || '')
   }
   function cardMedia(id: string): string {
-    return VID[id]
-      ? `<video src="/assets/${id}.mp4" autoplay loop muted playsinline poster="/assets/${id}.jpg" onerror="this.remove()"></video>`
-      : `<img src="${cardImgSrc(id)}" alt="" onerror="this.remove()">`
+    return `<img src="${cardImgSrc(id)}" alt="" onerror="this.remove()">`
   }
   function ncard(m: ENode): string {
     const isA = AREAS.has(m.id)
@@ -886,6 +887,8 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   }
 
   function buildPage(n: ENode): void {
+    projectVideoObserver?.disconnect()
+    projectVideoObserver = null
     const acc = COLOR[n.region]
     document.documentElement.style.setProperty('--acc', acc)
     const _pg = gid('page')
@@ -1027,6 +1030,19 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     }
     if (workCards.length) wireProjectCards(n, workCards)
     else wireNodeLightbox(n)
+    // 상세 페이지는 처음에 숨겨져 있어 autoplay만으로는 재생되지 않을 수 있다.
+    // 두 trailer는 사용자가 미리보기까지 스크롤했을 때 재생을 시작한다.
+    if (VID[n.id]) {
+      const video = gid('doc').querySelector<HTMLVideoElement>('.gview video')
+      if (video) {
+        video.muted = true
+        projectVideoObserver = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) void video.play().catch(() => {})
+          else video.pause()
+        }, { root: _pg, threshold: 0.15 })
+        projectVideoObserver.observe(video)
+      }
+    }
     gid('doc').querySelectorAll('[data-go]').forEach((p) => {
       (p as HTMLElement).onclick = (ev) => { ev.preventDefault(); navigate((p as HTMLElement).dataset.go as string) }
     })
@@ -1057,11 +1073,15 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
   function returnField(): void {
     const s = U()
     if (s.mode === 'field') return
+    projectVideoObserver?.disconnect()
+    gid('doc').querySelectorAll('video').forEach((video) => video.pause())
     // 전이가 끝나는 프레임에서 uiStore.returnField() 가 mode='field'/activeId=null 을 내린다.
     s.setMode('trans'); sim.transDir = -1; sim.playing = true
     setHash(s.galNode || s.fieldSel || ENTRY_ID)
   }
   function returnHome(): void {
+    projectVideoObserver?.disconnect()
+    gid('doc').querySelectorAll('video').forEach((video) => video.pause())
     setHoverId(null); hideTip()
     if (U().mode !== 'field') {
       // 원본은 여기서 goHome()을 즉시 불렀지만 uiStore.goHome()은 activeId 까지 지운다.
@@ -1293,6 +1313,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         skills: (n.project.skills || []).map(([name]) => name),
         demo,
         shot: n.id,
+        video: VID[n.id],
       }]
     }
     return []
@@ -1326,7 +1347,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
         ? `<a class="pc-go" href="${c.demo}" target="_blank" rel="noopener">${esc(c.demoLabel || PAGE_TEXT.cardDemo)}</a>`
         : (c.note ? `<span class="pc-note">${esc(c.note)}</span>` : '')
       return `<article class="pc${index === 0 ? ' is-selected' : ''}" data-project-index="${index}">
-   <button class="pc-hit" type="button" aria-label="${esc(c.repo)} 이미지를 상단에서 보기" aria-pressed="${index === 0}"></button>
+   <button class="pc-hit" type="button" aria-label="${esc(c.repo)} ${c.video ? '영상을' : '이미지를'} 상단에서 보기" aria-pressed="${index === 0}"></button>
    <div class="pc-th${thumbId ? '' : ' none'}">${th}</div>
    <div class="pc-b">
      <div class="pc-n">${esc(c.repo)}</div>
@@ -1356,6 +1377,21 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
     const capEl = document.querySelector('#doc .mediaframe + .cap')
     if (capEl) capEl.textContent = card.repo
 
+    if (card.video) {
+      // 초기 미리보기가 같은 영상이면 재생 위치와 컨트롤 상태를 유지한다.
+      if (view.querySelector('video')?.getAttribute('src') !== card.video) {
+        view.innerHTML = `<video src="${esc(card.video)}" controls autoplay loop muted playsinline preload="metadata"${imageId ? ` poster="/assets/${imageId}.jpg"` : ''}></video>`
+      }
+      frame.classList.remove('noimg', 'zoomable', 'clk')
+      frame.removeAttribute('role')
+      frame.removeAttribute('tabindex')
+      frame.removeAttribute('aria-label')
+      frame.removeAttribute('title')
+      frame.onclick = null
+      frame.onkeydown = null
+      return
+    }
+
     if (!imageId) {
       view.innerHTML = ''
       frame.classList.add('noimg')
@@ -1368,7 +1404,7 @@ export function createEngine({ canvases, seed = 0xC0FFEE }: EngineDeps): EngineT
       return
     }
 
-    view.innerHTML = `<img src="/assets/${imageId}.jpg" alt="${esc(card.repo)}" onerror="this.parentNode.parentNode.classList.add('noimg');this.remove()">`
+    view.innerHTML = `<img src="/assets/${imageId}.jpg" alt="${esc(card.repo)}" onerror="this.parentNode?.parentNode?.classList.add('noimg');this.remove()">`
     frame.classList.remove('noimg')
     frame.classList.add('zoomable')
     frame.setAttribute('role', 'button')

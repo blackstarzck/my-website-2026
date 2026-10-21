@@ -31,13 +31,11 @@ describe('contact 타임라인 카드의 연관 노드', () => {
   it.each([
     ['모두가딜러', '반응형 서비스 운영 및 신규 콘텐츠 개발', ['dealer-web']],
     ['모두가딜러', '관리자 페이지 UI 개선', ['dealer-admin']],
-    ['모두가딜러', '레거시 코드와 데이터 조회 구조 정리', ['legacy-cleanup']],
     ['팜커넥트', '센서 데이터 3D 시각화 대시보드', ['farm-3d']],
     ['팜커넥트', 'CONNECT BEE 하이브리드 앱', ['connect-bee']],
     ['케듀올', '도토리 TOPIK 학습 서비스', ['topik-user', 'topik-admin', 'verify-loop']],
     ['케듀올', '도서 재고 문서 통합 관리 서비스', ['doc-merge']],
     ['케듀올', '법인별 홈페이지', ['corp-sites']],
-    ['케듀올', 'DADOKe 전자책·오디오북 플랫폼', ['dadoke']],
   ])('%s · %s 가 %j 로 이어진다', (company, title, refs) => {
     expect(card(company, title).refs).toEqual(refs)
   })
@@ -45,6 +43,8 @@ describe('contact 타임라인 카드의 연관 노드', () => {
   it('대응 노드가 없는 카드는 refs 를 두지 않는다', () => {
     // 노드를 만들면 gen-content.py 에서 refs 를 채우고 이 기대값을 바꾼다.
     expect(card('팜커넥트', '스마트팜 관리자 페이지').refs).toBeUndefined()
+    expect(card('모두가딜러', '레거시 코드와 데이터 조회 구조 정리').refs).toBeUndefined()
+    expect(card('케듀올', 'DADOKe 전자책·오디오북 플랫폼').refs).toBeUndefined()
   })
 
   it('회사 이력에만 칩이 붙는다', () => {

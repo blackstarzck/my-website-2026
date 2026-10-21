@@ -17,14 +17,16 @@ export type ProjectCard = {
   repo: string
   desc: string
   skills: string[]
-  /** false 이면 코드 버튼을 숨기고, 문자열이면 해당 코드 주소를 쓴다. */
+  /** false 이면 코드 버튼을 숨기고, 문자열이면 해당 코드 주소를 씁니다. */
   code?: string | false
   /** 배포된 화면 주소. 없으면 코드 링크만 보인다. */
   demo?: string
   /** 데모 버튼에 표시할 문구. */
   demoLabel?: string
-  /** /assets/<shot>.jpg 를 카드 썸네일로 쓴다. */
+  /** /assets/<shot>.jpg 를 카드 썸네일로 씁니다. */
   shot?: string
+  /** 이미지 미리보기 자리에 재생할 영상의 public 기준 경로. */
+  video?: string
   /** 같은 작업물의 추가 이미지. 파일명에서 .jpg 를 뺀 값을 넣는다. */
   images?: string[]
   /** 화면이 없는 이유 같은 단서. */

@@ -100,15 +100,11 @@ export const EDGES: [string, string][] = [
   ],
   [
     "product",
-    "dadoke"
+    "ttokttok"
   ],
   [
     "product",
-    "legacy-cleanup"
-  ],
-  [
-    "product",
-    "docs-comm"
+    "on-the-book"
   ],
   [
     "lab",
@@ -157,10 +153,6 @@ export const EDGES: [string, string][] = [
   [
     "dealer-web",
     "dealer-admin"
-  ],
-  [
-    "dealer-admin",
-    "legacy-cleanup"
   ],
   [
     "farm-3d",
@@ -251,15 +243,15 @@ export const EDGES: [string, string][] = [
     "multi-agent"
   ],
   [
-    "docs-comm",
-    "dealer-admin"
-  ],
-  [
     "doc-merge",
     "backend"
   ],
   [
-    "dadoke",
-    "topik-user"
+    "ttokttok",
+    "on-the-book"
+  ],
+  [
+    "on-the-book",
+    "three-lab"
   ]
 ]

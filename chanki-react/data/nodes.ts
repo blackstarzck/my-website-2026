@@ -89,10 +89,7 @@ export const NODES: ContentNode[] = [
             },
             {
               "title": "레거시 코드와 데이터 조회 구조 정리",
-              "body": "불필요한 데이터 호출과 사용하지 않는 자산을 제거하고 조회 구조와 추적 스크립트를 정리해 유지보수성을 높였습니다.",
-              "refs": [
-                "legacy-cleanup"
-              ]
+              "body": "불필요한 데이터 호출과 사용하지 않는 자산을 제거하고 조회 구조와 추적 스크립트를 정리해 유지보수성을 높였습니다."
             }
           ]
         },
@@ -151,10 +148,7 @@ export const NODES: ContentNode[] = [
             },
             {
               "title": "DADOKe 전자책·오디오북 플랫폼",
-              "body": "시장과 경쟁사를 분석하고 요구사항 정의와 해외 개발업체 커뮤니케이션을 총괄했습니다.",
-              "refs": [
-                "dadoke"
-              ]
+              "body": "시장과 경쟁사를 분석하고 요구사항 정의와 해외 개발업체 커뮤니케이션을 총괄했습니다."
             }
           ]
         }
@@ -975,38 +969,57 @@ export const NODES: ContentNode[] = [
   },
   {
     "id": "product",
-    "name": "제품 · 협업",
+    "name": "독서 경험 · 제품",
     "region": "product",
-    "kicker": "일하는 방식",
-    "body": "기획자와 디자이너가 없는 환경에서 일한 시간이 길어, 무엇을 만들지 정하는 일과 만드는 일을 함께 해왔습니다. 기술적인 내용을 상대방의 눈높이에 맞게 설명하는 것, 서로 다른 관점 사이를 조율하는 것이 강점이라고 생각합니다.",
-    "cap": "제품 · 협업",
+    "kicker": "발견에서 몰입까지",
+    "body": "책을 만나는 입구와 읽는 방식을 새롭게 설계한 두 서비스입니다. 똑똑은 숏폼 피드에서 흥미를 느낀 순간 바로 읽도록 연결하고, 온더북은 책 속 장면을 직접 걸어 보는 3D 독서 경험을 제공합니다. 독자 화면뿐 아니라 콘텐츠를 등록하고 공개하는 관리자 흐름까지 함께 구성했습니다.",
+    "cap": "독서 경험 · 제품",
     "x": -4.5,
     "y": -0.96,
     "r": 1.22
   },
   {
-    "id": "dadoke",
-    "name": "DADOKe 전자책 · 오디오북",
+    "id": "ttokttok",
+    "name": "똑똑 · 숏폼 독서",
     "region": "product",
-    "kicker": "케듀올 · B2C",
-    "sum": "개발은 외주에 맡기고 기획·요구사항 정의·커뮤니케이션을 총괄했습니다.",
-    "body": "B2C 전자책·오디오북 플랫폼입니다. 밀리의서재, 리디북스, 아마존 킨들 등 주요 서비스를 벤치마킹해 시장과 경쟁사를 분석했습니다. 개발은 베트남 외주업체에 위탁하고 기획과 요구사항 정의, 커뮤니케이션을 총괄했습니다.",
-    "cap": "DADOKe 플랫폼",
+    "kicker": "독서 서비스 · 모바일 웹",
+    "sum": "숏폼에서 만난 책을, 그 자리에서 바로 읽도록 연결했습니다.",
+    "body": "책 소개 카드와 세로 영상을 넘기다가 마음에 드는 책을 바로 펼치는 모바일 웹 서비스입니다. 로그인 없이 피드를 탐색하고 전문 도서를 읽을 수 있으며, EPUB 뷰어의 글자 크기·배경 설정과 이어 읽기를 지원합니다. 운영자는 별도 관리자 앱에서 도서·게시물·채널·추천 콘텐츠와 댓글 신고를 관리합니다.",
+    "cap": "똑똑 (Ttokttok)",
+    "url": "https://ttokttok-virid.vercel.app/",
+    "urlLabel": "똑똑 열기",
+    "repos": [
+      "ttokttok"
+    ],
     "project": {
-      "role": "시장조사·기획·요구사항 정의·외주 커뮤니케이션 총괄",
-      "impact": "직접 구현하지 않는 프로젝트에서 요구사항을 전달하고 조율하는 경험을 했습니다.",
-      "scope": "밀리의서재·리디북스·아마존 킨들 벤치마킹, 베트남 외주업체와의 요구사항 조율.",
+      "role": "독자 경험 · 콘텐츠 운영 화면 구현",
+      "impact": "책 발견 → 읽기 → 이어 읽기를 하나의 웹 흐름으로 연결했습니다.",
+      "scope": "Next.js App Router·TypeScript·Tailwind CSS v4·Supabase·epub.js 기반. 사용자·관리자 앱과 공용 패키지를 모노레포로 구성했습니다.",
+      "objectives": [
+        "카드·세로 영상 피드에서 책 발견",
+        "전문 도서 읽기와 독서 위치 저장",
+        "제목·저자·채널 검색과 장르 탐색",
+        "도서·게시물·채널·추천·신고 관리"
+      ],
       "skills": [
         [
-          "시장 · 경쟁사 분석",
-          "first"
-        ],
-        [
-          "외주 커뮤니케이션",
+          "Next.js",
           "grew"
         ],
         [
-          "요구사항 정의",
+          "TypeScript",
+          "grew"
+        ],
+        [
+          "Supabase",
+          "grew"
+        ],
+        [
+          "epub.js",
+          "first"
+        ],
+        [
+          "Tailwind CSS",
           "grew"
         ]
       ]
@@ -1016,55 +1029,54 @@ export const NODES: ContentNode[] = [
     "r": 0.62
   },
   {
-    "id": "legacy-cleanup",
-    "name": "레거시 정리 · 성능 개선",
+    "id": "on-the-book",
+    "name": "온더북 · 3D 독서",
     "region": "product",
-    "kicker": "모두가딜러 · 2022",
-    "sum": "불필요한 호출과 쓰지 않는 자산을 걷어내 유지보수 비용을 줄였습니다.",
-    "body": "불필요한 Ajax 호출을 제거하고 MySQL SELECT문을 정리해 데이터 조회 구조를 단순화했습니다. 쓰이지 않는 common.js와 style.css를 걷어내 프론트엔드 자산을 경량화했고, 네이버·구글 애널리틱스와 앱스플라이어, 카카오 픽셀 등 추적 코드를 재정비해 스크립트 관리 효율을 개선했습니다.",
-    "cap": "레거시 정리",
+    "kicker": "독서 서비스 · 3D 웹",
+    "sum": "책 속 장면을 직접 걸으며, 이야기와 공간을 함께 읽습니다.",
+    "body": "책을 고르고 장면을 선택하면 작품 속 3D 공간으로 들어가는 웹 서비스입니다. 캐릭터를 움직여 모델에 다가가면 애니메이션과 글귀를 만나고, 챕터를 따라 이동하며 본문을 읽습니다. 관리자는 도서·장면·3D 모델을 편집하고 독자와 같은 공간에서 미리 본 뒤 공개할 수 있습니다.",
+    "cap": "온더북 (On the Book)",
+    "url": "https://on-the-book-client.vercel.app/",
+    "urlLabel": "온더북 열기",
+    "repos": [
+      "on-the-book"
+    ],
     "project": {
-      "role": "성능 개선 및 레거시 코드 정리",
-      "duration": "2022.01 - 2022.05",
+      "role": "3D 독서 경험 · 콘텐츠 편집·공개 흐름 구현",
+      "impact": "도서 탐색과 장면별 3D 체험을 연결하고, 편집 중인 내용과 독자에게 공개된 내용을 분리했습니다.",
+      "scope": "JavaScript·Three.js·Vite·Express·Supabase 기반. 사용자·관리자 화면이 공통 3D 렌더링과 데이터 검증 코드를 사용합니다.",
+      "objectives": [
+        "책장 검색·분류·정렬과 작품 상세 탐색",
+        "장면별 3D 이동·모델 반응·본문 읽기",
+        "GLB 모델 등록과 위치·크기·회전·동작 편집",
+        "임시 저장·미리보기·공개와 마지막 장면 이어 읽기"
+      ],
       "skills": [
         [
-          "성능 개선",
+          "Three.js",
           "grew"
         ],
         [
-          "레거시 정리",
-          "first"
-        ]
-      ]
-    },
-    "x": -7.29,
-    "y": -1.55,
-    "r": 0.72
-  },
-  {
-    "id": "docs-comm",
-    "name": "문서화 · 비개발 직군 협업",
-    "region": "product",
-    "kicker": "지속",
-    "sum": "기능과 정책을 문서로 남기고, 비개발 직군이 읽을 수 있는 자료를 따로 만들었습니다.",
-    "body": "서비스 기능과 정책을 문서화하고 비개발 직군과의 커뮤니케이션 자료를 별도로 제작해 협업 효율을 높였습니다. 최근에는 반응형·다국어 UI와 사용자·관리자 권한 경계를 문서화해 유지보수성과 운영 안정성을 함께 올리는 데 적용하고 있습니다.",
-    "cap": "문서화 · 협업",
-    "project": {
-      "role": "기능·정책 문서화 및 협업 자료 제작",
-      "skills": [
-        [
-          "기술 문서화",
-          "grew"
-        ],
-        [
-          "비개발 직군 커뮤니케이션",
+          "JavaScript",
           "core"
+        ],
+        [
+          "Supabase",
+          "grew"
+        ],
+        [
+          "GLB",
+          "grew"
+        ],
+        [
+          "콘텐츠 관리",
+          "grew"
         ]
       ]
     },
-    "x": -6.11,
-    "y": -5.69,
-    "r": 0.82
+    "x": -5.45,
+    "y": -5.08,
+    "r": 0.72
   },
   {
     "id": "lab",
@@ -1233,7 +1245,7 @@ export const NODES: ContentNode[] = [
     "cards": [
       {
         "repo": "isosmetric-02",
-        "desc": "GLTF로 만든 아이소메트릭 방. 침대·책상·조명까지 배치하고 모델에 붙은 애니메이션을 재생한다.",
+        "desc": "GLTF로 만든 아이소메트릭 방. 침대·책상·조명까지 배치하고 모델에 붙은 애니메이션을 재생합니다.",
         "skills": [
           "three.js",
           "GLTF",
@@ -1244,7 +1256,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "isosmetric-01",
-        "desc": "같은 구조로 지은 첫 번째 방. lil-gui를 붙여 값을 실시간으로 만져 가며 감을 잡았다.",
+        "desc": "같은 구조로 지은 첫 번째 방. lil-gui를 붙여 값을 실시간으로 만져 가며 감을 잡았습니다.",
         "skills": [
           "three.js",
           "GLTF",
@@ -1255,7 +1267,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "custom_model",
-        "desc": "Blender로 만든 모델을 웹에 올리고 조명 둘을 붙여 밝기와 위치를 조절해 봤다.",
+        "desc": "Blender로 만든 모델을 웹에 올리고 조명 둘을 붙여 밝기와 위치를 조절해 봤습니다.",
         "skills": [
           "Blender",
           "three.js",
@@ -1276,7 +1288,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "ilbunidiary",
-        "desc": "위에서 내려다보는 시점의 방. Raycaster로 바닥을 찍으면 캐릭터가 그 지점까지 걸어간다.",
+        "desc": "위에서 내려다보는 시점의 방. Raycaster로 바닥을 찍으면 캐릭터가 그 지점까지 걸어갑니다.",
         "skills": [
           "Raycaster",
           "GLTF",
@@ -1322,7 +1334,7 @@ export const NODES: ContentNode[] = [
     "cards": [
       {
         "repo": "neon-fist",
-        "desc": "백엔드도 외부 에셋도 없이 만든 1:1 격투 게임. UI·파티클·게이지를 코드로 그리고 타격음부터 배경 음악까지 실시간 합성한다.",
+        "desc": "백엔드도 외부 에셋도 없이 만든 1:1 격투 게임. UI·파티클·게이지를 코드로 그리고 타격음부터 배경 음악까지 실시간 합성합니다.",
         "skills": [
           "Canvas 2D",
           "Web Audio API",
@@ -1333,7 +1345,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "game-cabinet",
-        "desc": "3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행한다. 큐레이션한 게임을 캐비닛 화면에 띄운다.",
+        "desc": "3D 아케이드 캐비닛을 세우고 그 안에서 웹게임을 실행합니다. 큐레이션한 게임을 캐비닛 화면에 띄웁니다.",
         "skills": [
           "React Three Fiber",
           "Next.js"
@@ -1343,7 +1355,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "bridge",
-        "desc": "유리다리를 건너는 게임. 밟은 판이 깨져 떨어지는 것을 눈속임이 아니라 물리 엔진으로 처리했다.",
+        "desc": "유리다리를 건너는 게임. 밟은 판이 깨져 떨어지는 것을 눈속임이 아니라 물리 엔진으로 처리했습니다.",
         "skills": [
           "cannon",
           "Raycaster",
@@ -1354,7 +1366,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "first-person-perspective",
-        "desc": "1인칭으로 공간을 걸어 다닌다. 충돌은 cannon-es로 처리하고 키보드와 터치 조작을 따로 나눠 뒀다.",
+        "desc": "1인칭으로 공간을 걸어 다닙니다. 충돌은 cannon-es로 처리하고 키보드와 터치 조작을 따로 나눠 뒀습니다.",
         "skills": [
           "three.js",
           "cannon-es",
@@ -1365,7 +1377,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "lets-fps",
-        "desc": "여럿이 같이 하는 FPS. 충돌용 월드를 GLTF로 불러오고 로그인과 방 상태는 Supabase에 뒀다.",
+        "desc": "여럿이 같이 하는 FPS. 충돌용 월드를 GLTF로 불러오고 로그인과 방 상태는 Supabase에 뒀습니다.",
         "skills": [
           "three.js",
           "Supabase",
@@ -1454,7 +1466,7 @@ export const NODES: ContentNode[] = [
     "cards": [
       {
         "repo": "zenith",
-        "desc": "업비트 자동매매 본체. Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 쓴다. 손실 리포트와 원인 분석 문서가 함께 있다.",
+        "desc": "업비트 자동매매 본체. Python 봇과 React UI가 REST 없이 Supabase를 공유 채널로 씁니다. 손실 리포트와 원인 분석 문서가 함께 있습니다.",
         "skills": [
           "Python",
           "Supabase",
@@ -1464,7 +1476,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "zenith-v2",
-        "desc": "봇을 zenith_bot 패키지로 다시 묶고 pytest를 붙였다.",
+        "desc": "봇을 zenith_bot 패키지로 다시 묶고 pytest를 붙였습니다.",
         "skills": [
           "Python",
           "pytest"
@@ -1472,7 +1484,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "zenith-v3",
-        "desc": "docs/prd.md에 적은 매매 명세를 그대로 구현하는 전략 엔진으로 다시 짰다. trader와 web을 나눴다.",
+        "desc": "docs/prd.md에 적은 매매 명세를 그대로 구현하는 전략 엔진으로 다시 짰습니다. trader와 web을 나눴습니다.",
         "skills": [
           "Python",
           "명세 기반 구현"
@@ -1480,7 +1492,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "zenith-v4",
-        "desc": "모노레포로 재작성. 연결 상태를 상태머신으로 정리하고 타임아웃·지터 백오프 재시도, runId와 seq로 중복·순서역전을 막았다.",
+        "desc": "모노레포로 재작성. 연결 상태를 상태머신으로 정리하고 타임아웃·지터 백오프 재시도, runId와 seq로 중복·순서역전을 막았습니다.",
         "skills": [
           "TypeScript",
           "WebSocket",
@@ -1489,7 +1501,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "coin-lab",
-        "desc": "backend·frontend·workers·infra로 나눠 다시 세운 판. PostgreSQL 함수까지 직접 썼다.",
+        "desc": "backend·frontend·workers·infra로 나눠 다시 세운 판. PostgreSQL 함수까지 직접 썼습니다.",
         "skills": [
           "Python",
           "PostgreSQL",
@@ -1498,7 +1510,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "coin-lab-v2",
-        "desc": "전략 실험 대시보드. 디자인 시스템을 문서로 먼저 정하고 화면을 맞췄다.",
+        "desc": "전략 실험 대시보드. 디자인 시스템을 문서로 먼저 정하고 화면을 맞췄습니다.",
         "skills": [
           "디자인 시스템",
           "Python",
@@ -1516,7 +1528,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "Haley",
-        "desc": "매매 전략을 코드보다 먼저 문서로 정리한 것. 단계별 다이어그램으로 흐름을 굳혔다.",
+        "desc": "매매 전략을 코드보다 먼저 문서로 정리한 것. 단계별 다이어그램으로 흐름을 굳혔습니다.",
         "skills": [
           "전략 명세"
         ]
@@ -1636,7 +1648,7 @@ export const NODES: ContentNode[] = [
     "cards": [
       {
         "repo": "react-todos",
-        "desc": "투두 앱. 영상을 보며 클론 코딩한 것으로, 목록 추가·완료·삭제를 처음 끝까지 만들어 봤다.",
+        "desc": "투두 앱. 영상을 보며 클론 코딩한 것으로, 목록 추가·완료·삭제를 처음 끝까지 만들어 봤습니다.",
         "skills": [
           "React",
           "클론 코딩"
@@ -1653,7 +1665,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "business-card",
-        "desc": "명함을 만들어 저장하는 앱. Firebase로 로그인과 저장을, Cloudinary로 이미지 업로드를 붙였다.",
+        "desc": "명함을 만들어 저장하는 앱. Firebase로 로그인과 저장을, Cloudinary로 이미지 업로드를 붙였습니다.",
         "skills": [
           "Firebase",
           "Cloudinary"
@@ -1663,7 +1675,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-modeal.net2",
-        "desc": "화면 하나를 통째로 따라 만들어 본 클론 코딩. swiper로 캐러셀을 붙였다.",
+        "desc": "화면 하나를 통째로 따라 만들어 본 클론 코딩. swiper로 캐러셀을 붙였습니다.",
         "skills": [
           "React Router",
           "swiper"
@@ -1673,7 +1685,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-modeal",
-        "desc": "같은 클론의 앞 버전. styled-components와 라우터를 처음 같이 써 봤다.",
+        "desc": "같은 클론의 앞 버전. styled-components와 라우터를 처음 같이 써 봤습니다.",
         "skills": [
           "styled-components",
           "React Router"
@@ -1681,7 +1693,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-face-detect",
-        "desc": "face-api.js를 붙여 사진 속 얼굴을 잡아 봤다. 모델 파일을 직접 넣어 브라우저에서 돌린다.",
+        "desc": "face-api.js를 붙여 사진 속 얼굴을 잡아 봤습니다. 모델 파일을 직접 넣어 브라우저에서 돌립니다.",
         "skills": [
           "face-api.js",
           "React"
@@ -1689,7 +1701,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-youtube",
-        "desc": "유튜브 API를 붙여 영상 목록과 상세를 보여주는 앱. API 호출부를 service로 떼어 냈다.",
+        "desc": "유튜브 API를 붙여 영상 목록과 상세를 보여주는 앱. API 호출부를 service로 떼어 냈습니다.",
         "skills": [
           "axios",
           "API 분리"
@@ -1697,7 +1709,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-swiper",
-        "desc": "영화 목록과 상세를 라우팅으로 나눈 앱. 강의를 따라가며 만들었다.",
+        "desc": "영화 목록과 상세를 라우팅으로 나눈 앱. 강의를 따라가며 만들었습니다.",
         "skills": [
           "React Router",
           "axios"
@@ -1706,7 +1718,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-practice4",
-        "desc": "코인 시세 목록. axios로 외부 API를 처음 붙여 본 연습이다.",
+        "desc": "코인 시세 목록. axios로 외부 API를 처음 붙여 본 연습입니다.",
         "skills": [
           "axios"
         ]
@@ -1728,7 +1740,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "react-practice3",
-        "desc": "페이지를 나누고 라우터로 이동시키는 연습. 아이콘을 붙여 봤다.",
+        "desc": "페이지를 나누고 라우터로 이동시키는 연습. 아이콘을 붙여 봤습니다.",
         "skills": [
           "React Router",
           "react-icons"
@@ -1786,7 +1798,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "memo",
-        "desc": "메모 앱. lodash.debounce로 입력이 멈춘 뒤에만 저장되게 했다.",
+        "desc": "메모 앱. lodash.debounce로 입력이 멈춘 뒤에만 저장되게 했습니다.",
         "skills": [
           "debounce",
           "React"
@@ -1794,21 +1806,21 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "habit-tracker",
-        "desc": "습관 기록 앱. 클래스형 컴포넌트로 만들었다.",
+        "desc": "습관 기록 앱. 클래스형 컴포넌트로 만들었습니다.",
         "skills": [
           "클래스 컴포넌트"
         ]
       },
       {
         "repo": "new-habit-tracker",
-        "desc": "위 앱을 함수형 컴포넌트로 다시 쓴 것. 같은 화면을 두 방식으로 만들어 비교했다.",
+        "desc": "위 앱을 함수형 컴포넌트로 다시 쓴 것. 같은 화면을 두 방식으로 만들어 비교했습니다.",
         "skills": [
           "함수형 컴포넌트"
         ]
       },
       {
         "repo": "assignment",
-        "desc": "PokeAPI로 포켓몬을 검색하는 과제. TypeScript로 썼고 React 없이 만들었다.",
+        "desc": "PokeAPI로 포켓몬을 검색하는 과제. TypeScript로 썼고 React 없이 만들었습니다.",
         "skills": [
           "TypeScript",
           "PokeAPI"
@@ -1816,7 +1828,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "data_structure",
-        "desc": "연결 리스트를 자바스크립트로 직접 구현하고 화면에 그려 확인했다.",
+        "desc": "연결 리스트를 자바스크립트로 직접 구현하고 화면에 그려 확인했습니다.",
         "skills": [
           "자료구조",
           "바닐라 JS"
@@ -1824,7 +1836,7 @@ export const NODES: ContentNode[] = [
       },
       {
         "repo": "drag-n-drop",
-        "desc": "라이브러리 없이 드래그 앤 드롭을 브라우저 API만으로 구현했다.",
+        "desc": "라이브러리 없이 드래그 앤 드롭을 브라우저 API만으로 구현했습니다.",
         "skills": [
           "바닐라 JS",
           "DnD"

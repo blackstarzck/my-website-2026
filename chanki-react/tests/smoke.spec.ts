@@ -189,6 +189,33 @@ test('포켓몬 도감과 능력치 카드 게임이 실험실의 독립 페이�
   }
 })
 
+for (const project of [
+  { id: 'ttokttok', video: '/ttok-ttok-trailer-web.mp4', demo: 'https://ttokttok-virid.vercel.app/' },
+  { id: 'on-the-book', video: '/on-the-book-trailer.mp4', demo: 'https://on-the-book-client.vercel.app/' },
+]) {
+  test(`${project.id}의 trailer 재생과 운영 링크가 기존 상세 양식에 연결된다`, async ({ page }) => {
+    const errors = collectPageErrors(page)
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto(`/#/${project.id}`, { waitUntil: 'networkidle' })
+    const video = page.locator('#doc .gview video')
+    await expect(video).toBeVisible()
+    await expect(video).toHaveAttribute('src', project.video)
+    await expect(video).toHaveAttribute('controls', '')
+    await expect(page.locator('#doc .cta')).toHaveAttribute('href', project.demo)
+    await expect(page.locator('#doc .pc-go')).toHaveAttribute('href', project.demo)
+    await expect(page.locator('#doc .pc-th img')).toHaveAttribute('src', `/assets/${project.id}.jpg`)
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.readyState)).toBeGreaterThanOrEqual(2)
+    await video.scrollIntoViewIfNeeded()
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.paused)).toBe(false)
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.currentTime)).toBeGreaterThan(0)
+    const size = await video.evaluate((el) => ({ width: el.clientWidth, container: el.closest('#doc')!.clientWidth }))
+    expect(size.width).toBeLessThanOrEqual(size.container)
+    await page.locator('#back').click()
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.paused)).toBe(true)
+    expect(errors, errors.join(' / ')).toEqual([])
+  })
+}
+
 test('area 노드와 홈 복귀에서 런타임 에러가 없다', async ({ page }) => {
   const errors = collectPageErrors(page)
   await page.goto('/', { waitUntil: 'networkidle' })
@@ -302,8 +329,8 @@ test('연락 페이지가 경력 근거와 협업 방식을 채용 담당자에�
     await expect(briefItem).toHaveCount(1)
     await expect(briefItem.locator('p')).toHaveCount(0)
   }
-  // 카드에서 이어지는 노드 칩. 스마트팜 관리자 페이지만 대응 노드가 없어 칩이 빠진다.
-  await expect(page.locator('#doc .contact-timeline-link')).toHaveCount(11)
+  // 지도에 남아 있는 프로젝트만 칩으로 연결한다.
+  await expect(page.locator('#doc .contact-timeline-link')).toHaveCount(9)
   await expect(page.locator('#doc .contact-collab-item')).toHaveCount(4)
   await expect(page.locator('#doc .contact-fit li')).toHaveCount(4)
   const revealSections = page.locator('#doc .contact-reveal')
