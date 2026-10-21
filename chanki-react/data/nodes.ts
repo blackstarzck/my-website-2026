@@ -1029,6 +1029,65 @@ export const NODES: ContentNode[] = [
     "r": 0.62
   },
   {
+    "id": "ttokttok-admin",
+    "name": "똑똑 · 관리자",
+    "region": "product",
+    "kicker": "콘텐츠 운영 · 관리자 웹",
+    "sum": "책과 게시물의 제작부터 발행과 운영까지 한곳에서 관리합니다.",
+    "body": "똑똑의 도서·카드·영상·채널·추천 콘텐츠를 관리하는 별도 운영 앱입니다. 게시물 편집 중 독자 화면과 같은 미리보기를 확인하고 발행할 수 있으며, 독자 반응 분석과 댓글 신고 처리, 회원·관리자 권한 관리까지 운영 흐름으로 연결했습니다.",
+    "cap": "똑똑 관리자 · 저장소 검증 화면",
+    "url": "https://ttokttok-admin.vercel.app/",
+    "urlLabel": "똑똑 관리자 열기",
+    "project": {
+      "role": "관리자 정보 구조 · 콘텐츠 편집·운영 화면 구현",
+      "impact": "콘텐츠 등록·미리보기·발행과 독자 반응 확인을 하나의 운영 흐름으로 연결했습니다.",
+      "scope": "Next.js App Router·TypeScript·Tailwind CSS v4·Supabase 기반. 독자 앱과 UI·데이터 타입·콘텐츠 코드를 공용 패키지로 공유합니다.",
+      "objectives": [
+        "도서·본문·구매 링크 등록",
+        "카드·영상 게시물 편집·미리보기·발행",
+        "채널·추천 도서와 노출 순서 관리",
+        "독자 반응 분석·댓글 신고·운영 권한 관리"
+      ],
+      "skills": [
+        [
+          "Next.js",
+          "grew"
+        ],
+        [
+          "TypeScript",
+          "grew"
+        ],
+        [
+          "Supabase",
+          "grew"
+        ],
+        [
+          "콘텐츠 관리",
+          "grew"
+        ]
+      ]
+    },
+    "cards": [
+      {
+        "repo": "ttokttok · 관리자",
+        "desc": "도서와 게시물, 채널과 추천 콘텐츠를 관리하는 똑똑 운영 화면입니다.",
+        "skills": [
+          "Next.js",
+          "TypeScript",
+          "Supabase",
+          "Tailwind CSS"
+        ],
+        "demo": "https://ttokttok-admin.vercel.app/",
+        "shot": "ttokttok-admin",
+        "code": "https://github.com/blackstarzck/ttokttok/tree/master/apps/admin",
+        "demoLabel": "관리자 열기 ↗"
+      }
+    ],
+    "x": -7.45,
+    "y": -0.22,
+    "r": 0.72
+  },
+  {
     "id": "on-the-book",
     "name": "온더북 · 3D 독서",
     "region": "product",
@@ -1074,9 +1133,72 @@ export const NODES: ContentNode[] = [
         ]
       ]
     },
-    "x": -5.45,
-    "y": -5.08,
-    "r": 0.72
+    "x": -7.72,
+    "y": -3.17,
+    "r": 0.82
+  },
+  {
+    "id": "on-the-book-admin",
+    "name": "온더북 · 관리자",
+    "region": "product",
+    "kicker": "3D 콘텐츠 운영 · 스튜디오",
+    "sum": "책 속 공간을 편집하고, 독자와 같은 화면에서 확인한 뒤 공개합니다.",
+    "body": "온더북의 책장과 3D 장면을 구성하는 콘텐츠 스튜디오입니다. 도서·챕터·본문을 관리하고 GLB 모델과 바닥 이미지를 배치해 위치·크기·회전·접근 반응을 조절합니다. 편집 화면에서 독자 체험으로 전환해 검수하고, 임시 저장과 공개를 나누어 운영합니다.",
+    "cap": "온더북 관리자 · 저장소 검증 화면",
+    "url": "https://on-the-book-admin.vercel.app/",
+    "urlLabel": "온더북 관리자 열기",
+    "project": {
+      "role": "3D 편집 도구 · 미리보기·공개 흐름 구현",
+      "impact": "3D 공간 편집과 독자 체험을 같은 좌표에서 연결하고, 초안과 공개본을 분리했습니다.",
+      "scope": "JavaScript·Three.js·Vite·Supabase 기반. 도서 보관함·모델 보관함·챕터 편집과 공통 3D 렌더링·검증 코드를 연결합니다.",
+      "objectives": [
+        "표지·분류·추천 배너와 책장 순서 관리",
+        "챕터·본문·공간 크기 편집",
+        "GLB 모델·바닥 이미지 배치와 접근 범위 조절",
+        "독자 체험·실행 취소·임시 저장·공개"
+      ],
+      "skills": [
+        [
+          "Three.js",
+          "grew"
+        ],
+        [
+          "JavaScript",
+          "core"
+        ],
+        [
+          "Supabase",
+          "grew"
+        ],
+        [
+          "GLB",
+          "grew"
+        ],
+        [
+          "콘텐츠 관리",
+          "grew"
+        ]
+      ]
+    },
+    "cards": [
+      {
+        "repo": "on-the-book · 관리자",
+        "desc": "도서·챕터·3D 모델을 편집하고 미리보기와 공개를 연결하는 온더북 스튜디오입니다.",
+        "skills": [
+          "Three.js",
+          "JavaScript",
+          "Supabase",
+          "GLB"
+        ],
+        "demo": "https://on-the-book-admin.vercel.app/",
+        "shot": "on-the-book-admin",
+        "code": "https://github.com/blackstarzck/on-the-book/tree/main/admin",
+        "demoLabel": "관리자 열기 ↗"
+      }
+    ],
+    "x": -4.79,
+    "y": -4.47,
+    "r": 0.62
   },
   {
     "id": "lab",

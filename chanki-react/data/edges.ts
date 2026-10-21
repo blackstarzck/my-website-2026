@@ -104,7 +104,15 @@ export const EDGES: [string, string][] = [
   ],
   [
     "product",
+    "ttokttok-admin"
+  ],
+  [
+    "product",
     "on-the-book"
+  ],
+  [
+    "product",
+    "on-the-book-admin"
   ],
   [
     "lab",
@@ -253,5 +261,13 @@ export const EDGES: [string, string][] = [
   [
     "on-the-book",
     "three-lab"
+  ],
+  [
+    "ttokttok",
+    "ttokttok-admin"
+  ],
+  [
+    "on-the-book",
+    "on-the-book-admin"
   ]
 ]

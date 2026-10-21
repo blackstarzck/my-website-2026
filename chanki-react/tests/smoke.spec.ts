@@ -190,7 +190,7 @@ test('포켓몬 도감과 능력치 카드 게임이 실험실의 독립 페이�
 })
 
 for (const project of [
-  { id: 'ttokttok', video: '/ttok-ttok-trailer-web.mp4', demo: 'https://ttokttok-virid.vercel.app/' },
+  { id: 'ttokttok', video: '/ttok-ttok-trailer.mp4', demo: 'https://ttokttok-virid.vercel.app/' },
   { id: 'on-the-book', video: '/on-the-book-trailer.mp4', demo: 'https://on-the-book-client.vercel.app/' },
 ]) {
   test(`${project.id}의 trailer 재생과 운영 링크가 기존 상세 양식에 연결된다`, async ({ page }) => {
@@ -215,6 +215,32 @@ for (const project of [
     expect(errors, errors.join(' / ')).toEqual([])
   })
 }
+
+test('Product의 독자·관리자 네 항목이 각각의 상세 화면으로 연결된다', async ({ page }) => {
+  const errors = collectPageErrors(page)
+  await page.goto('/#/product', { waitUntil: 'networkidle' })
+  await expect(page.locator('#gallery .gcard')).toHaveCount(4)
+  expect(await page.locator('#gallery .gcard').evaluateAll((cards) => cards.map((card) => (card as HTMLElement).dataset.go)))
+    .toEqual(['ttokttok', 'ttokttok-admin', 'on-the-book', 'on-the-book-admin'])
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  for (const project of [
+    { id: 'ttokttok-admin', demo: 'https://ttokttok-admin.vercel.app/', code: 'https://github.com/blackstarzck/ttokttok/tree/master/apps/admin' },
+    { id: 'on-the-book-admin', demo: 'https://on-the-book-admin.vercel.app/', code: 'https://github.com/blackstarzck/on-the-book/tree/main/admin' },
+  ]) {
+    await page.evaluate((id) => {
+      ;(window as unknown as { __open(id: string): void }).__open(id)
+    }, project.id)
+    await expect(page.locator('#doc .cta')).toHaveAttribute('href', project.demo)
+    await expect(page.locator('#doc .pc-go')).toHaveAttribute('href', project.demo)
+    await expect(page.locator('#doc .pc-code')).toHaveAttribute('href', project.code)
+    await expect(page.locator('#doc .ai-article-section')).toHaveCount(3)
+    await expect(page.locator('#doc .gview video')).toHaveCount(0)
+    await expect.poll(() => page.locator('#doc .gview img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
+  }
+  expect(errors, errors.join(' / ')).toEqual([])
+})
 
 test('area 노드와 홈 복귀에서 런타임 에러가 없다', async ({ page }) => {
   const errors = collectPageErrors(page)

@@ -128,7 +128,7 @@ export const CARD_IMG: Record<string, string> = {}
 
 /** 프로젝트 미리보기 영상의 public 기준 경로. */
 export const VID: Record<string, string> = {
-  "ttokttok": "/ttok-ttok-trailer-web.mp4",
+  "ttokttok": "/ttok-ttok-trailer.mp4",
   "on-the-book": "/on-the-book-trailer.mp4"
 }
 

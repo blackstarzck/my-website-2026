@@ -81,6 +81,103 @@ const milliePackage = {
 }
 
 export const PROJECT_ARTICLES: Record<string, AIArticle> = {
+  'ttokttok-admin': {
+    deck: '독자가 만나는 책과 게시물 뒤에는 콘텐츠를 준비하고 발행하는 운영 과정이 있습니다. 똑똑 관리자는 도서 등록부터 카드·영상 제작, 추천 구성과 독자 반응 확인까지 이어지는 별도 웹 앱입니다.',
+    sections: [
+      {
+        eyebrow: '콘텐츠 제작',
+        title: '등록과 편집을 실제 독자 화면의 미리보기로 연결했습니다',
+        paragraphs: [
+          '운영자는 도서의 서지 정보와 표지, 전자책 본문과 외부 구매 링크를 등록합니다. 등록한 책을 카드나 영상 게시물에 연결하고, 문구·배경·서체·페이지 순서를 편집해 독자에게 보여 줄 콘텐츠를 구성합니다.',
+          '게시물 편집기에서는 실제 독자 화면에 가까운 미리보기를 함께 확인합니다. 도서 선택과 배경, 문구 작성, 최종 확인을 단계로 나누고 여러 페이지를 추가해 게시물을 제작하도록 구성했습니다.',
+        ],
+        workflow: {
+          caption: '도서 준비에서 게시물 발행까지의 운영 흐름',
+          steps: [
+            { label: 'Prepare', title: '도서와 채널 준비', detail: '책 정보와 본문·구매 링크, 발행할 채널을 정합니다.' },
+            { label: 'Edit', title: '게시물 제작', detail: '카드 문구와 배경·서체를 조절하거나 영상을 연결합니다.' },
+            { label: 'Review', title: '미리보기와 발행', detail: '독자에게 보일 화면을 확인하고 게시물을 발행합니다.', tone: 'check' },
+          ],
+        },
+      },
+      {
+        eyebrow: '서비스 운영',
+        title: '콘텐츠를 공개한 뒤의 관리 업무도 한곳에 모았습니다',
+        paragraphs: [
+          '도서와 게시물 외에 채널 정보, 오늘의 추천과 노출 순서도 관리자에서 관리합니다. 통계·분석 화면에서는 독자 반응과 도서 성과를 확인해 다음 콘텐츠 운영에 참고할 수 있도록 구성했습니다.',
+          '댓글 신고 검토와 금칙어 관리를 운영 메뉴에 포함하고, 회원과 관리자 계정 관리는 최고 관리자에게 제한합니다. 콘텐츠를 다루는 업무와 계정·권한을 다루는 업무의 접근 범위를 구분했습니다.',
+        ],
+        bullets: [
+          '도서·본문·구매 링크와 카드·영상 게시물 관리',
+          '채널 소개·추천 도서·노출 순서 관리',
+          '독자 반응과 도서 성과를 확인하는 통계·분석',
+          '댓글 신고·금칙어 처리와 역할에 따른 관리 권한',
+        ],
+      },
+      {
+        eyebrow: '구현 구성',
+        title: '독자 앱과 운영 앱의 화면 규칙을 공용 코드로 맞췄습니다',
+        paragraphs: [
+          '관리자 앱은 Next.js App Router·TypeScript·Tailwind CSS v4·Supabase를 기반으로 구성했습니다. 모노레포 안에서 독자 앱과 공용 UI·데이터 타입·콘텐츠 코드를 함께 사용해 편집 미리보기와 실제 표시 규칙을 연결합니다.',
+          '사용자 앱과 분리된 Vercel 프로젝트로 배포하며, 관리자 기능은 로그인과 역할 확인을 거칩니다. 이 페이지의 미리보기는 저장소에 포함된 게시물 편집기 검증 화면입니다.',
+        ],
+      },
+    ],
+    sources: [
+      { label: '똑똑 관리자 업무 메뉴 (비공개 저장소)', url: 'https://github.com/blackstarzck/ttokttok/blob/master/apps/admin/src/app/admin/(dashboard)/page.tsx' },
+      { label: '관리자 앱 기술 스택', url: 'https://github.com/blackstarzck/ttokttok/blob/master/apps/admin/package.json' },
+      { label: '게시물 편집기 검증 화면', url: 'https://github.com/blackstarzck/ttokttok/blob/master/e2e/baselines/admin/post-studio-1440.png' },
+    ],
+  },
+  'on-the-book-admin': {
+    deck: '책과 챕터, 3D 모델과 본문을 하나의 작품으로 구성하는 온더북 운영 도구입니다. 공간을 편집하는 과정에서 독자 체험으로 전환해 동작을 확인하고, 초안과 공개본을 구분해 콘텐츠를 운영합니다.',
+    sections: [
+      {
+        eyebrow: '도서와 장면 관리',
+        title: '책장에 보이는 정보와 장면 속 콘텐츠를 함께 편집합니다',
+        paragraphs: [
+          '도서 보관함에서 표지·분류·작품 소개와 공개 여부를 관리하고 독자 책장의 노출 순서를 정합니다. 홈 화면의 추천 배너와 연결 도서, 이미지와 문구도 운영 화면에서 구성합니다.',
+          '챕터 편집에서는 본문·장면 썸네일·공간 크기와 분위기를 조절합니다. 장면 순서를 바꾸면 독자가 이동하는 여정도 바뀌며, 작품 정보와 3D 공간을 하나의 도서 구조 안에서 관리할 수 있습니다.',
+        ],
+      },
+      {
+        eyebrow: '3D 편집 도구',
+        title: '모델과 이미지를 배치하고 접근 반응을 조절합니다',
+        paragraphs: [
+          'GLB 모델을 보관함에 등록해 월드로 끌어 배치하고, 위치·크기·회전과 접근 거리·동작을 설정합니다. 모델 선택과 이동 도구, 좌표 패널을 연결해 장면 안의 오브젝트를 편집하도록 구성했습니다.',
+          '바닥 이미지와 화살표를 배치해 이동 경로를 안내하고, 모델의 접근 반응과 충돌 범위를 함께 확인합니다. 독자 체험에서는 편집 중인 공간을 직접 이동하며 본문·애니메이션·카메라 구도를 검수할 수 있습니다.',
+        ],
+        bullets: [
+          'GLB 모델 보관함과 드래그 배치',
+          '위치·크기·회전·애니메이션과 접근 범위 설정',
+          '바닥 이미지·이동 안내와 챕터별 본문 편집',
+          '독자 체험 전환과 편집 시점·선택 상태 복원',
+        ],
+      },
+      {
+        eyebrow: '검수와 공개',
+        title: '독자와 같은 공간에서 확인하고 공개본을 갱신합니다',
+        paragraphs: [
+          '관리자와 독자 화면은 같은 좌표와 공통 3D 렌더링 코드를 사용합니다. 편집 화면의 결과를 독자 체험으로 확인한 뒤 임시 저장하고, 사용자 화면에 공개하는 단계를 별도로 거칩니다.',
+          'Supabase에 도서·챕터·모델 배치와 공개본을 보관하고, GLB와 이미지는 파일 저장소에서 관리합니다. JavaScript·Three.js·Vite 기반 관리자 앱은 독자 앱과 분리해 Vercel에 배포합니다.',
+          '이 페이지의 미리보기는 저장소에 포함된 3D 월드 편집기 검증 화면입니다. 운영 관리자 화면은 로그인 후 사용할 수 있습니다.',
+        ],
+        workflow: {
+          caption: '편집 결과를 독자 경험으로 확인하고 공개하는 흐름',
+          steps: [
+            { label: 'Edit', title: '장면 편집', detail: '모델·이미지·본문과 공간 설정을 수정합니다.' },
+            { label: 'Preview', title: '독자 체험', detail: '같은 공간을 이동하며 반응과 본문을 확인합니다.', tone: 'check' },
+            { label: 'Publish', title: '저장과 공개', detail: '초안을 저장하고 확인을 마친 내용을 공개합니다.', tone: 'gate' },
+          ],
+        },
+      },
+    ],
+    sources: [
+      { label: '온더북 관리자 안내', url: 'https://github.com/blackstarzck/on-the-book/blob/main/docs/ADMIN-GUIDE.md' },
+      { label: '사용자·관리자 분리 배포', url: 'https://github.com/blackstarzck/on-the-book/blob/main/docs/DEPLOYMENT.md' },
+      { label: '3D 편집기 검증 화면', url: 'https://github.com/blackstarzck/on-the-book/blob/main/docs/screenshots/admin-desktop.png' },
+    ],
+  },
   ttokttok: {
     deck: '책 소개를 본 관심이 실제 읽기로 이어지도록, 발견과 독서를 같은 화면 흐름 안에 놓았습니다. 숏폼 피드·EPUB 뷰어·독서 기록과 콘텐츠 운영 도구를 함께 구성한 모바일 웹 서비스입니다.',
     sections: [

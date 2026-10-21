@@ -28,7 +28,7 @@ export const TAB_DESC: Record<Region, string> = {
   frontend: '퍼블리싱에서 Next.js까지, 5년 9개월의 중심 축',
   backend: 'NestJS · TypeORM · PostgreSQL — 화면 뒤의 흐름',
   ai: '멀티 에이전트 · 게이트 하네스 · 검증 루프',
-  product: '똑똑 · 온더북 — 책 발견에서 3D 독서까지',
+  product: '똑똑 · 온더북 — 독자 서비스와 관리자 도구',
   lab: '캔버스 · 3D · 게임, 업무 밖에서 만든 것들',
 }
 

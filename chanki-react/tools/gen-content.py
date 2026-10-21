@@ -52,6 +52,12 @@ def card(repo, desc, skills, demo=None, shot=None, note=None, code=None, demo_la
     return d
 
 CARDS = {
+"ttokttok-admin": [
+    card("ttokttok · 관리자", "도서와 게시물, 채널과 추천 콘텐츠를 관리하는 똑똑 운영 화면입니다.", ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"], "https://ttokttok-admin.vercel.app/", "ttokttok-admin", code="https://github.com/blackstarzck/ttokttok/tree/master/apps/admin", demo_label="관리자 열기 ↗"),
+],
+"on-the-book-admin": [
+    card("on-the-book · 관리자", "도서·챕터·3D 모델을 편집하고 미리보기와 공개를 연결하는 온더북 스튜디오입니다.", ["Three.js", "JavaScript", "Supabase", "GLB"], "https://on-the-book-admin.vercel.app/", "on-the-book-admin", code="https://github.com/blackstarzck/on-the-book/tree/main/admin", demo_label="관리자 열기 ↗"),
+],
 "corp-sites": [
     card("케듀올", "베트남과 한국을 잇는 유학·한국어교육·출판·에듀테크 기업 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://keduall.com", "corp-sites", code=False, demo_label="사이트 열기 ↗"),
     card("부클리", "한국 출판 콘텐츠의 해외 수출과 판권 정보를 소개하는 글로벌 콘텐츠 홈페이지.", ["React", "Tailwind CSS", "GSAP"], "https://hibookly.com", "corp-sites-bookly", code=False, demo_label="사이트 열기 ↗"),
@@ -559,6 +565,17 @@ node("ttokttok", "똑똑 · 숏폼 독서", "product", "독서 서비스 · 모�
      url="https://ttokttok-virid.vercel.app/", urlLabel="똑똑 열기",
      repos=["ttokttok"])
 
+node("ttokttok-admin", "똑똑 · 관리자", "product", "콘텐츠 운영 · 관리자 웹",
+     "책과 게시물의 제작부터 발행과 운영까지 한곳에서 관리합니다.",
+     "똑똑의 도서·카드·영상·채널·추천 콘텐츠를 관리하는 별도 운영 앱입니다. 게시물 편집 중 독자 화면과 같은 미리보기를 확인하고 발행할 수 있으며, 독자 반응 분석과 댓글 신고 처리, 회원·관리자 권한 관리까지 운영 흐름으로 연결했습니다.",
+     "똑똑 관리자 · 저장소 검증 화면",
+     P(role="관리자 정보 구조 · 콘텐츠 편집·운영 화면 구현",
+       impact="콘텐츠 등록·미리보기·발행과 독자 반응 확인을 하나의 운영 흐름으로 연결했습니다.",
+       scope="Next.js App Router·TypeScript·Tailwind CSS v4·Supabase 기반. 독자 앱과 UI·데이터 타입·콘텐츠 코드를 공용 패키지로 공유합니다.",
+       objectives=["도서·본문·구매 링크 등록", "카드·영상 게시물 편집·미리보기·발행", "채널·추천 도서와 노출 순서 관리", "독자 반응 분석·댓글 신고·운영 권한 관리"],
+       skills=[["Next.js", "grew"], ["TypeScript", "grew"], ["Supabase", "grew"], ["콘텐츠 관리", "grew"]]),
+     url="https://ttokttok-admin.vercel.app/", urlLabel="똑똑 관리자 열기")
+
 node("on-the-book", "온더북 · 3D 독서", "product", "독서 서비스 · 3D 웹",
      "책 속 장면을 직접 걸으며, 이야기와 공간을 함께 읽습니다.",
      "책을 고르고 장면을 선택하면 작품 속 3D 공간으로 들어가는 웹 서비스입니다. 캐릭터를 움직여 모델에 다가가면 애니메이션과 글귀를 만나고, 챕터를 따라 이동하며 본문을 읽습니다. 관리자는 도서·장면·3D 모델을 편집하고 독자와 같은 공간에서 미리 본 뒤 공개할 수 있습니다.",
@@ -570,6 +587,17 @@ node("on-the-book", "온더북 · 3D 독서", "product", "독서 서비스 · 3D
        skills=[["Three.js", "grew"], ["JavaScript", "core"], ["Supabase", "grew"], ["GLB", "grew"], ["콘텐츠 관리", "grew"]]),
      url="https://on-the-book-client.vercel.app/", urlLabel="온더북 열기",
      repos=["on-the-book"])
+
+node("on-the-book-admin", "온더북 · 관리자", "product", "3D 콘텐츠 운영 · 스튜디오",
+     "책 속 공간을 편집하고, 독자와 같은 화면에서 확인한 뒤 공개합니다.",
+     "온더북의 책장과 3D 장면을 구성하는 콘텐츠 스튜디오입니다. 도서·챕터·본문을 관리하고 GLB 모델과 바닥 이미지를 배치해 위치·크기·회전·접근 반응을 조절합니다. 편집 화면에서 독자 체험으로 전환해 검수하고, 임시 저장과 공개를 나누어 운영합니다.",
+     "온더북 관리자 · 저장소 검증 화면",
+     P(role="3D 편집 도구 · 미리보기·공개 흐름 구현",
+       impact="3D 공간 편집과 독자 체험을 같은 좌표에서 연결하고, 초안과 공개본을 분리했습니다.",
+       scope="JavaScript·Three.js·Vite·Supabase 기반. 도서 보관함·모델 보관함·챕터 편집과 공통 3D 렌더링·검증 코드를 연결합니다.",
+       objectives=["표지·분류·추천 배너와 책장 순서 관리", "챕터·본문·공간 크기 편집", "GLB 모델·바닥 이미지 배치와 접근 범위 조절", "독자 체험·실행 취소·임시 저장·공개"],
+       skills=[["Three.js", "grew"], ["JavaScript", "core"], ["Supabase", "grew"], ["GLB", "grew"], ["콘텐츠 관리", "grew"]]),
+     url="https://on-the-book-admin.vercel.app/", urlLabel="온더북 관리자 열기")
 
 # ── lab ──────────────────────────────────────────────────────────────────
 node("lab", "실험실", "lab", "손이 기억하는 것",
@@ -788,6 +816,7 @@ E += [
     ["ai-squads", "multi-agent"],
     ["doc-merge", "backend"],
     ["ttokttok", "on-the-book"], ["on-the-book", "three-lab"],
+    ["ttokttok", "ttokttok-admin"], ["on-the-book", "on-the-book-admin"],
 ]
 
 # ── SPINE (서사 순서) ────────────────────────────────────────────────────
@@ -795,7 +824,8 @@ SPINE = ["chanki", "contact", "react-basics", "pokemon", "frontend", "dealer-web
          "canvas-lab", "multicanvas-lab", "scroll-3d", "three-lab",
          "space-3d", "game-lab", "game-cards", "trading-lab", "detect-lab", "lab",
          "farm-3d", "connect-bee", "backend", "nest-sns", "doc-merge",
-         "corp-sites", "millie-admin-dashboard", "figma-gen", "design-rulebook", "product", "ttokttok", "on-the-book",
+         "corp-sites", "millie-admin-dashboard", "figma-gen", "design-rulebook", "product",
+         "ttokttok", "ttokttok-admin", "on-the-book", "on-the-book-admin",
          "topik-user", "topik-admin", "ai", "gate-harness", "multi-agent",
          "verify-loop", "my-skills", "ai-squads", "video-agent"]
 
@@ -814,7 +844,7 @@ for n in N:
 # ── 무결성 검사 ──────────────────────────────────────────────────────────
 ids = {n["id"] for n in N}
 assert len(ids) == len(N), "중복 id"
-assert len(N) == 38, f"노드 수 {len(N)}"
+assert len(N) == 40, f"노드 수 {len(N)}"
 for a, b in E:
     assert a in ids and b in ids, f"엣지 미상 노드: {a}-{b}"
 assert set(SPINE) == ids, f"SPINE 누락: {ids - set(SPINE)} / 초과: {set(SPINE) - ids}"
@@ -879,7 +909,7 @@ export const CARD_IMG: Record<string, string> = {{}}
 
 /** 프로젝트 미리보기 영상의 public 기준 경로. */
 export const VID: Record<string, string> = {{
-  "ttokttok": "/ttok-ttok-trailer-web.mp4",
+  "ttokttok": "/ttok-ttok-trailer.mp4",
   "on-the-book": "/on-the-book-trailer.mp4"
 }}
 
